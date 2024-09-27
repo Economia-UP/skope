@@ -21,13 +21,15 @@ jobs:
         run: pip install requests pandas
 
       - name: Fetch FRED Data
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
         run: |
-          python fetch_fred_data.py # Make sure this script is in your repo and executable
+          python fetch_fred_data.py
 
       - name: Commit and push changes
         run: |
           git config --local user.name "GitHub Action"
           git config --local user.email "action@github.com"
-          git add .
-          git commit -m "Update FRED data"
+          git add fred_data.csv
+          git commit -m "Update FRED data" || echo "No changes to commit"
           git push
