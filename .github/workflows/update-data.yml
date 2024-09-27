@@ -28,13 +28,13 @@ jobs:
         run: |
           python 'MX/mc_inflation.py'  # Replace with your actual script name
 
-      # - name: Fetch Data from Script 2
-      #   env:
-      #     FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-      #     BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
-      #     INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
-      #   run: |
-      #     python 'US/script2.py'  # Replace with your actual script name
+      - name: Fetch Data from Script 2
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
+          INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
+        run: |
+          python 'MX/mx_exchangerate.py'  # Replace with your actual script name
 
       # - name: Fetch Data from Script 3
       #   env:
