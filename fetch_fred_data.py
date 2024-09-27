@@ -4,7 +4,7 @@ import pandas as pd
 
 def fetch_fred_data():
     FRED_API_KEY = os.getenv('FRED_API_KEY')
-    SERIES_ID = 'IRLTLT01MXM156N'  # Replace with your desired FRED series ID
+    SERIES_ID = 'YOUR_SERIES_ID'  # Replace with your desired FRED series ID
     FRED_URL = f'https://api.stlouisfed.org/fred/series/observations?series_id={SERIES_ID}&api_key={FRED_API_KEY}&file_type=json'
 
     response = requests.get(FRED_URL)
@@ -16,11 +16,14 @@ def fetch_fred_data():
         raise ValueError(f"No observations found for series ID {SERIES_ID}")
 
     df = pd.DataFrame(observations)
-    # Optionally, process the data (e.g., convert dates, handle missing values)
     df['date'] = pd.to_datetime(df['date'])
     df['value'] = pd.to_numeric(df['value'], errors='coerce')
 
-    output_file = 'fred_data.csv'
+    # Define the output directory and file path
+    output_dir = 'US/Monitor cambiario'
+    os.makedirs(output_dir, exist_ok=True)  # Create the directory if it doesn't exist
+    output_file = os.path.join(output_dir, 'fred_data.csv')
+
     df.to_csv(output_file, index=False)
     print(f"Data successfully written to {output_file}")
 
