@@ -24,12 +24,12 @@ jobs:
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
         run: |
-          python '/US/Monitor cambiario/fetch_fred_data.py'
+          python 'US/Monitor cambiario/fetch_fred_data.py'
 
       - name: Commit and push changes
         run: |
           git config --local user.name "GitHub Action"
           git config --local user.email "action@github.com"
-          git add fred_data.csv
+          git add 'US/Monitor cambiario/fred_data.csv'  # Add the file from the specific folder
           git commit -m "Update FRED data" || echo "No changes to commit"
           git push
