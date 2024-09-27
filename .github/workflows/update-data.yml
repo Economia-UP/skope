@@ -1,9 +1,9 @@
-name: Update FRED Data
+name: Update MX
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs daily at midnight (UTC)
-  workflow_dispatch: # Allows manual trigger
+    - cron: '0 0 * * *'  # Runs daily at midnight (UTC)
+  workflow_dispatch:  # Allows manual trigger
 
 jobs:
   update-data:
@@ -20,16 +20,34 @@ jobs:
       - name: Install dependencies
         run: pip install requests pandas
 
-      - name: Fetch FRED Data
+      - name: Fetch Data from Script 1
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
+          INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
         run: |
-          python 'US/Monitor cambiario/fetch_fred_data.py'
+          python 'MX/mc_inflation.py'  # Replace with your actual script name
+
+      # - name: Fetch Data from Script 2
+      #   env:
+      #     FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+      #     BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
+      #     INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
+      #   run: |
+      #     python 'US/script2.py'  # Replace with your actual script name
+
+      # - name: Fetch Data from Script 3
+      #   env:
+      #     FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+      #     BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
+      #     INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
+      #   run: |
+      #     python 'US/script3.py'  # Replace with your actual script name
 
       - name: Commit and push changes
         run: |
           git config --local user.name "GitHub Action"
           git config --local user.email "action@github.com"
-          git add 'US/Monitor cambiario/fred_data.csv'  # Add the file from the specific folder
+          git add 'MX/*.csv'  # Add all CSV files from the specific folder
           git commit -m "Update FRED data" || echo "No changes to commit"
           git push
