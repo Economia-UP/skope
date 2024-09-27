@@ -39,6 +39,8 @@ def inflation():
     for df in dfs[1:]:
         merged_df = pd.merge(merged_df, df, on='TIME_PERIOD', how='outer')  # Merge with the next DataFrame
 
+    merged_df.columns = ['TIME_PERIOD', 'Inflación general', 'Subyacente', 'No subyacente']
+
     # Filter since 2018
     merged_df = merged_df[merged_df['TIME_PERIOD'] >= '2018-01-01']
     
