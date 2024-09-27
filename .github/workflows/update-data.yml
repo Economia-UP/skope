@@ -24,7 +24,7 @@ jobs:
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
         run: |
-          python fetch_fred_data.py
+          python '/US/Monitor cambiario/fetch_fred_data.py'
 
       - name: Commit and push changes
         run: |
