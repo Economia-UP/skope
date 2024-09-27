@@ -4,7 +4,7 @@ import pandas as pd
 
 def fetch_fred_data():
     FRED_API_KEY = os.getenv('FRED_API_KEY')
-    SERIES_ID = 'YOUR_SERIES_ID'  # Replace with your desired FRED series ID
+    SERIES_ID = 'IRLTLT01MXM156N'  # Replace with your desired FRED series ID
     FRED_URL = f'https://api.stlouisfed.org/fred/series/observations?series_id={SERIES_ID}&api_key={FRED_API_KEY}&file_type=json'
 
     response = requests.get(FRED_URL)
