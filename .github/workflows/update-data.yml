@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: pip install requests pandas
 
-      - name: Fetch Data from Script 1
+      - name: Inflation
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
           BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
@@ -28,7 +28,7 @@ jobs:
         run: |
           python 'MX/mc_inflation.py'  # Replace with your actual script name
 
-      - name: Fetch Data from Script 2
+      - name: Exchange rate
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
           BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
@@ -36,13 +36,13 @@ jobs:
         run: |
           python 'MX/mc_exchangerate.py'  # Replace with your actual script name
 
-      # - name: Fetch Data from Script 3
-      #   env:
-      #     FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-      #     BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
-      #     INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
-      #   run: |
-      #     python 'US/script3.py'  # Replace with your actual script name
+      - name: Monetary base
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
+          INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
+        run: |
+          python 'MX/mc_monetarybase.py'  # Replace with your actual script name
 
       - name: Commit and push changes
         run: |
