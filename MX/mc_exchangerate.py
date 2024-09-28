@@ -10,7 +10,7 @@ def exchange():
     SERIES_ID = 'SF63528'  # Your FRED series ID
     BANXICO_URL = f'https://www.banxico.org.mx/SieAPIRest/service/v1/series/{SERIES_ID}/datos?token={BANXICO_API_KEY}&mediaType=json'
 
-    # Fetch data from the INEGI API
+    # Fetch data from the BANXICO API
     response = requests.get(BANXICO_URL)
     response.raise_for_status()  # Raise an error if the response status is not 200
     data = response.json()
