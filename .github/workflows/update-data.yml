@@ -44,6 +44,30 @@ jobs:
         run: |
           python 'MX/mc_monetarybase.py'  # Replace with your actual script name
 
+      - name: Exchange rate
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
+          INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
+        run: |
+          python 'MX/mc_exchangerate.py'  # Replace with your actual script name
+
+      - name: Monetary base
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
+          INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
+        run: |
+          python 'MX/mc_monetarybase.py'  # Replace with your actual script name
+
+      - name: International reserves
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
+          INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
+        run: |
+          python 'MX/mc_internationalreserves.py'  # Replace with your actual script name
+
       - name: Commit and push changes
         run: |
           git config --local user.name "GitHub Action"
