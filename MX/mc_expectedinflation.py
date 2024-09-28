@@ -49,7 +49,7 @@ def EXP_LOWER():
     # Define the output directory and ensure it exists
     output_dir = 'MX'
     os.makedirs(output_dir, exist_ok=True)  # Create the directory if it doesn't exist
-    output_file = os.path.join(output_dir, 'mc_internationalEXP_UPPER.csv')
+    output_file = os.path.join(output_dir, 'mc_expectedinflation.csv')
 
     # Save the merged DataFrame to a CSV file in the specified folder
     dfs.to_csv(output_file, index=False)
