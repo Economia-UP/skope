@@ -50,7 +50,7 @@ def monetary():
     # Define the output directory and ensure it exists
     output_dir = 'MX'
     os.makedirs(output_dir, exist_ok=True)  # Create the directory if it doesn't exist
-    output_file = os.path.join(output_dir, 'mc_exchangerate.csv')
+    output_file = os.path.join(output_dir, 'mc_monetarybase.csv')
 
     # Save the merged DataFrame to a CSV file in the specified folder
     df.to_csv(output_file, index=False)
