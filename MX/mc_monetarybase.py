@@ -32,11 +32,11 @@ def monetary():
 
 
     df1 = pd.DataFrame(observations1)
-    df1['fecha'] = pd.to_datetime(df1['fecha'], errors = 'coerce')  
+    df1['fecha'] = pd.to_datetime(df1['fecha'], format='%d/%m/%Y', errors='coerce')
     df1['dato'] = pd.to_numeric(df1['dato'].str.replace(',', ''), errors='coerce')
 
     df2 = pd.DataFrame(observations2)
-    df2['fecha'] = pd.to_datetime(df2['fecha'], errors = 'coerce')  
+    df2['fecha'] = pd.to_datetime(df2['fecha'], format='%d/%m/%Y', errors='coerce')
     df2['dato'] = pd.to_numeric(df2['dato'].str.replace(',', ''), errors='coerce')
     
     # Filter since 2018
