@@ -81,5 +81,5 @@ jobs:
           git config --local user.name "GitHub Action"
           git config --local user.email "action@github.com"
           git add 'MX/*.csv'  # Add all CSV files from the specific folder
-          git commit -m "Update FRED data" || echo "No changes to commit"
+          git commit -m "Update data" || echo "No changes to commit"
           git push
