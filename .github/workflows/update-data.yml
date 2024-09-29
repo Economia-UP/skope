@@ -82,7 +82,7 @@ jobs:
           BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
           INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
         run: |
-          python 'MX/mc_policy.py'  # Replace with your actual script name
+          python 'MX/mc_policy.py'  # Replace with your actual script names
 
 
       - name: Commit and push changes
