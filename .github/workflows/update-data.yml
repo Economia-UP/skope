@@ -84,7 +84,6 @@ jobs:
         run: |
           python 'MX/mc_policy.py'  # Replace with your actual script name
 
-
       - name: Commit and push changes
         run: |
           git config --local user.name "GitHub Action"
