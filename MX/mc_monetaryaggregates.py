@@ -4,7 +4,7 @@ import pandas as pd
 
 # BANXICO_API_KEY = '86d02771fd6b64ce29912469f70d872cf666627201a5d7e819a82c452ae61289'
 
-def MONETIZATION():
+def AGGREGATES():
     # Retrieve the INEGI API key from environment variables
     BANXICO_API_KEY = os.getenv('BANXICO_API_KEY')
     
@@ -56,11 +56,11 @@ def MONETIZATION():
     # Define the output directory and ensure it exists
     output_dir = 'MX'
     os.makedirs(output_dir, exist_ok=True)  # Create the directory if it doesn't exist
-    output_file = os.path.join(output_dir, 'mc_monetaryMONETIZATION.csv')
+    output_file = os.path.join(output_dir, 'mc_monetaryaggregates.csv')
 
     # Save the merged DataFrame to a CSV file in the specified folder
     dfs.to_csv(output_file, index=False)
     print(f"Data successfully written to {output_file}")
 
 if __name__ == "__main__":
-    MONETIZATION()
+    AGGREGATES()
