@@ -83,6 +83,14 @@ jobs:
           INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
         run: |
           python 'MX/mc_policy.py'  # Replace with your actual script name
+    
+      - name: Monetary Aggregates
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
+          INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
+        run: |
+          python 'MX/mc_monetaryaggregates.py'  # Replace with your actual script name
 
       - name: Commit and push changes
         run: |
