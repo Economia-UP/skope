@@ -3,8 +3,8 @@ import requests
 import pandas as pd
 from datetime import datetime
 
-BANXICO_API_KEY = '86d02771fd6b64ce29912469f70d872cf666627201a5d7e819a82c452ae61289'
-INEGI_API_KEY = '446548c3-7b55-4b22-8430-ac8f251ea555'
+# BANXICO_API_KEY = '86d02771fd6b64ce29912469f70d872cf666627201a5d7e819a82c452ae61289'
+# INEGI_API_KEY = '446548c3-7b55-4b22-8430-ac8f251ea555'
 
 def policy():
     # Retrieve the INEGI API key from environment variables
