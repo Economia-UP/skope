@@ -20,10 +20,13 @@ Here's a quick overview of the main folders and files you will interact with:
 │       └── update_data.yml       # The GitHub Actions workflow file
 ├── US
 │   └── Monitor cambiario
-│       ├── fetch_fred_data.py    # Example Python script to fetch FRED data
-│       └── fred_data.csv         # Output CSV file updated by the script
+│       ├── *.py    # Example Python script to fetch data
+│       └── *.csv   # Output CSV file updated by the script
 ├── MX
-│   └── mc_inflation.csv          # Output CSV file for Mexican inflation data
+│   └── Monitor cambiario
+│       ├── *.py    # Example Python script to fetch data
+│       └── *.csv   # Output CSV file updated by the script
+|
 └── README.md                     # Documentation file
 ```
 
