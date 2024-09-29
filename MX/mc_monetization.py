@@ -46,6 +46,8 @@ def MONETIZATION():
     dfs = df1.merge(df2, how='outer', on='fecha')
     dfs.columns = ['fecha', 'Activo total', 'Tenencia de valores gubernamentales']
 
+    dfs['Deuda pública como porcentaje del activo total'] = dfs['Tenencia de valores gubernamentales']/dfs['Activo total']*100
+
     # Define the output directory and ensure it exists
     output_dir = 'MX'
     os.makedirs(output_dir, exist_ok=True)  # Create the directory if it doesn't exist
