@@ -8,9 +8,9 @@ def MONETIZATION():
     # Retrieve the INEGI API key from environment variables
     BANXICO_API_KEY = os.getenv('BANXICO_API_KEY')
     
-    ASSET_ID = 'SF311408'  # Your BANXICO series ID
+    ASSET_ID = 'SF332'  # Your BANXICO series ID
     ASSET = f'https://www.banxico.org.mx/SieAPIRest/service/v1/series/{ASSET_ID}/datos?token={BANXICO_API_KEY}&mediaType=json'
-    TENURE_ID = 'SF311418'  # Your BANXICO series ID
+    TENURE_ID = 'SF10'  # Your BANXICO series ID
     TENURE = f'https://www.banxico.org.mx/SieAPIRest/service/v1/series/{TENURE_ID}/datos?token={BANXICO_API_KEY}&mediaType=json'
     
     # Fetch data from the BANXICO API
