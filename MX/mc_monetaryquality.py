@@ -10,8 +10,8 @@ def monetaryquality():
     
     ASSET_ID = 'SF29654'  # Your BANXICO series ID
     ASSET = f'https://www.banxico.org.mx/SieAPIRest/service/v1/series/{ASSET_ID}/datos?token={BANXICO_API_KEY}&mediaType=json'
-    ASSET_ID = 'SF29656'  # Your BANXICO series ID
-    ASSET = f'https://www.banxico.org.mx/SieAPIRest/service/v1/series/{ASSET_ID}/datos?token={BANXICO_API_KEY}&mediaType=json'
+    RESERVES_ID = 'SF29656'  # Your BANXICO series ID
+    RESERVES = f'https://www.banxico.org.mx/SieAPIRest/service/v1/series/{RESERVES_ID}/datos?token={BANXICO_API_KEY}&mediaType=json'
     
     # Fetch data from the BANXICO API
     response1 = requests.get(ASSET)
@@ -22,13 +22,13 @@ def monetaryquality():
     if not observations1:
         raise ValueError(f"No observations found for series ID {ASSET_ID}")
 
-    response2 = requests.get(ASSET)
+    response2 = requests.get(RESERVES)
     response2.raise_for_status()  # Raise an error if the response status is not 200
     data2 = response2.json()
 
     observations2 = data2.get('bmx').get('series')[0].get('datos')
     if not observations2:
-        raise ValueError(f"No observations found for series ID {ASSET_ID}")    
+        raise ValueError(f"No observations found for series ID {RESERVES_ID}")    
 
 
     df1 = pd.DataFrame(observations1)
