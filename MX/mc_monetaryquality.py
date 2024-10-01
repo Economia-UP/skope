@@ -4,7 +4,7 @@ import pandas as pd
 
 # BANXICO_API_KEY = '86d02771fd6b64ce29912469f70d872cf666627201a5d7e819a82c452ae61289'
 
-def monetary():
+def monetaryquality():
     # Retrieve the INEGI API key from environment variables
     BANXICO_API_KEY = os.getenv('BANXICO_API_KEY')
     
@@ -56,4 +56,4 @@ def monetary():
     print(f"Data successfully written to {output_file}")
 
 if __name__ == "__main__":
-    monetary()
+    monetaryquality()
