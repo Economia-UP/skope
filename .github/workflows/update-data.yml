@@ -2,7 +2,7 @@ name: Update MX
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # Runs daily at midnight (UTC)
+    - cron: '*/5 * * * *'  # Runs every 5 minutes (you can adjust this)
   workflow_dispatch:  # Allows manual trigger
 
 jobs:
@@ -20,85 +20,15 @@ jobs:
       - name: Install dependencies
         run: pip install requests pandas
 
-      - name: Inflation
+      - name: Run all Python scripts in MX folder
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
           BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
           INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
         run: |
-          python 'MX/mc_inflation.py'  # Replace with your actual script name
-
-      - name: Exchange rate
-        env:
-          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-          BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
-          INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
-        run: |
-          python 'MX/mc_exchangerate.py'  # Replace with your actual script name
-
-      - name: Monetary base
-        env:
-          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-          BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
-          INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
-        run: |
-          python 'MX/mc_monetarybase.py'  # Replace with your actual script name
-
-      - name: Exchange rate
-        env:
-          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-          BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
-          INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
-        run: |
-          python 'MX/mc_exchangerate.py'  # Replace with your actual script name
-
-      - name: Monetary base
-        env:
-          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-          BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
-          INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
-        run: |
-          python 'MX/mc_monetarybase.py'  # Replace with your actual script name
-
-      - name: International reserves
-        env:
-          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-          BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
-          INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
-        run: |
-          python 'MX/mc_internationalreserves.py'  # Replace with your actual script name
-
-      - name: Expected inflation
-        env:
-          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-          BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
-          INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
-        run: |
-          python 'MX/mc_expectedinflation.py'  # Replace with your actual script name
-          
-      - name: Policy
-        env:
-          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-          BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
-          INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
-        run: |
-          python 'MX/mc_policy.py'  # Replace with your actual script name
-    
-      - name: Monetary Aggregates
-        env:
-          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-          BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
-          INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
-        run: |
-          python 'MX/mc_monetaryaggregates.py'  # Replace with your actual script name
-    
-      - name: Monetization
-        env:
-          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-          BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
-          INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
-        run: |
-          python 'MX/mc_monetization.py'  # Replace with your actual script name
+          for script in MX/*.py; do
+            python "$script"
+          done
 
       - name: Commit and push changes
         run: |
