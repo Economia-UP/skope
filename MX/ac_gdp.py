@@ -20,7 +20,7 @@ def gdp():
         raise ValueError(f"No observations found for series ID {SERIES_ID}")
 
     df = pd.DataFrame(observations)
-    df['fecha'] = pd.to_datetime(df['fecha'], errors = 'coerce')  # Convert TIME_PERIOD to datetime
+    df['fecha'] = pd.to_datetime(df['fecha'], format='%d/%m/%Y', errors = 'coerce')  # Convert TIME_PERIOD to datetime
     df['dato'] = pd.to_numeric(df['dato'].str.replace(',', ''), errors='coerce')
 
     # Filter since 2018
