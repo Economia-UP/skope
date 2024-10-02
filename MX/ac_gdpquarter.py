@@ -24,13 +24,13 @@ def gdp():
     df['dato'] = pd.to_numeric(df['dato'].str.replace(',', ''), errors='coerce')
 
     # Filter since 2018
-    df = df[df['fecha'] >= '2017-01-01']
+    df = df[df['fecha'] >= '2020-09-01']
 
     # Change name of columns
     df.columns = ['fecha', 'PIB trimestral']
     
     # Sacar variación interanual
-    index = pd.date_range(start='2017-01-01', periods=len(df['fecha']), freq='Q')
+    index = pd.date_range(start='2020-09-01', periods=len(df['fecha']), freq='Q')
     df = df.set_index(index)
 
     df['Crecimiento económico'] = df['PIB trimestral'].pct_change(periods=1) * 100  # Multiply by 100 for percentage
