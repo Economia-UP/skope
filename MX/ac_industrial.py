@@ -27,7 +27,7 @@ def industrial():
     df = df.rename(columns = {'TIME_PERIOD':'fecha'})
 
     # Filter since 2018
-    df = df[df['fecha'] >= '2018-01-01']
+    df = df[df['fecha'] >= '2021-01-01']
 
     # Change name of columns
     df.columns = ['fecha', 'Actividad industrial']
