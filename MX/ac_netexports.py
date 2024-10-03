@@ -78,6 +78,7 @@ def netexports():
 
     df_wide = df.pivot(index='año_relativo', columns='sexenio', 
                          values=['Exportaciones', 'Importaciones', 'Exportaciones netas'])
+    df_wide.columns = [f'{var}_{sexenio}' for var, sexenio in df_wide.columns]
 
     # Define the output directory and ensure it exists
     output_dir = 'MX'
