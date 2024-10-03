@@ -89,7 +89,7 @@ def netexports():
     output_file = os.path.join(output_dir, 'ac_netexports.csv')
 
     # Save the merged DataFrame to a CSV file in the specified folder
-    df_wide.to_csv(output_file, index=False)
+    df_wide.to_csv(output_file, index=True)
     print(f"Data successfully written to {output_file}")
 
 if __name__ == "__main__":
