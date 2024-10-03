@@ -58,7 +58,7 @@ def gdp():
     # Calculate year-over-year percentage change
     dfs = dfs.pct_change(periods=4) * 100  # Multiply by 100 to get percentages
     
-    dfs.columns = ['Agricultura', 'Pesa', 'Minería', 'Electricidad', 
+    dfs.columns = ['Agricultura', 'Pesca', 'Minería', 'Electricidad', 
                    'Construcción', 'Manufactura', 'Comercio al por mayor', 
                    'Comercio al por menor', 'Finanzas', 'Inmobiliario', 
                    'Educación', 'Salud', 'Recreación', 'Hospitalidad', 'Gobierno']
