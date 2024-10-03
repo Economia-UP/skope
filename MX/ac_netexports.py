@@ -37,14 +37,39 @@ def netexports():
     df = df1.merge(df2, on = 'TIME_PERIOD', how='outer')    
     df = df.rename(columns = {'TIME_PERIOD':'fecha'})
 
-    # Filter since 2018
-    df = df[df['fecha'] >= '2018-01-01']
-
-    # Change name of columns
     df.columns = ['fecha', 'Exportaciones', 'Importaciones']
-    df.sort_values(by='fecha', ascending=True, inplace=True)
-    
     df['Exportaciones netas'] = df['Exportaciones'] - df['Importaciones']
+    
+    # Define los rangos de fechas para los sexenios
+    sexenios = {
+        '2000-2006': (pd.to_datetime('2000-12-01'), pd.to_datetime('2006-11-30')),
+        '2006-2012': (pd.to_datetime('2006-12-01'), pd.to_datetime('2012-11-30')),
+        '2012-2018': (pd.to_datetime('2012-12-01'), pd.to_datetime('2018-11-30')),
+        '2018-2024': (pd.to_datetime('2018-12-01'), pd.to_datetime('2024-11-30'))
+    }
+    
+    # Función para asignar cada fecha a su sexenio correspondiente
+    def asignar_sexenio(fecha):
+        for sexenio, (inicio, fin) in sexenios.items():
+            if inicio <= fecha <= fin:
+                return sexenio
+        return None
+    
+    # Aplica la función para crear una nueva columna 'sexenio'
+    df['sexenio'] = df['fecha'].apply(asignar_sexenio)
+    
+    # Filtra solo las filas que pertenecen a un sexenio válido
+    df = df[df['sexenio'].notna()]
+    
+    # Crea una nueva columna con el número de año relativo dentro del sexenio
+    df['año_relativo'] = df['fecha'].dt.year - df['fecha'].dt.year.min()
+    
+    # Ordena el DataFrame por sexenio y por fecha
+    df.sort_values(by=['sexenio', 'fecha'], inplace=True)
+    
+    # Selecciona las columnas relevantes para comparar los datos por sexenio
+    df = df[['sexenio', 'año_relativo', 'Exportaciones', 'Importaciones', 'Exportaciones netas']]
+
 
     # Define the output directory and ensure it exists
     output_dir = 'MX'
