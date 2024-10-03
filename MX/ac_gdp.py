@@ -18,11 +18,16 @@ def gdp():
     observations = data.get('Series', {})[0].get('OBSERVATIONS')
     if not observations:
         raise ValueError(f"No observations found for series ID {SERIES_ID}")
+    
+    def quarter_to_date(quarter_str):
+        year, quarter = quarter_str.split('/')
+        month = (int(quarter) - 1) * 3 + 1  # Calculate the starting month of the quarter
+        return pd.Timestamp(year=int(year), month=month, day=1)
 
     df = pd.DataFrame(observations)
     df = df[['TIME_PERIOD', 'OBS_VALUE']]  # Select relevant columns
-    df['TIME_PERIOD'] = pd.to_datetime(df['TIME_PERIOD'])  # Convert TIME_PERIOD to datetime
     df['OBS_VALUE'] = pd.to_numeric(df['OBS_VALUE'], errors='coerce')  # Rename OBS_VALUE and convert to numeric
+    df['TIME_PERIOD'] = df['TIME_PERIOD'].apply(quarter_to_date)        
     df = df.rename(columns = {'TIME_PERIOD':'fecha'})
 
     # Filter since 2018
