@@ -61,8 +61,14 @@ def netexports():
     # Filtra solo las filas que pertenecen a un sexenio válido
     df = df[df['sexenio'].notna()]
     
-    # Crea una nueva columna con el número de año relativo dentro del sexenio
-    df['año_relativo'] = df['fecha'].dt.year - df['fecha'].dt.year.min()
+    # Función para calcular el año relativo dentro del sexenio
+    def calcular_año_relativo(fecha, sexenio):
+        inicio_sexenio = sexenios[sexenio][0]
+        return (fecha.year - inicio_sexenio.year)
+    
+    # Aplica la función para crear la columna 'año_relativo'
+    df['año_relativo'] = df.apply(lambda row: calcular_año_relativo(row['fecha'], row['sexenio']), axis=1)
+
     
     # Ordena el DataFrame por sexenio y por fecha
     df.sort_values(by=['sexenio', 'fecha'], inplace=True)
