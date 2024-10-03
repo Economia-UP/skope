@@ -7,7 +7,7 @@ import pandas as pd
 def imports():
     # Retrieve the INEGI API key from environment variables
     INEGI_API_KEY = os.getenv('INEGI_API_KEY')
-    SERIES_ID = '938'  # Your INEGI series ID
+    SERIES_ID = '452056'  # Your INEGI series ID
     INEGI_URL = f'https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/INDICATOR/{SERIES_ID}/es/0700/false/BIE/2.0/{INEGI_API_KEY}?type=json'
 
     # Fetch data from the INEGI API
