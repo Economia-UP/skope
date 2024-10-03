@@ -10,7 +10,7 @@ def monetary():
     
     BASE_ID = 'SF1'  # Your BANXICO series ID
     BASE = f'https://www.banxico.org.mx/SieAPIRest/service/v1/series/{BASE_ID}/datos?token={BANXICO_API_KEY}&mediaType=json'
-    DEPOSITS_ID = 'SF1574'  # Your BANXICO series ID
+    DEPOSITS_ID = 'SF5'  # Your BANXICO series ID
     DEPOSITS = f'https://www.banxico.org.mx/SieAPIRest/service/v1/series/{DEPOSITS_ID}/datos?token={BANXICO_API_KEY}&mediaType=json'
     
     # Fetch data from the BANXICO API
