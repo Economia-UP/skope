@@ -55,6 +55,7 @@ def gdp():
     dfs = dfs.set_index('fecha')
     
     dfs.dropna(inplace=True)
+    dfs = dfs.sort_index()
     # Calculate year-over-year percentage change
     dfs = dfs.pct_change(periods=4) * 100  # Multiply by 100 to get percentages
     

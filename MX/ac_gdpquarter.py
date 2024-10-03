@@ -33,6 +33,7 @@ def gdp():
     
     # Sacar variación interanual
     df = df.set_index(df['fecha']).dropna()
+    df = df.sort_index()
 
     df['Crecimiento económico'] = df['PIB trimestral'].pct_change(periods=1) * 100  # Multiply by 100 for percentage
     
