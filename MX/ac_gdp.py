@@ -2,26 +2,28 @@ import os
 import requests
 import pandas as pd
 
-# BANXICO_API_KEY = '86d02771fd6b64ce29912469f70d872cf666627201a5d7e819a82c452ae61289'
+# INEGI_API_KEY = '446548c3-7b55-4b22-8430-ac8f251ea555'
 
 def gdp():
     # Retrieve the INEGI API key from environment variables
-    BANXICO_API_KEY = os.getenv('BANXICO_API_KEY')
-    SERIES_ID = 'SR17622'  # Your FRED series ID
-    BANXICO_URL = f'https://www.banxico.org.mx/SieAPIRest/service/v1/series/{SERIES_ID}/datos?token={BANXICO_API_KEY}&mediaType=json'
+    INEGI_API_KEY = os.getenv('INEGI_API_KEY')
+    SERIES_ID = '733671'  # Your INEGI series ID
+    INEGI_URL = f'https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/INDICATOR/{SERIES_ID}/es/0700/false/BIE/2.0/{INEGI_API_KEY}?type=json'
 
-    # Fetch data from the BANXICO API
-    response = requests.get(BANXICO_URL)
+    # Fetch data from the INEGI API
+    response = requests.get(INEGI_URL)
     response.raise_for_status()  # Raise an error if the response status is not 200
     data = response.json()
-    
-    observations = data.get('bmx').get('series')[0].get('datos')
+
+    observations = data.get('Series', {})[0].get('OBSERVATIONS')
     if not observations:
         raise ValueError(f"No observations found for series ID {SERIES_ID}")
 
     df = pd.DataFrame(observations)
-    df['fecha'] = pd.to_datetime(df['fecha'], format='%d/%m/%Y', errors = 'coerce')  # Convert TIME_PERIOD to datetime
-    df['dato'] = pd.to_numeric(df['dato'].str.replace(',', ''), errors='coerce')
+    df = df[['TIME_PERIOD', 'OBS_VALUE']]  # Select relevant columns
+    df['TIME_PERIOD'] = pd.to_datetime(df['TIME_PERIOD'])  # Convert TIME_PERIOD to datetime
+    df['OBS_VALUE'] = pd.to_numeric(df['OBS_VALUE'], errors='coerce')  # Rename OBS_VALUE and convert to numeric
+    df = df.rename(columns = {'TIME_PERIOD':'fecha'})
 
     # Filter since 2018
     df = df[df['fecha'] >= '2017-01-01']
