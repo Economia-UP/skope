@@ -62,6 +62,7 @@ def gdp():
                    'Construcción', 'Manufactura', 'Comercio al por mayor', 
                    'Comercio al por menor', 'Finanzas', 'Inmobiliario', 
                    'Educación', 'Salud', 'Recreación', 'Hospitalidad', 'Gobierno']
+    dfs = dfs.iloc[-1,:]
     
     # Define the output directory and ensure it exists
     output_dir = 'MX'
