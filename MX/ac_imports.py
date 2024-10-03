@@ -7,7 +7,7 @@ import pandas as pd
 def imports():
     # Retrieve the INEGI API key from environment variables
     INEGI_API_KEY = os.getenv('INEGI_API_KEY')
-    SERIES_ID = '728159'  # Your INEGI series ID
+    SERIES_ID = '938'  # Your INEGI series ID
     INEGI_URL = f'https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/INDICATOR/{SERIES_ID}/es/0700/false/BIE/2.0/{INEGI_API_KEY}?type=json'
 
     # Fetch data from the INEGI API
@@ -23,18 +23,18 @@ def imports():
     df = pd.DataFrame(observations)
     df = df[['TIME_PERIOD', 'OBS_VALUE']]  # Select relevant columns
     df['OBS_VALUE'] = pd.to_numeric(df['OBS_VALUE'], errors='coerce')  # Rename OBS_VALUE and convert to numeric
-    df['TIME_PERIOD'] = pd.to_datetime(df['TIME_PERIOD'], errors = 'coerce')     
+    df['TIME_PERIOD'] = pd.to_datetime(df['TIME_PERIOD'], format = '%Y/%m', errors = 'coerce')     
     df = df.rename(columns = {'TIME_PERIOD':'fecha'})
 
     # Filter since 2018
-    df = df[df['fecha'] >= '2017-01-01']
+    df = df[df['fecha'] >= '2018-01-01']
 
     # Change name of columns
     df.columns = ['fecha', 'Importaciones']
     
     df.sort_values(by='fecha', ascending=True, inplace=True)
     
-    df['Crecimiento importaciones'] = df['Importaciones'].pct_change(periods = 1)*100
+    # df['Crecimiento importaciones'] = df['Importaciones'].pct_change(periods = 1)*100
 
     # Define the output directory and ensure it exists
     output_dir = 'MX'
