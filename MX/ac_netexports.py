@@ -82,6 +82,8 @@ def netexports():
     
     # Rename the columns to only include the sexenio names
     df_wide.columns = [f'{sexenio}' for sexenio in df_wide.columns]
+    
+    df_wide = df_wide.cumsum()
 
     # Define the output directory and ensure it exists
     output_dir = 'MX'
