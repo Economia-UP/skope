@@ -32,8 +32,7 @@ def gdp():
     df.columns = ['fecha', 'PIB trimestral']
     
     # Sacar variación interanual
-    index = pd.date_range(start='2017-01-01', periods=len(df['fecha']), freq='Q')
-    df = df.set_index(index)
+    df = df.set_index(df['fecha']).dropna()
 
     df['Crecimiento económico'] = df['PIB trimestral'].pct_change(periods=4) * 100  # Multiply by 100 for percentage
     
@@ -43,7 +42,7 @@ def gdp():
     output_file = os.path.join(output_dir, 'ac_gdp.csv')
 
     # Save the merged DataFrame to a CSV file in the specified folder
-    df.to_csv(output_file, index=False)
+    df.to_csv(output_file, index=True)
     print(f"Data successfully written to {output_file}")
 
 if __name__ == "__main__":
