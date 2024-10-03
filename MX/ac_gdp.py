@@ -42,7 +42,7 @@ def gdp():
     output_file = os.path.join(output_dir, 'ac_gdp.csv')
 
     # Save the merged DataFrame to a CSV file in the specified folder
-    df.to_csv(output_file, index=True)
+    df.to_csv(output_file, index=False)
     print(f"Data successfully written to {output_file}")
 
 if __name__ == "__main__":
