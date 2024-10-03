@@ -44,8 +44,9 @@ def netexports():
     sexenios = {
         '2000-2006': (pd.to_datetime('2000-12-01'), pd.to_datetime('2006-11-30')),
         '2006-2012': (pd.to_datetime('2006-12-01'), pd.to_datetime('2012-11-30')),
-        '2012-2018': (pd.to_datetime('2012-12-01'), pd.to_datetime('2018-11-30')),
-        '2018-2024': (pd.to_datetime('2018-12-01'), pd.to_datetime('2024-11-30'))
+        '2012-2018': (pd.to_datetime('2012-12-01'), pd.to_datetime('2018-09-30')),
+        '2018-2024': (pd.to_datetime('2018-12-01'), pd.to_datetime('2024-09-30')),
+        '2024-2030': (pd.to_datetime('2018-10-01'), pd.to_datetime('2030-09-30'))
     }
     
     # Función para asignar cada fecha a su sexenio correspondiente
@@ -77,8 +78,10 @@ def netexports():
     df = df[['sexenio', 'año_relativo', 'Exportaciones', 'Importaciones', 'Exportaciones netas']]
 
     df_wide = df.pivot(index='año_relativo', columns='sexenio', 
-                         values=['Exportaciones', 'Importaciones', 'Exportaciones netas'])
-    df_wide.columns = [f'{var}_{sexenio}' for var, sexenio in df_wide.columns]
+                       values='Exportaciones netas')
+    
+    # Rename the columns to only include the sexenio names
+    df_wide.columns = [f'{sexenio}' for sexenio in df_wide.columns]
 
     # Define the output directory and ensure it exists
     output_dir = 'MX'
