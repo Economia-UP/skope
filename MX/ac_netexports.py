@@ -29,48 +29,58 @@ def netexports():
     df = df.rename(columns = {'TIME_PERIOD':'fecha'})
     df.columns = ['fecha', 'Exportaciones netas']
     
-    # Define los rangos de fechas para los sexenios
-    sexenios = {
-        '2000-2006': (pd.to_datetime('2000-12-01'), pd.to_datetime('2006-11-30')),
-        '2006-2012': (pd.to_datetime('2006-12-01'), pd.to_datetime('2012-11-30')),
-        '2012-2018': (pd.to_datetime('2012-12-01'), pd.to_datetime('2018-09-30')),
-        '2018-2024': (pd.to_datetime('2018-12-01'), pd.to_datetime('2024-09-30')),
-        '2024-2030': (pd.to_datetime('2018-10-01'), pd.to_datetime('2030-09-30'))
+    # # Define los rangos de fechas para los sexenios
+    # sexenios = {
+    #     '2000-2006': (pd.to_datetime('2000-12-01'), pd.to_datetime('2006-11-30')),
+    #     '2006-2012': (pd.to_datetime('2006-12-01'), pd.to_datetime('2012-11-30')),
+    #     '2012-2018': (pd.to_datetime('2012-12-01'), pd.to_datetime('2018-09-30')),
+    #     '2018-2024': (pd.to_datetime('2018-12-01'), pd.to_datetime('2024-09-30')),
+    #     '2024-2030': (pd.to_datetime('2018-10-01'), pd.to_datetime('2030-09-30'))
+    # }
+    
+    # # Función para asignar cada fecha a su sexenio correspondiente
+    # def asignar_sexenio(fecha):
+    #     for sexenio, (inicio, fin) in sexenios.items():
+    #         if inicio <= fecha <= fin:
+    #             return sexenio
+    #     return None
+    
+    # # Aplica la función para crear una nueva columna 'sexenio'
+    # df['sexenio'] = df['fecha'].apply(asignar_sexenio)
+    
+    # # Filtra solo las filas que pertenecen a un sexenio válido
+    # df = df[df['sexenio'].notna()]
+    
+    df = df[df['fecha'] >= '2018-01-01']
+    
+    meses_abreviados = {
+        1: 'ene', 2: 'feb', 3: 'mar', 4: 'abr', 5: 'may', 6: 'jun',
+        7: 'jul', 8: 'ago', 9: 'sep', 10: 'oct', 11: 'nov', 12: 'dic'
     }
     
-    # Función para asignar cada fecha a su sexenio correspondiente
-    def asignar_sexenio(fecha):
-        for sexenio, (inicio, fin) in sexenios.items():
-            if inicio <= fecha <= fin:
-                return sexenio
-        return None
+    # Función para obtener el mes en formato abreviado
+    def obtener_mes_abreviado(fecha):
+        return meses_abreviados[fecha.month]
     
-    # Aplica la función para crear una nueva columna 'sexenio'
-    df['sexenio'] = df['fecha'].apply(asignar_sexenio)
-    
-    # Filtra solo las filas que pertenecen a un sexenio válido
-    df = df[df['sexenio'].notna()]
-    
-    # Función para calcular el año relativo dentro del sexenio
-    def calcular_año_relativo(fecha, sexenio):
-        inicio_sexenio = sexenios[sexenio][0]
-        return (fecha.year - inicio_sexenio.year)
-    
-    # Aplica la función para crear la columna 'año_relativo'
-    df['año_relativo'] = df.apply(lambda row: calcular_año_relativo(row['fecha'], row['sexenio']), axis=1)
+    # Aplica la función para crear la columna 'mes_abreviado'
+    df['mes_abreviado'] = df['fecha'].apply(obtener_mes_abreviado)
 
     
-    # Ordena el DataFrame por sexenio y por fecha
-    df.sort_values(by=['sexenio', 'fecha'], inplace=True)
+    df['año'] = df['fecha'].dt.year
     
-    # Selecciona las columnas relevantes para comparar los datos por sexenio
-
-    df_wide = df.pivot(index='año_relativo', columns='sexenio', 
+    # Ordena el DataFrame por año y por fecha
+    df.sort_values(by=['fecha'], inplace=True)
+    
+    # Convertir 'mes_abreviado' a tipo categórico con un orden específico
+    df['mes_abreviado'] = pd.Categorical(df['mes_abreviado'], 
+                                          categories=list(meses_abreviados.values()), 
+                                          ordered=True)
+    
+    # Pivot the DataFrame to wide format: months as index and years as columns
+    df_wide = df.pivot(index='mes_abreviado', columns='año', 
                        values='Exportaciones netas')
-    
-    # Rename the columns to only include the sexenio names
-    df_wide.columns = [f'{sexenio}' for sexenio in df_wide.columns]
-    
+        
+    # Cumsum    
     df_wide = df_wide.cumsum()
 
     # Define the output directory and ensure it exists
