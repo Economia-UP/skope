@@ -76,6 +76,8 @@ def netexports():
     # Selecciona las columnas relevantes para comparar los datos por sexenio
     df = df[['sexenio', 'año_relativo', 'Exportaciones', 'Importaciones', 'Exportaciones netas']]
 
+    df_wide = df.pivot(index='año_relativo', columns='sexenio', 
+                         values=['Exportaciones', 'Importaciones', 'Exportaciones netas'])
 
     # Define the output directory and ensure it exists
     output_dir = 'MX'
@@ -83,7 +85,7 @@ def netexports():
     output_file = os.path.join(output_dir, 'ac_netexports.csv')
 
     # Save the merged DataFrame to a CSV file in the specified folder
-    df.to_csv(output_file, index=False)
+    df_wide.to_csv(output_file, index=False)
     print(f"Data successfully written to {output_file}")
 
 if __name__ == "__main__":
