@@ -23,7 +23,7 @@ def exports():
     df = pd.DataFrame(observations)
     df = df[['TIME_PERIOD', 'OBS_VALUE']]  # Select relevant columns
     df['OBS_VALUE'] = pd.to_numeric(df['OBS_VALUE'], errors='coerce')  # Rename OBS_VALUE and convert to numeric
-    df['TIME_PERIOD'] = pd.to_datetime(df['TIME_PERIOD'], format = '%y/%m', errors = 'coerce')     
+    df['TIME_PERIOD'] = pd.to_datetime(df['TIME_PERIOD'], format = '%Y/%m', errors = 'coerce')     
     df = df.rename(columns = {'TIME_PERIOD':'fecha'})
 
     # Filter since 2018
