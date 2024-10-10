@@ -27,7 +27,7 @@ jobs:
 
       - name: Install R dependencies
         run: |
-          Rscript -e 'install.packages(c("httr", "tidyverse"))'  # Add any R packages needed for your scripts
+          Rscript -e 'install.packages(c("httr", "jsonlite", "lubridate", "tidyverse"))'
 
       - name: Run all Python scripts in MX folder
         env:
