@@ -45,7 +45,7 @@ jobs:
       #   run: |
       #     Rscript -e 'if (!requireNamespace("tidyverse", quietly = TRUE)) install.packages(c("httr", "jsonlite", "lubridate", "tidyverse"))'
 
-      # - name: Run all Python scripts in MX folder
+      - name: Run all Python scripts in MX folder
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
           BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
