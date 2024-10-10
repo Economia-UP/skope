@@ -33,19 +33,19 @@ jobs:
         with:
           r-version: '4.x'
 
-      - name: Cache R package dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.R/  # Location where R packages are installed
-          key: ${{ runner.os }}-R-${{ hashFiles('MX/*.R') }}  # Unique cache key based on OS and R scripts
-          restore-keys: |
-            ${{ runner.os }}-R-
+      # - name: Cache R package dependencies
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: ~/.R/  # Location where R packages are installed
+      #     key: ${{ runner.os }}-R-${{ hashFiles('MX/*.R') }}  # Unique cache key based on OS and R scripts
+      #     restore-keys: |
+      #       ${{ runner.os }}-R-
 
-      - name: Install R dependencies
-        run: |
-          Rscript -e 'if (!requireNamespace("tidyverse", quietly = TRUE)) install.packages(c("httr", "jsonlite", "lubridate", "tidyverse"))'
+      # - name: Install R dependencies
+      #   run: |
+      #     Rscript -e 'if (!requireNamespace("tidyverse", quietly = TRUE)) install.packages(c("httr", "jsonlite", "lubridate", "tidyverse"))'
 
-      - name: Run all Python scripts in MX folder
+      # - name: Run all Python scripts in MX folder
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
           BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
@@ -55,11 +55,11 @@ jobs:
             python "$script"
           done
 
-      - name: Run all R scripts in MX folder
-        run: |
-          for script in MX/*.R; do
-            Rscript "$script"
-          done
+      # - name: Run all R scripts in MX folder
+      #   run: |
+      #     for script in MX/*.R; do
+      #       Rscript "$script"
+      #     done
 
       - name: Commit and push changes
         run: |
