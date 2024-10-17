@@ -25,6 +25,7 @@ jobs:
 
     - name: Ejecutar todos los scripts de Python en la carpeta Calendar
       env:
+        GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
         GOOGLE_CALENDAR_ID: ${{ secrets.GOOGLE_CALENDAR_ID }}
       run: |
         for script in Calendar/*.py; do
