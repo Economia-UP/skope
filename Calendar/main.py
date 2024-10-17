@@ -7,7 +7,7 @@ from googleapiclient.discovery import build
 import os
 
 # Configuración: URL del RSS y ID del calendario
-RSS_URL = "https://www.inegi.org.mx/rss/noticias/xmlfeeds?p=3,20"
+RSS_URL = "https://www.inegi.org.mx/rss/noticias/xmlfeeds?p="
 CALENDAR_ID = os.getenv("GOOGLE_CALENDAR_ID")
 
 # Autenticación usando Google Calendar API
