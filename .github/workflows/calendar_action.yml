@@ -1,4 +1,4 @@
-name: Actualizar Google Calendar desde RSS
+name: Google Calendar RSS
 
 on:
   schedule:
