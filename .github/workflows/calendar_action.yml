@@ -1,0 +1,32 @@
+name: Actualizar Google Calendar desde RSS
+
+on:
+  schedule:
+    - cron: "0 6 * * *"  # Ejecuta cada día a las 6 AM UTC
+  workflow_dispatch:  # Permitir ejecución manual
+
+jobs:
+  update_calendar:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clonar repositorio
+      uses: actions/checkout@v3
+
+    - name: Configurar Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.9"
+
+    - name: Instalar dependencias
+      run: |
+        cd Calendar
+        pip install -r requirements.txt
+
+    - name: Ejecutar todos los scripts de Python en la carpeta Calendar
+      env:
+        GOOGLE_CALENDAR_ID: ${{ secrets.GOOGLE_CALENDAR_ID }}
+      run: |
+        for script in Calendar/*.py; do
+          python "$script"
+        done
