@@ -1,16 +1,16 @@
-import json
 import xml.etree.ElementTree as ET
 import requests
 from datetime import datetime, timedelta
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 import os
+import json  # Ensure json is imported
 
-# Configuración: URL del RSS y ID del calendario
+# Configuration: RSS URL and Calendar ID
 RSS_URL = "https://www.inegi.org.mx/rss/noticias/xmlfeeds?p="
 CALENDAR_ID = os.getenv("GOOGLE_CALENDAR_ID")
 
-# Autenticación usando Google Calendar API
+# Authenticate using Google Calendar API
 def autenticar_google_calendar():
     credentials_json = os.getenv("GOOGLE_CREDENTIALS_JSON")
     creds = Credentials.from_service_account_info(
@@ -19,7 +19,7 @@ def autenticar_google_calendar():
     )
     return build("calendar", "v3", credentials=creds)
 
-# Leer el RSS y extraer los eventos
+# Read the RSS and extract events
 def leer_rss():
     response = requests.get(RSS_URL)
     root = ET.fromstring(response.content)
@@ -28,7 +28,15 @@ def leer_rss():
     for row in root.findall("./channel/row"):
         titulo = row.find("title").text
         descripcion = row.find("description").text
-        fecha_pub = datetime.strptime(row.find("pubdate").text, "%a, %d %b %Y %H:%M:%S %Z")
+        pubdate_text = row.find("pubdate").text
+        
+        # Check the format of pubdate
+        try:
+            # Attempt to parse with time
+            fecha_pub = datetime.strptime(pubdate_text, "%a, %d %b %Y %H:%M:%S %Z")
+        except ValueError:
+            # If it fails, try parsing without time
+            fecha_pub = datetime.strptime(pubdate_text, "%a, %d %b %Y")
 
         eventos.append({
             "summary": titulo,
@@ -38,7 +46,7 @@ def leer_rss():
         })
     return eventos
 
-# Crear eventos en Google Calendar
+# Create events in Google Calendar
 def crear_eventos(service, eventos):
     for evento in eventos:
         evento_body = {
