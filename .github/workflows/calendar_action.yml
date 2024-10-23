@@ -2,7 +2,7 @@ name: Google Calendar RSS
 
 on:
   schedule:
-    - cron: "0 6 * * *"  # Ejecuta cada día a las 6 AM UTC
+    - cron: "1 6 * * *"  # Executes every day at 6:01 AM UTC
   workflow_dispatch:  # Permitir ejecución manual
 
 jobs:
