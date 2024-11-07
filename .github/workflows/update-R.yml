@@ -17,10 +17,16 @@ jobs:
         with:
           r-version: '4.x'  # Use the required R version
 
-      # Step 3: Install required R packages directly
-      - name: Install R dependencies
+      # Step 3: Install R dependencies conditionally
+      - name: Install R dependencies if not already installed
         run: |
-          Rscript -e 'install.packages(c("ggplot2", "rcmdcheck", "inegiR", "dplyr", "tidyr", "purrr", "siebanxicor"), repos = "https://cloud.r-project.org/")'
+          packages <- c("ggplot2", "rcmdcheck", "inegiR", "dplyr", "tidyr", "purrr", "siebanxicor")
+          installed_packages <- rownames(installed.packages())
+          for (pkg in packages) {
+            if (!(pkg %in% installed_packages)) {
+              install.packages(pkg, repos = "https://cloud.r-project.org/")
+            }
+          }
 
       # Step 4: Run all R scripts in MX folder
       - name: Run all R scripts in MX folder
