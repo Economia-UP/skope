@@ -32,19 +32,19 @@ jobs:
       - name: Cache R package dependencies
         uses: actions/cache@v3
         with:
-          path: ~/.local/lib/R/4.x/site-library  # Path where R packages are installed
+          path: ~/.local/lib/R/site-library  # Use a writable path
           key: ${{ runner.os }}-R-${{ hashFiles('r_requirements.txt') }}  # Cache key based on requirements file
           restore-keys: |
             ${{ runner.os }}-R-
 
       - name: Conditionally install R dependencies from r_requirements.txt
         run: |
-          Rscript -e 'options(repos = c(CRAN = "https://cloud.r-project.org/"))'  # Faster CRAN mirror
-          Rscript -e 'required_packages <- readLines("r_requirements.txt"); missing_packages <- required_packages[!(required_packages %in% installed.packages()[,"Package"])]; if(length(missing_packages)) install.packages(missing_packages)'
+          Rscript -e 'options(repos = c(CRAN = "https://cloud.r-project.org/"))'  # Set a faster CRAN mirror
+          Rscript -e '.libPaths(c("~/.local/lib/R/site-library", .libPaths())); required_packages <- readLines("r_requirements.txt"); missing_packages <- required_packages[!(required_packages %in% installed.packages()[,"Package"])]; if(length(missing_packages)) install.packages(missing_packages, lib="~/.local/lib/R/site-library")'
 
       - name: Run all R scripts in MX folder
         run: |
-          for script in MX/*.R; do
+          for script in R/*.R; do
             Rscript "$script"
           done
 
