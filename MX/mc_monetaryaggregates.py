@@ -47,7 +47,7 @@ def AGGREGATES():
     dfs.columns = ['fecha', 'M1 (datos)', 'M2 (datos)']
 
     # Calculate pct_change
-    index = pd.date_range(start='2017-01-01', periods=len(dfs['fecha']), freq='M')
+    index = pd.date_range(start='2010-01-01', periods=len(dfs['fecha']), freq='M')
     dfs = dfs.set_index(index)
 
     dfs['M1'] = dfs['M1 (datos)'].pct_change(periods=12) * 100  # Multiply by 100 for percentage
