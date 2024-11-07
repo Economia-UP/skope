@@ -1,4 +1,4 @@
-name: Import Data Every 5 Minutes
+name: Update R
 
 on:
   schedule:
