@@ -26,7 +26,11 @@ jobs:
       # Step 4: Run R scripts from the 'R' folder
       - name: Run R scripts
         run: |
-          mkdir -p Out  # Create the output folder if it doesn't exist
           for file in R/*.R; do
-            Rscript $file > Out/$(basename $file .R).log 2>&1  # Redirect output to the 'Out' folder
+            # Assuming R scripts save their outputs as CSVs, modify them to save to Out folder
+            # If your R scripts already save CSVs, ensure the path is set to Out/
+            Rscript $file  # Modify the scripts to save CSV to MX/ folder
+
+            # Example to save outputs from each R script:
+            # Rscript $file > MX/$(basename $file .R).csv
           done
