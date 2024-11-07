@@ -22,13 +22,13 @@ jobs:
         with:
           cache-version: 2  # Cache version to ensure proper updates
           extra-packages: |
-            any::ggplot2   # Example of extra packages
-            any::rcmdcheck # Example of extra packages
-            any::inegiR
-            any::dplyr
-            any::tidyr
-            any::purrr
-            any::siebanxicor
+            ggplot2   # Example of extra packages
+            rcmdcheck # Example of extra packages
+            inegiR
+            dplyr
+            tidyr
+            purrr
+            siebanxicor
           needs: |
             check    # Dependencies required before this step
 
