@@ -2,7 +2,7 @@ name: Update Py
 
 on:
   schedule:
-    - cron: '*/15 * * * *'  # Runs every 5 minutes (you can adjust this)
+    - cron: '*/30 * * * *'  # Runs every 5 minutes (you can adjust this)
   push:
     branches: 
       - main  # This will also run when there are changes pushed to the main branch.

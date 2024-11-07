@@ -2,7 +2,7 @@ name: Update R
 
 on:
   schedule:
-    - cron: '*/15 * * * *'  # This will run the workflow every 5 minutes.
+    - cron: '*/30 * * * *'  # This will run the workflow every 5 minutes.
   push:
     branches: 
       - main  # This will also run when there are changes pushed to the main branch.
