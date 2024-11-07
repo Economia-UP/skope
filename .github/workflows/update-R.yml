@@ -22,15 +22,13 @@ jobs:
         with:
           cache-version: 2  # Cache version to ensure proper updates
           extra-packages: |
-            ggplot2   # Example of extra packages
-            rcmdcheck # Example of extra packages
+            ggplot2
+            rcmdcheck
             inegiR
             dplyr
             tidyr
             purrr
             siebanxicor
-          needs: |
-            check    # Dependencies required before this step
 
       # Step 4: Check the R package (run R CMD check)
       - uses: r-lib/actions/check-r-package@v2
