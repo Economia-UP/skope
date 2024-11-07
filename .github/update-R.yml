@@ -1,0 +1,44 @@
+name: Update MX
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # Runs every 5 minutes (you can adjust this)
+  workflow_dispatch:  # Allows manual trigger
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: '4.x'
+
+      - name: Cache R package dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.R/  # Location where R packages are installed
+          key: ${{ runner.os }}-R-${{ hashFiles('r_requirements.txt') }}  # Unique cache key based on requirements file
+          restore-keys: |
+            ${{ runner.os }}-R-
+
+      - name: Install R dependencies from r_requirements.txt
+        run: |
+          Rscript -e 'install.packages(readLines("r_requirements.txt"))'
+
+      - name: Run all R scripts in MX folder
+        run: |
+          for script in R/*.R; do
+            Rscript "$script"
+          done
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.name "GitHub Action"
+          git config --local user.email "action@github.com"
+          git add 'R/*.csv'  # Add all CSV files from the specific folder
+          git commit -m "Update data" || echo "No changes to commit"
+          git push
