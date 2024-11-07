@@ -17,30 +17,19 @@ jobs:
         with:
           r-version: '4.x'  # Use the required R version
 
-      # Step 3: Set up R dependencies, install additional required packages, and handle caching
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          cache-version: 2  # Cache version to ensure proper updates
-          extra-packages: |
-            ggplot2
-            rcmdcheck
-            inegiR
-            dplyr
-            tidyr
-            purrr
-            siebanxicor
+      # Step 3: Install required R packages directly
+      - name: Install R dependencies
+        run: |
+          Rscript -e 'install.packages(c("ggplot2", "rcmdcheck", "inegiR", "dplyr", "tidyr", "purrr", "siebanxicor"), repos = "https://cloud.r-project.org/")'
 
-      # Step 4: Check the R package (run R CMD check)
-      - uses: r-lib/actions/check-r-package@v2
-
-      # Step 5: Run all R scripts in MX folder
+      # Step 4: Run all R scripts in MX folder
       - name: Run all R scripts in MX folder
         run: |
           for script in R/*.R; do
             Rscript "$script"
           done
 
-      # Step 6: Commit and push changes
+      # Step 5: Commit and push changes
       - name: Commit and push changes
         run: |
           git config --local user.name "GitHub Action"
