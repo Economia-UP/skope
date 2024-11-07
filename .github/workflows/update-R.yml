@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           Rscript -e "
-          packages <- c('dplyr', 'ggplot2', 'tidyr')  # Modify this with the required packages
+          packages <- c('dplyr', 'ggplot2', 'tidyr', 'inegiR', 'siebanxicor', 'purrr')  # Modify this with the required packages
           installed <- installed.packages()[, 'Package']
           to_install <- packages[!(packages %in% installed)]
           if(length(to_install) > 0) {
