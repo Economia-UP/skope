@@ -21,10 +21,10 @@ jobs:
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           packages: |
-            any::tidyverse
-            any::inegiR
-            any::siebanxicor
-            any::fredr
+            tidyverse
+            inegiR
+            siebanxicor
+            fredr
 
       # Step 3: Check out the repository
       - name: Check out repository
