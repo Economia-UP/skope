@@ -7,9 +7,9 @@ def AGGREGATES():
     # Retrieve the INEGI API key from environment variables
     BANXICO_API_KEY = os.getenv('BANXICO_API_KEY')
     
-    M1_ID = 'SF311408'  # Your BANXICO series ID
+    M1_ID = 'SF311408'  # BANXICO series ID for M1
     M1 = f'https://www.banxico.org.mx/SieAPIRest/service/v1/series/{M1_ID}/datos?token={BANXICO_API_KEY}&mediaType=json'
-    M2_ID = 'SF311418'  # Your BANXICO series ID
+    M2_ID = 'SF311418'  # BANXICO series ID for M2
     M2 = f'https://www.banxico.org.mx/SieAPIRest/service/v1/series/{M2_ID}/datos?token={BANXICO_API_KEY}&mediaType=json'
     
     # Fetch data from the BANXICO API
@@ -39,8 +39,8 @@ def AGGREGATES():
     df2['dato'] = pd.to_numeric(df2['dato'].str.replace(',', ''), errors='coerce')
     
     # Filter since 2017
-    df1 = df1[df1['fecha'] >= '2010-01-01']
-    df2 = df2[df2['fecha'] >= '2010-01-01']
+    df1 = df1[df1['fecha'] >= '2017-01-01']
+    df2 = df2[df2['fecha'] >= '2017-01-01']
 
     # Merge the dataframes on 'fecha'
     dfs = df1.merge(df2, how='outer', on='fecha')
@@ -50,8 +50,12 @@ def AGGREGATES():
     dfs['Log_M1'] = np.log(dfs['M1 (datos)'])
     dfs['Log_M2'] = np.log(dfs['M2 (datos)'])
 
-    # Create a 45-degree line for comparison
-    dfs['45_degree_line'] = np.linspace(dfs['Log_M1'].min(), dfs['Log_M1'].max(), num=len(dfs))
+    # Generate the 45-degree line with exponential growth
+    initial_log_value = dfs['Log_M1'].iloc[0]  # Starting point based on the first log value of M1
+    exponential_growth_rate = 0.02  # Approx. 2% monthly growth rate (or adjust as needed)
+    
+    # Create the exponential growth line
+    dfs['45_degree_line'] = [initial_log_value + exponential_growth_rate * i for i in range(len(dfs))]
 
     # Define the output directory and ensure it exists
     output_dir = 'MX'
