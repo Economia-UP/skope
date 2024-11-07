@@ -22,8 +22,8 @@ def exchange():
     df = pd.DataFrame(observations)
     df['fecha'] = pd.to_datetime(df['fecha'], errors = 'coerce')  # Convert TIME_PERIOD to datetime
     
-    # Filter since 2018
-    df = df[df['fecha'] >= '2018-01-01']
+    # Filter since 2010
+    df = df[df['fecha'] >= '2010-01-01']
     
     # Define the output directory and ensure it exists
     output_dir = 'MX'

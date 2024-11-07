@@ -61,11 +61,11 @@ def policy():
     df3['dato'] = pd.to_numeric(df3['dato'].str.replace(',', ''), errors='coerce')
     
     # Filter since 2018
-    df1 = df1[df1['fecha'] >= '2018-01-01']
-    df2 = df2[df2['fecha'] >= '2018-01-01']
-    df3 = df3[df3['fecha'] >= '2018-01-01']
+    df1 = df1[df1['fecha'] >= '2010-01-01']
+    df2 = df2[df2['fecha'] >= '2010-01-01']
+    df3 = df3[df3['fecha'] >= '2010-01-01']
 
-    start_date = '2018-01-01'
+    start_date = '2010-01-01'
     end_date = datetime.today().strftime('%Y-%m-%d')
     date_range = pd.date_range(start=start_date, end=end_date, freq='D')
     df_dates = pd.DataFrame(date_range, columns=['fecha'])

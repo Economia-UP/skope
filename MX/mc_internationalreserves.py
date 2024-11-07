@@ -40,8 +40,8 @@ def monetary():
     df2['dato'] = pd.to_numeric(df2['dato'].str.replace(',', ''), errors='coerce')
     
     # Filter since 2018
-    df1 = df1[df1['fecha'] >= '2018-01-01']
-    df2 = df2[df2['fecha'] >= '2018-01-01']
+    df1 = df1[df1['fecha'] >= '2010-01-01']
+    df2 = df2[df2['fecha'] >= '2010-01-01']
 
     dfs = df1.merge(df2, how='outer', on='fecha')
     dfs.columns = ['fecha', 'Activos internacionales netos', 'Reservas internacionales']

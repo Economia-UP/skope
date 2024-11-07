@@ -42,7 +42,7 @@ def inflation():
     merged_df.columns = ['TIME_PERIOD', 'Inflación general', 'Subyacente', 'No subyacente']
 
     # Filter since 2018
-    merged_df = merged_df[merged_df['TIME_PERIOD'] >= '2018-01-01']
+    merged_df = merged_df[merged_df['TIME_PERIOD'] >= '2010-01-01']
     
     # Define the output directory and ensure it exists
     output_dir = 'MX'
