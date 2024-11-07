@@ -1,54 +1,48 @@
-name: Run R Scripts Every 5 Minutes
+name: Import Data Every 5 Minutes
 
 on:
   schedule:
     - cron: '*/5 * * * *'  # This will run the workflow every 5 minutes.
-  workflow_dispatch:  # Allow manual triggers as well.
+  push:
+    branches: 
+      - main  # This will also run when there are changes pushed to the main branch.
 
 jobs:
-  run-r-scripts:
+  import-data:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out the repository
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      # Step 2: Check if R is installed
-      - name: Check if R is installed
-        run: |
-          if ! command -v R &> /dev/null
-          then
-            echo "R is not installed. Installing R..."
-            sudo apt update
-            sudo apt install -y r-base
-          else
-            echo "R is already installed."
-          fi
-
-      # Step 3: Set up R (in case additional setup is needed)
+      # Step 1: Set up R
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
 
-      # Step 4: Install required R packages only if not already installed
-      - name: Install dependencies
-        run: |
-          Rscript -e "
-          packages <- c('dplyr', 'ggplot2', 'tidyr')  # Modify this with the required packages
-          installed <- installed.packages()[, 'Package']
-          to_install <- packages[!(packages %in% installed)]
-          if(length(to_install) > 0) {
-            install.packages(to_install)
-          }
-          "
+      # Step 2: Install required R packages
+      - name: Install packages
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            any::tidyverse
+            any::inegiR
+            any::siebanxicor
+            any::fredr
 
-      # Step 5: Run R scripts from the 'R' folder
-      - name: Run R scripts
+      # Step 3: Check out the repository
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      # Step 4: Run all R scripts in the 'R' folder
+      - name: Import data
         run: |
+          # Loop through all .R files in the R folder and run them
           for file in R/*.R; do
-            # Run each script, assuming the script saves its output as a CSV in Out folder
-            Rscript $file  # Modify the scripts to save CSV to MX/ folder
-
-            # Example to save outputs from each R script:
-            # Rscript $file > MX/$(basename $file .R).csv
+            Rscript $file
           done
+
+      # Step 5: Commit and push the updated data
+      - name: Commit results
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add survey_data.rds
+          git commit -m 'Data updated' || echo "No changes to commit"
+          git push origin || echo "No changes to commit"
