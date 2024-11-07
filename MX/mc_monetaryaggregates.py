@@ -46,23 +46,21 @@ def AGGREGATES():
     dfs = df1.merge(df2, how='outer', on='fecha')
     dfs.columns = ['fecha', 'M1 (datos)', 'M2 (datos)']
 
-    # Calculate the natural logarithm of M1 and M2 values
-    dfs['Log_M1'] = np.log(dfs['M1 (datos)'])
-    dfs['Log_M2'] = np.log(dfs['M2 (datos)'])
-
-    # Generate the 45-degree line with exponential growth
-    initial_log_value = dfs['Log_M1'].iloc[0]  # Starting point based on the first log value of M1
-    exponential_growth_rate = 0.02  # Approx. 2% monthly growth rate (or adjust as needed)
+    # Get the initial value of M1 to start the exponential growth line
+    initial_value_M1 = dfs['M1 (datos)'].iloc[0]  # First data point for M1
     
-    # Create the exponential growth line
-    dfs['45_degree_line'] = [initial_log_value + exponential_growth_rate * i for i in range(len(dfs))]
+    # Set the growth rate, here using 2% (0.02) growth per period (month)
+    growth_rate = 0.02
+
+    # Create the 45-degree exponential growth line based on initial value and growth rate
+    dfs['45_degree_line'] = [initial_value_M1 * (1 + growth_rate) ** i for i in range(len(dfs))]
 
     # Define the output directory and ensure it exists
     output_dir = 'MX'
     os.makedirs(output_dir, exist_ok=True)  # Create the directory if it doesn't exist
     output_file = os.path.join(output_dir, 'mc_monetaryaggregates.csv')
 
-    # Save the merged DataFrame to a CSV file in the specified folder
+    # Save the merged DataFrame with the exponential line to a CSV file in the specified folder
     dfs.to_csv(output_file, index=False)
     print(f"Data successfully written to {output_file}")
 
