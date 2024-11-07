@@ -2,7 +2,7 @@ name: Import Data Every 5 Minutes
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # This will run the workflow every 5 minutes.
+    - cron: '*/15 * * * *'  # This will run the workflow every 5 minutes.
   push:
     branches: 
       - main  # This will also run when there are changes pushed to the main branch.
