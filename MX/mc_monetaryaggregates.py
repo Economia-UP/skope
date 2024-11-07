@@ -1,8 +1,7 @@
 import os
 import requests
 import pandas as pd
-
-# BANXICO_API_KEY = '86d02771fd6b64ce29912469f70d872cf666627201a5d7e819a82c452ae61289'
+import numpy as np
 
 def AGGREGATES():
     # Retrieve the INEGI API key from environment variables
@@ -30,7 +29,7 @@ def AGGREGATES():
     if not observations2:
         raise ValueError(f"No observations found for series ID {M2_ID}")    
 
-
+    # Convert data to DataFrames and parse dates and values
     df1 = pd.DataFrame(observations1)
     df1['fecha'] = pd.to_datetime(df1['fecha'], format='%d/%m/%Y', errors='coerce')
     df1['dato'] = pd.to_numeric(df1['dato'].str.replace(',', ''), errors='coerce')
@@ -40,18 +39,19 @@ def AGGREGATES():
     df2['dato'] = pd.to_numeric(df2['dato'].str.replace(',', ''), errors='coerce')
     
     # Filter since 2017
-    df1 = df1[df1['fecha'] >= '2017-01-01']
-    df2 = df2[df2['fecha'] >= '2017-01-01']
+    df1 = df1[df1['fecha'] >= '2010-01-01']
+    df2 = df2[df2['fecha'] >= '2010-01-01']
 
+    # Merge the dataframes on 'fecha'
     dfs = df1.merge(df2, how='outer', on='fecha')
     dfs.columns = ['fecha', 'M1 (datos)', 'M2 (datos)']
 
-    # Calculate pct_change
-    index = pd.date_range(start='2017-01-01', periods=len(dfs['fecha']), freq='M')
-    dfs = dfs.set_index(index)
+    # Calculate the natural logarithm of M1 and M2 values
+    dfs['Log_M1'] = np.log(dfs['M1 (datos)'])
+    dfs['Log_M2'] = np.log(dfs['M2 (datos)'])
 
-    dfs['M1'] = dfs['M1 (datos)'].pct_change(periods=12) * 100  # Multiply by 100 for percentage
-    dfs['M2'] = dfs['M2 (datos)'].pct_change(periods=12) * 100  # Multiply by 100 for percentage
+    # Create a 45-degree line for comparison
+    dfs['45_degree_line'] = np.linspace(dfs['Log_M1'].min(), dfs['Log_M1'].max(), num=len(dfs))
 
     # Define the output directory and ensure it exists
     output_dir = 'MX'
