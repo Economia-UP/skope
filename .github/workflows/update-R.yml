@@ -42,8 +42,8 @@ jobs:
 
       - name: Conditionally install R dependencies from r_requirements.txt
         run: |
-          Rscript -e 'options(repos = c(CRAN = "https://cloud.r-project.org/"))'  # Set a faster CRAN mirror
-          Rscript -e '.libPaths(c("${{ runner.temp }}/R/site-library", .libPaths())); required_packages <- readLines("r_requirements.txt"); missing_packages <- required_packages[!(required_packages %in% installed.packages()[,"Package"])]; if(length(missing_packages)) install.packages(missing_packages, lib="${{ runner.temp }}/R/site-library")'
+          Rscript -e 'options(repos = c(CRAN = "https://cloud.r-project.org/"))'
+          Rscript -e '.libPaths(c("${{ runner.temp }}/R/site-library", .libPaths())); required_packages <- readLines("r_requirements.txt"); for (pkg in required_packages) { if (!pkg %in% installed.packages()[, "Package"]) install.packages(pkg, lib="${{ runner.temp }}/R/site-library") }'
 
       - name: Run all R scripts in MX folder
         run: |
