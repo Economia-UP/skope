@@ -20,13 +20,14 @@ jobs:
       - name: Cache R package dependencies
         uses: actions/cache@v3
         with:
-          path: ~/.R/  # Location where R packages are installed
-          key: ${{ runner.os }}-R-${{ hashFiles('r_requirements.txt') }}  # Unique cache key based on requirements file
+          path: ~/.local/lib/R/4.x/site-library  # Path where R packages are installed
+          key: ${{ runner.os }}-R-${{ hashFiles('r_requirements.txt') }}  # Cache key based on requirements file
           restore-keys: |
             ${{ runner.os }}-R-
 
       - name: Install R dependencies from r_requirements.txt
         run: |
+          Rscript -e 'options(repos = c(CRAN = "https://cloud.r-project.org/"))'  # Faster CRAN mirror
           Rscript -e 'install.packages(readLines("r_requirements.txt"))'
 
       - name: Run all R scripts in MX folder
@@ -39,6 +40,6 @@ jobs:
         run: |
           git config --local user.name "GitHub Action"
           git config --local user.email "action@github.com"
-          git add 'R/*.csv'  # Add all CSV files from the specific folder
+          git add 'MX/*.csv'  # Add all CSV files from the specific folder
           git commit -m "Update data" || echo "No changes to commit"
           git push
