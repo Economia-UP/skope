@@ -14,15 +14,27 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Step 2: Set up R
+      # Step 2: Check if R is installed
+      - name: Check if R is installed
+        run: |
+          if ! command -v R &> /dev/null
+          then
+            echo "R is not installed. Installing R..."
+            sudo apt update
+            sudo apt install -y r-base
+          else
+            echo "R is already installed."
+          fi
+
+      # Step 3: Set up R (in case additional setup is needed)
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
 
-      # Step 3: Install required R packages only if not already installed
+      # Step 4: Install required R packages only if not already installed
       - name: Install dependencies
         run: |
           Rscript -e "
-          packages <- c('dplyr', 'ggplot2', 'tidyr', 'inegiR', 'siebanxicor', 'purrr')  # Modify this with the required packages
+          packages <- c('dplyr', 'ggplot2', 'tidyr')  # Modify this with the required packages
           installed <- installed.packages()[, 'Package']
           to_install <- packages[!(packages %in% installed)]
           if(length(to_install) > 0) {
@@ -30,7 +42,7 @@ jobs:
           }
           "
 
-      # Step 4: Run R scripts from the 'R' folder
+      # Step 5: Run R scripts from the 'R' folder
       - name: Run R scripts
         run: |
           for file in R/*.R; do
