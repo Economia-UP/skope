@@ -26,7 +26,6 @@ series.incidence <- series %>%
   mutate(
     "Mercancías" = pi*weights$Weight[weights$Concept == "Mercancías Total"],
     "Servicios" = pi*weights$Weight[weights$Concept == "Servicios Total"],
-    "Vivienda" = pi*weights$Weight[weights$Concept == "Vivienda"],
     "Agropecuarios" = pi*weights$Weight[weights$Concept == "Total Agropecuarios"],
     "Energéticos y tarifas autorizadas por el gobierno" = pi*weights$Weight[weights$Concept == "Energéticos y tarifas autorizadas por el gobierno Total"]
       )
