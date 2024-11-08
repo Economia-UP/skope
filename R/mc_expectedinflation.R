@@ -17,7 +17,8 @@ med <- getSerieDataFrame(series, "SR14195")
 first <- getSerieDataFrame(series, "SR14196")
 third <- getSerieDataFrame(series, "SR14197")
 
-series.df <- reduce(list(first, med, third), full_join, by = "date")
+series.df <- reduce(list(first, med, third), full_join, by = "date") %>% 
+  filter(date >= "2024-01-01")
 colnames(series.df)[2:4] <- c("Primer cuartil", "Mediana", "Tercer cuartil")
 
 # Specify the output directory and file name
