@@ -5,8 +5,6 @@ library(inegiR)
 library(dplyr)
 library(tidyr)
 
-# setwd("C:/Users/ediaz/OneDrive - up.edu.mx/GitHub/skope/R/")
-
 # Define your INEGI API key
 inegi.api = '446548c3-7b55-4b22-8430-ac8f251ea555'
 
