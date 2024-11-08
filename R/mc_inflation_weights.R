@@ -31,7 +31,7 @@ series.incidence <- series %>%
     "Total Agropecuarios" = pi*weights$Weight[weights$Concept == "Total Agropecuarios"],
     "Energéticos y tarifas autorizadas por el gobierno Total" = pi*weights$Weight[weights$Concept == "Energéticos y tarifas autorizadas por el gobierno Total"]
       )
-
+      
 # Specify the output directory and file name
 output_dir <- "MX"
 output_file <- file.path(output_dir, "mc_inflation_weights.csv")
