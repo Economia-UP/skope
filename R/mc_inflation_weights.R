@@ -13,7 +13,7 @@ weights <- read.csv("R/weights.csv") %>%
   reframe(Concept, Weight = Weight/100)
 
 # Fetch the data using the specified series IDs
-idSeries <- c("910406")
+idSeries <- c("910399")
 
 # Get the data
 series <- inegi_series_multiple(series = idSeries, token = inegi.api)
@@ -24,11 +24,11 @@ series.incidence <- series %>%
     date = date,
     'pi' = values) %>% 
   mutate(
-    "Mercancías Total" = pi*weights$Weight[weights$Concept == "Mercancías Total"],
-    "Servicios Total" = pi*weights$Weight[weights$Concept == "Servicios Total"],
+    "Mercancías" = pi*weights$Weight[weights$Concept == "Mercancías Total"],
+    "Servicios" = pi*weights$Weight[weights$Concept == "Servicios Total"],
     "Vivienda" = pi*weights$Weight[weights$Concept == "Vivienda"],
-    "Total Agropecuarios" = pi*weights$Weight[weights$Concept == "Total Agropecuarios"],
-    "Energéticos y tarifas autorizadas por el gobierno Total" = pi*weights$Weight[weights$Concept == "Energéticos y tarifas autorizadas por el gobierno Total"]
+    "Agropecuarios" = pi*weights$Weight[weights$Concept == "Total Agropecuarios"],
+    "Energéticos y tarifas autorizadas por el gobierno" = pi*weights$Weight[weights$Concept == "Energéticos y tarifas autorizadas por el gobierno Total"]
       )
 
 # Specify the output directory and file name
