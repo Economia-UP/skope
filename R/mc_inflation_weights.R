@@ -24,14 +24,13 @@ series.incidence <- series %>%
     date = date,
     'pi' = values) %>% 
   mutate(
-    "Alimentos, bebidas y tabaco" = pi*weights$Weight[weights$Concept == "Alimentos, bebidas y tabaco"],
     "Mercancías Total" = pi*weights$Weight[weights$Concept == "Mercancías Total"],
     "Servicios Total" = pi*weights$Weight[weights$Concept == "Servicios Total"],
     "Vivienda" = pi*weights$Weight[weights$Concept == "Vivienda"],
     "Total Agropecuarios" = pi*weights$Weight[weights$Concept == "Total Agropecuarios"],
     "Energéticos y tarifas autorizadas por el gobierno Total" = pi*weights$Weight[weights$Concept == "Energéticos y tarifas autorizadas por el gobierno Total"]
       )
-      
+
 # Specify the output directory and file name
 output_dir <- "MX"
 output_file <- file.path(output_dir, "mc_inflation_weights.csv")
