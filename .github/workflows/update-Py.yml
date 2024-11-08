@@ -1,50 +1,50 @@
-name: Update Py
+# name: Update Py
 
-on:
-  schedule:
-    - cron: '*/30 * * * *'  # Runs every 5 minutes (you can adjust this)
-  push:
-    branches: 
-      - main  # This will also run when there are changes pushed to the main branch.
-  workflow_dispatch:
+# on:
+#   schedule:
+#     - cron: '*/30 * * * *'  # Runs every 5 minutes (you can adjust this)
+#   push:
+#     branches: 
+#       - main  # This will also run when there are changes pushed to the main branch.
+#   workflow_dispatch:
 
-jobs:
-  update-data:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+# jobs:
+#   update-data:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
+#       - name: Set up Python
+#         uses: actions/setup-python@v2
+#         with:
+#           python-version: '3.x'
 
-      - name: Cache Python dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('MX/*.py') }}  # Cache key based on OS and Python scripts
-          restore-keys: |
-            ${{ runner.os }}-pip-
+#       - name: Cache Python dependencies
+#         uses: actions/cache@v3
+#         with:
+#           path: ~/.cache/pip
+#           key: ${{ runner.os }}-pip-${{ hashFiles('MX/*.py') }}  # Cache key based on OS and Python scripts
+#           restore-keys: |
+#             ${{ runner.os }}-pip-
 
-      - name: Install Python dependencies
-        run: pip install requests pandas
+#       - name: Install Python dependencies
+#         run: pip install requests pandas
 
-      - name: Run all Python scripts in MX folder
-        env:
-          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-          BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
-          INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
-        run: |
-          for script in MX/*.py; do
-            python "$script"
-          done
+#       - name: Run all Python scripts in MX folder
+#         env:
+#           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+#           BANXICO_API_KEY: ${{ secrets.BANXICO_API_KEY }}
+#           INEGI_API_KEY: ${{ secrets.INEGI_API_KEY }}
+#         run: |
+#           for script in MX/*.py; do
+#             python "$script"
+#           done
 
-      - name: Commit and push changes
-        run: |
-          git config --local user.name "GitHub Action"
-          git config --local user.email "action@github.com"
-          git add 'MX/*.csv'  # Add all CSV files from the specific folder
-          git commit -m "Update data" || echo "No changes to commit"
-          git push
+#       - name: Commit and push changes
+#         run: |
+#           git config --local user.name "GitHub Action"
+#           git config --local user.email "action@github.com"
+#           git add 'MX/*.csv'  # Add all CSV files from the specific folder
+#           git commit -m "Update data" || echo "No changes to commit"
+#           git push
