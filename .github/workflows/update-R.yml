@@ -6,6 +6,7 @@ on:
   push:
     branches: 
       - main  # This will also run when there are changes pushed to the main branch.
+  workflow_dispatch:
 
 jobs:
   import-data:
