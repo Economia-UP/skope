@@ -44,6 +44,6 @@ if (!dir.exists(output_dir)) {
 }
 
 # Write the combined data to a CSV file
-write.csv(series.wide, output_file, row.names = FALSE)
+write.csv(series.incidence, output_file, row.names = FALSE)
 
 cat("Data successfully written to", output_file)
