@@ -11,7 +11,7 @@ library(tidyr)
 inegi.api = '446548c3-7b55-4b22-8430-ac8f251ea555'
 
 # Load dfs
-weights <- read.csv("weights.csv") %>% 
+weights <- read.csv("R/weights.csv") %>% 
   reframe(Concept, Weight = Weight/100)
 
 # Fetch the data using the specified series IDs
