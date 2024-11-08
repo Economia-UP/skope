@@ -13,7 +13,7 @@ weights <- read.csv("R/weights.csv") %>%
   reframe(Concept, Weight = Weight/100)
 
 # Fetch the data using the specified series IDs
-idSeries <- c("910406")  
+idSeries <- c("910392")  
 
 # Get the data
 series <- inegi_series_multiple(series = idSeries, token = inegi.api)
@@ -22,7 +22,7 @@ series.incidence <- series %>%
   select(date, values) %>%  
   rename(
     date = date,
-    'pi' = values) %>% 
+    'INPC' = values) %>% 
   mutate(
     "Alimentos, bebidas y tabaco" = pi*weights$Weight[weights$Concept == "Alimentos, bebidas y tabaco"],
     "Ropa, calzado y accesorios" = pi*weights$Weight[weights$Concept == "Ropa, calzado y accesorios"],
