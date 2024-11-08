@@ -13,7 +13,7 @@ weights <- read.csv("R/weights.csv") %>%
   reframe(Concept, Weight = Weight/100)
 
 # Fetch the data using the specified series IDs
-idSeries <- c("910406")  
+idSeries <- c("910406")
 
 # Get the data
 series <- inegi_series_multiple(series = idSeries, token = inegi.api)
