@@ -25,13 +25,14 @@ series.incidence <- series %>%
     'INPC' = values) %>% 
   mutate(
     "Alimentos, bebidas y tabaco" = pi*weights$Weight[weights$Concept == "Alimentos, bebidas y tabaco"],
-    "Ropa, calzado y accesorios" = pi*weights$Weight[weights$Concept == "Ropa, calzado y accesorios"],
+    "Mercancías no alimenticias" = pi*weights$Weight[weights$Concept == "Mercancías no alimenticias"],
+    "Educación (Colegiaturas)" = pi*weights$Weight[weights$Concept == "Educación (Colegiaturas)"],
     "Vivienda" = pi*weights$Weight[weights$Concept == "Vivienda"],
-    "Muebles, aparatos y accesorios domésticos" = pi*weights$Weight[weights$Concept == "Muebles, aparatos y accesorios domésticos"],
-    "Salud y cuidado personal" = pi*weights$Weight[weights$Concept == "Salud y cuidado personal"],
-    "Transporte" = pi*weights$Weight[weights$Concept == "Transporte"],
-    "Educación y esparcimiento" = pi*weights$Weight[weights$Concept == "Educación y esparcimiento"],
-    "Otros servicios" = pi*weights$Weight[weights$Concept == "Otros servicios"]
+    "Otros servicios" = pi*weights$Weight[weights$Concept == "Otros servicios"],
+    "Frutas y verduras" = pi*weights$Weight[weights$Concept == "Frutas y verduras"],
+    "Pecuarios" = pi*weights$Weight[weights$Concept == "Pecuarios"],
+    "Energéticos" = pi*weights$Weight[weights$Concept == "Energéticos"],
+    "Tarifas autorizadas por el gobierno" = pi*weights$Weight[weights$Concept == "Tarifas autorizadas por el gobierno"]
       )
 
 # Specify the output directory and file name
