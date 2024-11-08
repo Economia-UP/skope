@@ -25,14 +25,11 @@ series.incidence <- series %>%
     'pi' = values) %>% 
   mutate(
     "Alimentos, bebidas y tabaco" = pi*weights$Weight[weights$Concept == "Alimentos, bebidas y tabaco"],
-    "Mercancías no alimenticias" = pi*weights$Weight[weights$Concept == "Mercancías no alimenticias"],
-    "Educación (Colegiaturas)" = pi*weights$Weight[weights$Concept == "Educación (Colegiaturas)"],
+    "Mercancías Total" = pi*weights$Weight[weights$Concept == "Mercancías Total"],
+    "Servicios Total" = pi*weights$Weight[weights$Concept == "Servicios Total"],
     "Vivienda" = pi*weights$Weight[weights$Concept == "Vivienda"],
-    "Otros servicios" = pi*weights$Weight[weights$Concept == "Otros servicios"],
-    "Frutas y verduras" = pi*weights$Weight[weights$Concept == "Frutas y verduras"],
-    "Pecuarios" = pi*weights$Weight[weights$Concept == "Pecuarios"],
-    "Energéticos" = pi*weights$Weight[weights$Concept == "Energéticos"],
-    "Tarifas autorizadas por el gobierno" = pi*weights$Weight[weights$Concept == "Tarifas autorizadas por el gobierno"]
+    "Total Agropecuarios" = pi*weights$Weight[weights$Concept == "Total Agropecuarios"],
+    "Energéticos y tarifas autorizadas por el gobierno Total" = pi*weights$Weight[weights$Concept == "Energéticos y tarifas autorizadas por el gobierno Total"]
       )
 
 # Specify the output directory and file name
