@@ -27,7 +27,7 @@ series.incidence <- series %>%
     "Mercancías" = pi*weights$Weight[weights$Concept == "Mercancías"],
     "Servicios" = pi*weights$Weight[weights$Concept == "Servicios"],
     "Agropecuarios" = pi*weights$Weight[weights$Concept == "Agropecuarios"],
-    "Energéticos y tarifas autorizadas por el gobierno" = pi*weights$Weight[weights$Concept == "Energéticos y tarifas autorizadas por el gobierno"]
+    "Energéticos y tarifas autorizadas por el gobierno" = pi*weights$Weight[weights$Concept == "Energéticos y tarifas autorizadas por el gobierno "]
       )
 
 # Specify the output directory and file name
