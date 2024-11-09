@@ -24,10 +24,10 @@ series.incidence <- series %>%
     date = date,
     'pi' = values) %>% 
   mutate(
-    "Mercancías" = pi*weights$Weight[weights$Concept == "Mercancías Total"],
-    "Servicios" = pi*weights$Weight[weights$Concept == "Servicios Total"],
-    "Agropecuarios" = pi*weights$Weight[weights$Concept == "Total Agropecuarios"],
-    "Energéticos y tarifas autorizadas por el gobierno" = pi*weights$Weight[weights$Concept == "Energéticos y tarifas autorizadas por el gobierno Total"]
+    "Mercancías" = pi*weights$Weight[weights$Concept == "Mercancías"],
+    "Servicios" = pi*weights$Weight[weights$Concept == "Servicios"],
+    "Agropecuarios" = pi*weights$Weight[weights$Concept == "Agropecuarios"],
+    "Energéticos y tarifas autorizadas por el gobierno" = pi*weights$Weight[weights$Concept == "Energéticos y tarifas autorizadas por el gobierno"]
       )
 
 # Specify the output directory and file name
