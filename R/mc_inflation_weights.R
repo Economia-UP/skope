@@ -37,7 +37,8 @@ series.incidence <- series.wide %>%
     "Servicios" = Servicios*weights$Weight[weights$Concept == "Servicios"],
     "Agropecuarios" = Agropecuarios*weights$Weight[weights$Concept == "Agropecuarios"],
     "Energéticos y tarifas autorizadas por el gobierno" = `Energéticos y tarifas autorizadas por el gobierno`*weights$Weight[weights$Concept == "Energéticos y tarifas autorizadas por el gobierno "]
-      )
+      ) %>% 
+  filter(date >= "2024-01-01")
 
 # Specify the output directory and file name
 output_dir <- "MX"
