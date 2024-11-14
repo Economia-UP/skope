@@ -17,16 +17,19 @@ ref <- getSerieDataFrame(series, "SF61745")
 inf <- getSerieDataFrame(series, "SP30578")
 exp <- getSerieDataFrame(series, "SR14194")
 
-series.df <- reduce(list(ref, inf, exp), full_join, by = "date") %>% 
-  mutate(
-    "Tasa real ex-ante" = ref - exp,
-    "Tasa real ex-post" = ref - inf
-  )  
+series.df <- reduce(list(ref, inf, exp), full_join, by = "date")
+
 colnames(series.df)[2:4] <- c("Tasa objetivo", "Inflación", "Inflación esperada")
 
 series.df <- series.df %>%
   fill("Tasa objetivo", "Inflación", "Inflación esperada", .direction = "down") %>% 
   filter(date >= "2010-01-01")
+
+series.df <- series.df %>% 
+  mutate(
+    "Tasa real ex-ante" = "Tasa objetivo" - "Inflación esperada",
+    "Tasa real ex-post" = "Tasa objetivo" - "Inflación"
+  )  
 
 
 # Specify the output directory and file name
