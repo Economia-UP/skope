@@ -25,11 +25,9 @@ series.df <- series.df %>%
   fill("Tasa objetivo", "Inflación", "Inflación esperada", .direction = "down") %>% 
   filter(date >= "2010-01-01")
 
-series.df <- series.df %>% 
-  mutate(
-    "Tasa real ex-ante" = "Tasa objetivo" - "Inflación esperada",
-    "Tasa real ex-post" = "Tasa objetivo" - "Inflación"
-  )  
+series.df$"Tasa real ex-ante" = series.df$"Tasa objetivo" - series.df$"Inflación esperada"
+series.df$"Tasa real ex-post" = series.df$"Tasa objetivo" - series.df$"Inflación"
+ 
 
 
 # Specify the output directory and file name
