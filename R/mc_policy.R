@@ -17,7 +17,11 @@ ref <- getSerieDataFrame(series, "SF61745")
 inf <- getSerieDataFrame(series, "SP30578")
 exp <- getSerieDataFrame(series, "SR14194")
 
-series.df <- reduce(list(ref, inf, exp), full_join, by = "date")
+series.df <- reduce(list(ref, inf, exp), full_join, by = "date") %>% 
+  mutate(
+    "Tasa real ex-ante" = ref - exp,
+    "Tasa real ex-post" = ref - inf
+  )  
 colnames(series.df)[2:4] <- c("Tasa objetivo", "Inflación", "Inflación esperada")
 
 series.df <- series.df %>%
