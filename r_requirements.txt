@@ -1,5 +1,0 @@
-inegiR
-dplyr
-tidyr
-purrr
-siebanxicor

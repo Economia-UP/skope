@@ -5,7 +5,7 @@ This project automates the fetching, processing, and updating of data from APIs 
 ## Table of Contents
 1. [Project Structure](#project-structure)
 2. [Prerequisites](#prerequisites)
-3. [Adding and Editing Python Scripts](#adding-and-editing-python-scripts)
+3. [Adding and Editing R Scripts](#adding-and-editing-r-scripts)
 4. [Editing the GitHub Actions Workflow (YAML File)](#editing-the-github-actions-workflow-yaml-file)
 5. [Managing Access Tokens and Secrets](#managing-access-tokens-and-secrets)
 6. [Common Issues and Troubleshooting](#common-issues-and-troubleshooting)
@@ -18,63 +18,35 @@ Here's a quick overview of the main folders and files you will interact with:
 ├── .github
 │   └── workflows
 │       └── update_data.yml       # The GitHub Actions workflow file
-├── US
-│   └── Monitor cambiario
-│       ├── *.py    # Example Python script to fetch data
-│       └── *.csv   # Output CSV file updated by the script
-├── MX
-│   └── Monitor cambiario
-│       ├── *.py    # Example Python script to fetch data
-│       └── *.csv   # Output CSV file updated by the script
+├── r
+│   └── *.r    # Example R script to fetch data
 |
-└── README.md                     # Documentation file
+├── data
+|    └── *csv       # Output CSV file updated by the script
+|    
+└── README.md       # Documentation file
 ```
 
 ## Prerequisites
 
 - **GitHub account** with appropriate permissions to push changes to the repository.
-- **Python 3.x** installed locally for script testing and debugging.
+- **R** installed locally for script testing and debugging.
 - **Git** installed to clone the repository and manage version control.
 
-## Adding and Editing Python Scripts
+## Adding and Editing R Scripts
 
-### 1. Writing Python Scripts
+### 1. Writing R Scripts
 
-- Python scripts should fetch, process, and save data to CSV files. Use libraries like `requests`, `pandas`, and `os` to interact with APIs and handle file operations.
+- **R scripts** should fetch, process, and save data to CSV files. Use libraries like `httr`, `jsonlite`, `dplyr`, and `readr` to interact with APIs, process the data, and handle file operations.
 - Ensure each script has a clear purpose and error handling to manage failed API requests or data processing issues.
 - Save the output CSV files in the appropriate directory based on the data type (e.g., `US/Monitor cambiario` for US data).
 
-**Example Template for Python Scripts:**
+**Example Template for R Scripts:**
 
-```python
-import os
-import requests
-import pandas as pd
+### 2. Where to Put R Scripts
 
-def fetch_data():
-    # Example API request
-    response = requests.get('API_URL_HERE')
-    response.raise_for_status()  # Raise error if request fails
-    data = response.json()
-
-    # Process data into a DataFrame
-    df = pd.DataFrame(data['observations'])
-    
-    # Save DataFrame as CSV
-    output_dir = 'PATH/TO/DIRECTORY'
-    os.makedirs(output_dir, exist_ok=True)
-    output_file = os.path.join(output_dir, 'output_file.csv')
-    df.to_csv(output_file, index=False)
-    print(f"Data saved to {output_file}")
-
-if __name__ == "__main__":
-    fetch_data()
-```
-
-### 2. Where to Put Python Scripts
-
-- Place new Python scripts inside the relevant directory (e.g., `US/Monitor cambiario` or `MX`) based on the data's geographic region or topic.
-- Ensure the script’s file name reflects its function, like `fetch_fred_data.py` for fetching FRED data.
+- Place new R scripts inside the relevant directory (e.g., `r`) based on the data's geographic region or topic.
+- Ensure the script’s file name reflects its function, like `inflation_data.r` for fetching inflation data.
 
 ## Editing the GitHub Actions Workflow (YAML File)
 
@@ -82,21 +54,10 @@ The GitHub Actions workflow, typically located in `.github/workflows/update_data
 
 ### 1. Editing the YAML File
 
-To add a new Python script to the workflow, follow these steps:
+To add a new R script to the workflow, follow these steps:
 
 1. Open `.github/workflows/update_data.yml`.
-2. Add a new step under the `jobs` section for the Python script you want to run.
-
-**Example Step:**
-
-```yaml
-      - name: Fetch New Data
-        env:
-          API_KEY: ${{ secrets.API_KEY }}
-        run: |
-          python 'US/Monitor cambiario/your_script.py'
-```
-
+2. Add a new step under the `jobs` section for the R script you want to run.
 3. Make sure the script paths and any required environment variables (e.g., API keys) are correctly set up.
 
 ### 2. Adjusting the Schedule
@@ -119,13 +80,12 @@ Access tokens or API keys are stored as GitHub Secrets for security. To manage s
 3. Click **New repository secret**.
 4. Enter the name (e.g., `FRED_API_KEY`) and value of the secret.
 
-### 2. Using Secrets in Python Scripts
+### 2. Using Secrets in R Scripts
 
-- Retrieve secrets in your Python scripts using environment variables:
+- Retrieve secrets in your R scripts using environment variables:
 
-  ```python
-  import os
-  API_KEY = os.getenv('FRED_API_KEY')
+  ```r
+  api_key <- Sys.getenv('FRED_API_KEY')
   ```
 
 - Make sure the secret names in your workflow YAML file match those you set up in GitHub.
@@ -135,3 +95,13 @@ Access tokens or API keys are stored as GitHub Secrets for security. To manage s
 - **403 Errors (Permission Denied):** Ensure your GitHub token has the correct permissions.
 - **API Rate Limits:** Monitor API usage and consider caching data locally if rate limits are exceeded.
 - **Script Errors:** Check logs from GitHub Actions to debug issues. Logs provide detailed feedback on each step's execution.
+  
+---
+
+### Key Changes:
+
+- **Replaced Python with R** in the script-writing section. The R scripts use libraries like `httr`, `jsonlite`, `dplyr`, and `readr` for API interactions and data processing.
+- The workflow and secrets management sections are largely unchanged but adapted for R, with `Sys.getenv()` for environment variables.
+- R-specific libraries and functions are used for fetching and processing data.
+
+This setup ensures your R scripts are correctly integrated with GitHub Actions and can automate the process of fetching and updating your data regularly.
