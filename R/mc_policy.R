@@ -23,7 +23,7 @@ colnames(series.df)[2:4] <- c("Tasa objetivo", "Inflación", "Inflación esperad
 
 series.df <- series.df %>%
   fill("Tasa objetivo", "Inflación", "Inflación esperada", .direction = "down") %>% 
-  filter(date >= "2010-01-01")
+  filter(date >= "2020-01-01")
 
 series.df$"Tasa real ex-ante" = series.df$"Tasa objetivo" - series.df$"Inflación esperada"
 series.df$"Tasa real ex-post" = series.df$"Tasa objetivo" - series.df$"Inflación"
@@ -31,7 +31,7 @@ series.df$"Tasa real ex-post" = series.df$"Tasa objetivo" - series.df$"Inflació
 
 
 # Specify the output directory and file name
-output_dir <- "MX"
+output_dir <- "r"
 output_file <- file.path(output_dir, "mc_policy.csv")
 if (!dir.exists(output_dir)) {
   dir.create(output_dir)

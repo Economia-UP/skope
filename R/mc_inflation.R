@@ -22,10 +22,11 @@ series.wide <- series %>%
     date = date,
     'Inflación general' = '910406',
     'Subyacente' = '910407',
-    'No subyacente' = '910410')
+    'No subyacente' = '910410') %>% 
+  filter(date >= '2020-01-01')
 
 # Specify the output directory and file name
-output_dir <- "MX"
+output_dir <- "r"
 output_file <- file.path(output_dir, "mc_inflation.csv")
 
 # Ensure the output directory exists

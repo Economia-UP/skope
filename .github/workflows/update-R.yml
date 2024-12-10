@@ -26,6 +26,7 @@ jobs:
             inegiR
             siebanxicor
             fredr
+            hrbrthemes
 
       # Step 3: Check out the repository
       - name: Check out repository
@@ -35,7 +36,7 @@ jobs:
       - name: Import data
         run: |
           # Loop through all .R files in the R folder and run them
-          for file in R/*.R; do
+          for file in r/*.R; do
             Rscript $file
           done
 
@@ -44,7 +45,7 @@ jobs:
         run: |
           git config --local user.name "GitHub Action"
           git config --local user.email "action@github.com"
-          git add 'MX/*.csv'  # Add all CSV files from the specific folder
+          git add 'data/*.csv'  # Add all CSV files from the specific folder
           git commit -m "Update data" || echo "No changes to commit"
           git push
 
