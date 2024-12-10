@@ -26,7 +26,7 @@ series.wide <- series %>%
   filter(date >= '2020-01-01')
 
 # Specify the output directory and file name
-output_dir <- "r"
+output_dir <- "data"
 output_file <- file.path(output_dir, "mc_inflation.csv")
 
 # Ensure the output directory exists

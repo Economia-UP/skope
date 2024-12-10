@@ -22,7 +22,7 @@ series.df <- reduce(list(first, med, third), full_join, by = "date") %>%
 colnames(series.df)[2:4] <- c("Primer cuartil", "Mediana", "Tercer cuartil")
 
 # Specify the output directory and file name
-output_dir <- "r"
+output_dir <- "data"
 output_file <- file.path(output_dir, "mc_expectedinflation.csv")
 if (!dir.exists(output_dir)) {
   dir.create(output_dir)

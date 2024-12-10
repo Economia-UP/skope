@@ -41,7 +41,7 @@ series.incidence <- series.wide %>%
   filter(date >= "2024-01-01")
 
 # Specify the output directory and file name
-output_dir <- "r"
+output_dir <- "data"
 output_file <- file.path(output_dir, "mc_inflation_weights.csv")
 
 # Ensure the output directory exists

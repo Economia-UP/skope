@@ -31,7 +31,7 @@ series.df$"Tasa real ex-post" = series.df$"Tasa objetivo" - series.df$"Inflació
 
 
 # Specify the output directory and file name
-output_dir <- "r"
+output_dir <- "data"
 output_file <- file.path(output_dir, "mc_policy.csv")
 if (!dir.exists(output_dir)) {
   dir.create(output_dir)
