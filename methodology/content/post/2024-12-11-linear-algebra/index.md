@@ -9,9 +9,9 @@ tags: []
 
 Based on @garrity_2007
 
-## The Basic Vector Space `\(R^n\)`
+## The Basic Vector Space \( = \mathbb{R}^n \)
 
-The quintessential vector space is `\(R^n\)`, which is defined as the set of all \( n \)-tuples of real numbers. As we will see in the next section, what makes this set a vector space is the ability to add two \( n \)-tuples to obtain another \( n \)-tuple:
+The quintessential vector space is \(R^n \), which is defined as the set of all \( n \)-tuples of real numbers. As we will see in the next section, what makes this set a vector space is the ability to add two \( n \)-tuples to obtain another \( n \)-tuple:
 
 $$
 (v_1, \ldots, v_n) + (w_1, \ldots, w_n) = (v_1 + w_1, \ldots, v_n + w_n)
