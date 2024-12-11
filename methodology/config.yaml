@@ -1,4 +1,4 @@
-# baseURL: "localhost/"
+baseURL: "https://jadrk040507.github.io/skope/methodology/public/"
 title: ExampleSite
 paginate: 5
 theme: PaperMod

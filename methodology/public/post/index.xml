@@ -19,8 +19,8 @@
       <pubDate>Wed, 11 Dec 2024 00:00:00 +0000</pubDate>
       <guid>//localhost:4321/post/2024-12-11-linear-algebra/</guid>
       <description>&lt;p&gt;Based on @garrity_2007&lt;/p&gt;
-&lt;h2 id=&#34;the-basic-vector-space--mathbbrn-&#34;&gt;The Basic Vector Space ( \mathbb{R}^n )&lt;/h2&gt;
-&lt;p&gt;The quintessential vector space is ( \mathbb{R}^n ), which is defined as the set of all ( n )-tuples of real numbers. As we will see in the next section, what makes this set a vector space is the ability to add two ( n )-tuples to obtain another ( n )-tuple:&lt;/p&gt;
+&lt;h2 id=&#34;the-basic-vector-space---mathbbrn-&#34;&gt;The Basic Vector Space ( = \mathbb{R}^n )&lt;/h2&gt;
+&lt;p&gt;The quintessential vector space is (R^n ), which is defined as the set of all ( n )-tuples of real numbers. As we will see in the next section, what makes this set a vector space is the ability to add two ( n )-tuples to obtain another ( n )-tuple:&lt;/p&gt;
 &lt;p&gt;$$
 (v_1, \ldots, v_n) + (w_1, \ldots, w_n) = (v_1 + w_1, \ldots, v_n + w_n)
 $$&lt;/p&gt;</description>
