@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>ExampleSite</title>
-    <link>//localhost:4321/</link>
+    <link>https://jadrk040507.github.io/skope/methodology/public/</link>
     <description>Recent content on ExampleSite</description>
     <image>
       <title>ExampleSite</title>
-      <url>//localhost:4321/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>//localhost:4321/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://jadrk040507.github.io/skope/methodology/public/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://jadrk040507.github.io/skope/methodology/public/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- 0.139.3</generator>
     <language>en</language>
     <lastBuildDate>Wed, 11 Dec 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:4321/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://jadrk040507.github.io/skope/methodology/public/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Linear Algebra</title>
-      <link>//localhost:4321/post/2024-12-11-linear-algebra/</link>
+      <link>https://jadrk040507.github.io/skope/methodology/public/post/2024-12-11-linear-algebra/</link>
       <pubDate>Wed, 11 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>//localhost:4321/post/2024-12-11-linear-algebra/</guid>
+      <guid>https://jadrk040507.github.io/skope/methodology/public/post/2024-12-11-linear-algebra/</guid>
       <description>&lt;p&gt;Based on @garrity_2007&lt;/p&gt;
 &lt;h2 id=&#34;the-basic-vector-space---mathbbrn-&#34;&gt;The Basic Vector Space ( = \mathbb{R}^n )&lt;/h2&gt;
 &lt;p&gt;The quintessential vector space is (R^n ), which is defined as the set of all ( n )-tuples of real numbers. As we will see in the next section, what makes this set a vector space is the ability to add two ( n )-tuples to obtain another ( n )-tuple:&lt;/p&gt;
@@ -27,9 +27,9 @@ $$&lt;/p&gt;</description>
     </item>
     <item>
       <title>Hello R Markdown</title>
-      <link>//localhost:4321/post/2020-12-01-r-rmarkdown/</link>
+      <link>https://jadrk040507.github.io/skope/methodology/public/post/2020-12-01-r-rmarkdown/</link>
       <pubDate>Tue, 01 Dec 2020 21:13:14 -0500</pubDate>
-      <guid>//localhost:4321/post/2020-12-01-r-rmarkdown/</guid>
+      <guid>https://jadrk040507.github.io/skope/methodology/public/post/2020-12-01-r-rmarkdown/</guid>
       <description>&lt;h1 id=&#34;r-markdown&#34;&gt;R Markdown&lt;/h1&gt;
 &lt;p&gt;This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see &lt;a href=&#34;http://rmarkdown.rstudio.com&#34;&gt;http://rmarkdown.rstudio.com&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;You can embed an R code chunk like this:&lt;/p&gt;
@@ -55,16 +55,16 @@ $$&lt;/p&gt;</description>
     </item>
     <item>
       <title>My 1st post</title>
-      <link>//localhost:4321/sample/</link>
+      <link>https://jadrk040507.github.io/skope/methodology/public/sample/</link>
       <pubDate>Tue, 15 Sep 2020 11:30:03 +0000</pubDate>
-      <guid>//localhost:4321/sample/</guid>
+      <guid>https://jadrk040507.github.io/skope/methodology/public/sample/</guid>
       <description>Desc Text.</description>
     </item>
     <item>
       <title>A Plain Markdown Post</title>
-      <link>//localhost:4321/post/2016-12-30-hello-markdown/</link>
+      <link>https://jadrk040507.github.io/skope/methodology/public/post/2016-12-30-hello-markdown/</link>
       <pubDate>Fri, 30 Dec 2016 21:49:57 -0700</pubDate>
-      <guid>//localhost:4321/post/2016-12-30-hello-markdown/</guid>
+      <guid>https://jadrk040507.github.io/skope/methodology/public/post/2016-12-30-hello-markdown/</guid>
       <description>&lt;p&gt;This is a post written in plain Markdown (&lt;code&gt;*.md&lt;/code&gt;) instead of R Markdown (&lt;code&gt;*.Rmd&lt;/code&gt;). The major differences are:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;You cannot run any R code in a plain Markdown document, whereas in an R Markdown document, you can embed R code chunks (&lt;code&gt;```{r}&lt;/code&gt;);&lt;/li&gt;
@@ -74,16 +74,16 @@ $$&lt;/p&gt;</description>
     </item>
     <item>
       <title>About</title>
-      <link>//localhost:4321/about/</link>
+      <link>https://jadrk040507.github.io/skope/methodology/public/about/</link>
       <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
-      <guid>//localhost:4321/about/</guid>
+      <guid>https://jadrk040507.github.io/skope/methodology/public/about/</guid>
       <description>&lt;p&gt;This is a &amp;ldquo;hello world&amp;rdquo; example website for the &lt;a href=&#34;https://github.com/rstudio/blogdown&#34;&gt;&lt;strong&gt;blogdown&lt;/strong&gt;&lt;/a&gt; package. The theme was forked from &lt;a href=&#34;https://github.com/jrutheiser/hugo-lithium-theme&#34;&gt;@jrutheiser/hugo-lithium-theme&lt;/a&gt; and modified by &lt;a href=&#34;https://github.com/yihui/hugo-lithium&#34;&gt;Yihui Xie&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Lorem Ipsum</title>
-      <link>//localhost:4321/post/2015-01-01-lorem-ipsum/</link>
+      <link>https://jadrk040507.github.io/skope/methodology/public/post/2015-01-01-lorem-ipsum/</link>
       <pubDate>Thu, 01 Jan 2015 13:09:13 -0600</pubDate>
-      <guid>//localhost:4321/post/2015-01-01-lorem-ipsum/</guid>
+      <guid>https://jadrk040507.github.io/skope/methodology/public/post/2015-01-01-lorem-ipsum/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Lorem ipsum&lt;/strong&gt; dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore &lt;em&gt;magna aliqua&lt;/em&gt;. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;</description>
     </item>
   </channel>

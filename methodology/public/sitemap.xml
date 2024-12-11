@@ -2,49 +2,49 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>//localhost:4321/</loc>
+    <loc>https://jadrk040507.github.io/skope/methodology/public/</loc>
     <lastmod>2024-12-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:4321/post/2024-12-11-linear-algebra/</loc>
+    <loc>https://jadrk040507.github.io/skope/methodology/public/post/2024-12-11-linear-algebra/</loc>
     <lastmod>2024-12-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:4321/post/</loc>
+    <loc>https://jadrk040507.github.io/skope/methodology/public/post/</loc>
     <lastmod>2024-12-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:4321/categories/</loc>
+    <loc>https://jadrk040507.github.io/skope/methodology/public/categories/</loc>
     <lastmod>2020-12-01T21:13:14-05:00</lastmod>
   </url><url>
-    <loc>//localhost:4321/post/2020-12-01-r-rmarkdown/</loc>
+    <loc>https://jadrk040507.github.io/skope/methodology/public/post/2020-12-01-r-rmarkdown/</loc>
     <lastmod>2020-12-01T21:13:14-05:00</lastmod>
   </url><url>
-    <loc>//localhost:4321/tags/plot/</loc>
+    <loc>https://jadrk040507.github.io/skope/methodology/public/tags/plot/</loc>
     <lastmod>2020-12-01T21:13:14-05:00</lastmod>
   </url><url>
-    <loc>//localhost:4321/categories/r/</loc>
+    <loc>https://jadrk040507.github.io/skope/methodology/public/categories/r/</loc>
     <lastmod>2020-12-01T21:13:14-05:00</lastmod>
   </url><url>
-    <loc>//localhost:4321/tags/r-markdown/</loc>
+    <loc>https://jadrk040507.github.io/skope/methodology/public/tags/r-markdown/</loc>
     <lastmod>2020-12-01T21:13:14-05:00</lastmod>
   </url><url>
-    <loc>//localhost:4321/tags/regression/</loc>
+    <loc>https://jadrk040507.github.io/skope/methodology/public/tags/regression/</loc>
     <lastmod>2020-12-01T21:13:14-05:00</lastmod>
   </url><url>
-    <loc>//localhost:4321/tags/</loc>
+    <loc>https://jadrk040507.github.io/skope/methodology/public/tags/</loc>
     <lastmod>2020-12-01T21:13:14-05:00</lastmod>
   </url><url>
-    <loc>//localhost:4321/tags/first/</loc>
+    <loc>https://jadrk040507.github.io/skope/methodology/public/tags/first/</loc>
     <lastmod>2020-09-15T11:30:03+00:00</lastmod>
   </url><url>
-    <loc>//localhost:4321/sample/</loc>
+    <loc>https://jadrk040507.github.io/skope/methodology/public/sample/</loc>
     <lastmod>2020-09-15T11:30:03+00:00</lastmod>
   </url><url>
-    <loc>//localhost:4321/post/2016-12-30-hello-markdown/</loc>
+    <loc>https://jadrk040507.github.io/skope/methodology/public/post/2016-12-30-hello-markdown/</loc>
     <lastmod>2016-12-30T21:49:57-07:00</lastmod>
   </url><url>
-    <loc>//localhost:4321/about/</loc>
+    <loc>https://jadrk040507.github.io/skope/methodology/public/about/</loc>
     <lastmod>2016-05-05T21:48:51-07:00</lastmod>
   </url><url>
-    <loc>//localhost:4321/post/2015-01-01-lorem-ipsum/</loc>
+    <loc>https://jadrk040507.github.io/skope/methodology/public/post/2015-01-01-lorem-ipsum/</loc>
     <lastmod>2015-01-01T13:09:13-06:00</lastmod>
   </url>
 </urlset>
