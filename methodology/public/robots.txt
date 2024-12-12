@@ -1,3 +1,3 @@
 User-agent: *
 Disallow:
-Sitemap: https://jadrk040507.github.io/skope/methodology/public/sitemap.xml
+Sitemap: /sitemap.xml

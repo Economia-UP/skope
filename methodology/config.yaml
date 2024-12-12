@@ -1,6 +1,6 @@
-baseURL: "https://jadrk040507.github.io/skope/methodology/public/"
-title: ExampleSite
-paginate: 5
+# baseURL: "https://jadrk040507.github.io/skope/methodology/public/"
+title: Metodología
+# paginate: 5
 theme: PaperMod
 
 enableRobotsTXT: true
@@ -14,7 +14,7 @@ minify:
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: ExampleSite
+  title: Metodología
   description: "ExampleSite description"
   keywords: [Blog, Portfolio, PaperMod]
   author: Me
@@ -58,7 +58,7 @@ params:
   # profile-mode
   profileMode:
     enabled: false # needs to be explicitly set
-    title: ExampleSite
+    title: Metodología
     subtitle: "This is subtitle"
     imageUrl: "<img location>"
     imageWidth: 120
@@ -119,17 +119,13 @@ menu:
       url: /about/
       weight: 10
     - identifier: Categories
-      name: categories
+      name: Categories
       url: /categories/
       weight: 10
-    - identifier: tags
-      name: tags
+    - identifier: Tags
+      name: Tags
       url: /tags/
       weight: 20
-    - identifier: example
-      name: example.org
-      url: https://example.org
-      weight: 30
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 pygmentsUseClasses: true
 markup:
