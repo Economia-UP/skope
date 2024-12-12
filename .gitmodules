@@ -1,3 +1,0 @@
-[submodule "methodology/themes/hugo-goldmark-extensions"]
-	path = methodology/themes/hugo-goldmark-extensions
-	url = https://github.com/gohugoio/hugo-goldmark-extensions.git
