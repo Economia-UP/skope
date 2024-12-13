@@ -41,4 +41,4 @@ series.incidence <- series.wide %>%
   filter(date >= "2024-01-01")
 
 # Specify the output directory and file name
-(write.csv(series.df, "data/mc_inflation_weights.csv", row.names = FALSE))
+(write.csv(series.incidence, "data/mc_inflation_weights.csv", row.names = FALSE))

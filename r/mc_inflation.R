@@ -26,4 +26,4 @@ series.wide <- series %>%
   filter(date >= '2020-01-01')
 
 # Specify the output directory and file name
-(write.csv(series.df, "data/mc_inflation.csv", row.names = FALSE))
+(write.csv(series.wide, "data/mc_inflation.csv", row.names = FALSE))
