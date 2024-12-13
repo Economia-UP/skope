@@ -27,8 +27,6 @@ series.df <- series.df %>%
 
 series.df$"Tasa real ex-ante" = series.df$"Tasa objetivo" - series.df$"Inflación esperada"
 series.df$"Tasa real ex-post" = series.df$"Tasa objetivo" - series.df$"Inflación"
- 
-
 
 # Specify the output directory and file name
 output_dir <- "data"
