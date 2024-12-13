@@ -26,15 +26,4 @@ series.wide <- series %>%
   filter(date >= '2020-01-01')
 
 # Specify the output directory and file name
-output_dir <- "data"
-output_file <- file.path(output_dir, "mc_inflation.csv")
-
-# Ensure the output directory exists
-if (!dir.exists(output_dir)) {
-  dir.create(output_dir)
-}
-
-# Write the combined data to a CSV file
-write.csv(series.wide, output_file, row.names = FALSE)
-
-cat("Data successfully written to", output_file)
+(write.csv(series.df, "data/mc_inflation.csv", row.names = FALSE))

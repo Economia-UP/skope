@@ -29,10 +29,4 @@ series.df$"Tasa real ex-ante" = series.df$"Tasa objetivo" - series.df$"Inflació
 series.df$"Tasa real ex-post" = series.df$"Tasa objetivo" - series.df$"Inflación"
 
 # Specify the output directory and file name
-output_dir <- "data"
-output_file <- file.path(output_dir, "mc_policy.csv")
-if (!dir.exists(output_dir)) {
-  dir.create(output_dir)
-}
-write.csv(series.df, output_file, row.names = FALSE)
-cat("Data successfully written to", output_file)
+(write.csv(series.df, "data/mc_policy.csv", row.names = FALSE))
