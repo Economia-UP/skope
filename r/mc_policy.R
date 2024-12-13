@@ -22,11 +22,25 @@ series.df <- reduce(list(ref, inf, exp), full_join, by = "date")
 colnames(series.df)[2:4] <- c("Tasa objetivo", "Inflación", "Inflación esperada")
 
 series.df <- series.df %>%
-  fill("Tasa objetivo", "Inflación", "Inflación esperada", .direction = "down") %>% 
+  arrange(date) %>%
+  mutate(
+    date_diff = as.numeric(date - lag(date, default = first(date))),
+    is_consecutive = date_diff == 1
+  )
+
+# Rellena valores hacia abajo solo para fechas consecutivas
+series.df <- series.df %>%
+  group_by(is_consecutive) %>%
+  fill("Tasa objetivo", "Inflación", "Inflación esperada", .direction = "down") %>%
+  ungroup() %>%
   filter(date >= "2020-01-01")
 
 series.df$"Tasa real ex-ante" = series.df$"Tasa objetivo" - series.df$"Inflación esperada"
 series.df$"Tasa real ex-post" = series.df$"Tasa objetivo" - series.df$"Inflación"
 
+
+series.df <- series.df %>%
+  select(-date_diff, -is_consecutive)
+
 # Specify the output directory and file name
-(write.csv(series.df, "data/mc_policy.csv", row.names = FALSE))
+write.csv(series.df, "data/mc_policy.csv", row.names = FALSE)
