@@ -26,7 +26,6 @@ jobs:
             inegiR
             siebanxicor
             fredr
-            hrbrthemes
 
       # Step 3: Check out the repository
       - name: Check out repository
