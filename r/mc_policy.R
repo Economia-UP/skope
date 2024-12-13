@@ -9,7 +9,7 @@ library(tidyr)
 setToken("86d02771fd6b64ce29912469f70d872cf666627201a5d7e819a82c452ae61289")
 
 # Fetch the data using the specified series IDs
-idSeries <- c("SF61745", "SP30578","SR14194") 
+idSeries <- c("SF61745", "SP30578", "SR14194") 
 
 # Get the data
 series <- getSeriesData(idSeries, '2010-01-01')
@@ -25,23 +25,22 @@ colnames(series.df)[2:4] <- c("Tasa objetivo", "Inflación", "Inflación esperad
 series.df <- series.df %>%
   arrange(date)
 
-# Rellena hacia abajo y luego interpola los valores faltantes
+# Rellena hacia abajo con el valor previo y hacia arriba con el siguiente (nearest neighbor)
 series.df <- series.df %>%
   complete(date = seq(min(date), max(date), by = "1 day")) %>% # Asegura una secuencia completa de fechas
   group_by() %>% # Elimina cualquier agrupamiento previo
-  mutate(
-    `Tasa objetivo` = na.approx(`Tasa objetivo`, na.rm = FALSE, rule = 2),
-    `Inflación` = na.approx(`Inflación`, na.rm = FALSE, rule = 2),
-    `Inflación esperada` = na.approx(`Inflación esperada`, na.rm = FALSE, rule = 2)
-  )
+  fill(`Tasa objetivo`, `Inflación`, `Inflación esperada`, .direction = "downup") # Usa valores previos y siguientes para rellenar
 
 # Filtra las fechas deseadas
 series.df <- series.df %>%
   filter(date >= "2020-01-01")
 
-
-series.df$"Tasa real ex-ante" = series.df$"Tasa objetivo" - series.df$"Inflación esperada"
-series.df$"Tasa real ex-post" = series.df$"Tasa objetivo" - series.df$"Inflación"
+# Calcula las tasas reales ex-ante y ex-post
+series.df <- series.df %>%
+  mutate(
+    `Tasa real ex-ante` = (1 + `Tasa objetivo`) / (1 + `Inflación esperada`),
+    `Tasa real ex-post` = (1 + `Tasa objetivo`) / (1 + `Inflación`)
+  )
 
 # Specify the output directory and file name
 write.csv(series.df, "data/mc_policy.csv", row.names = FALSE)
