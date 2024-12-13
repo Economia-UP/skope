@@ -38,8 +38,8 @@ series.df <- series.df %>%
 # Calcula las tasas reales ex-ante y ex-post
 series.df <- series.df %>%
   mutate(
-    `Tasa real ex-ante` = (1 + `Tasa objetivo`) / (1 + `Inflación esperada`),
-    `Tasa real ex-post` = (1 + `Tasa objetivo`) / (1 + `Inflación`)
+    `Tasa real ex-ante` = `Tasa objetivo`-`Inflación esperada`,
+    `Tasa real ex-post` = `Tasa objetivo`-`Inflación`
   )
 
 # Specify the output directory and file name
