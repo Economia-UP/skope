@@ -28,7 +28,6 @@ series.df <- series.df %>%
 # Rellena hacia abajo con el valor previo y hacia arriba con el siguiente (nearest neighbor)
 series.df <- series.df %>%
   complete(date = seq(min(date), max(date), by = "1 day")) %>% # Asegura una secuencia completa de fechas
-  group_by() %>% # Elimina cualquier agrupamiento previo
   fill(`Tasa objetivo`, `Inflación`, `Inflación esperada`, .direction = "downup") # Usa valores previos y siguientes para rellenar
 
 # Filtra las fechas deseadas
