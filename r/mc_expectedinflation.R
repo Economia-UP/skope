@@ -23,4 +23,4 @@ series.df <- reduce(list(first, med, third), full_join, by = "date") %>%
 colnames(series.df)[2:4] <- c("Primer cuartil", "Mediana", "Tercer cuartil")
 
 # Specify the output directory and file name
-write.csv(series.df, "scripts/data/mc_expectedinflation.csv", row.names = FALSE)
+write.csv(series.df, "data/mc_expectedinflation.csv", row.names = FALSE)

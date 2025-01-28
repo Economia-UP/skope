@@ -29,5 +29,5 @@ colnames(series.df) <- c("date", "Reserva internacional", "Activo internacional 
 #                             names_to = "Index", values_to = "Values")
 
 # Specify the output directory and file name
-write.csv(reserves, "scripts/data/mc_internationalreserves.csv", row.names = FALSE)
-write.csv(series.df, "scripts/data/mc_reserves&assets.csv", row.names = FALSE)
+write.csv(reserves, "data/mc_internationalreserves.csv", row.names = FALSE)
+write.csv(series.df, "data/mc_reserves&assets.csv", row.names = FALSE)

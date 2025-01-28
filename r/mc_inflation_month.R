@@ -27,4 +27,4 @@ series.wide <- series %>%
   filter(date >= Sys.Date() - years(3))
 
 # Specify the output directory and file name
-write.csv(series.wide, "scripts/data/mc_inflation_month.csv", row.names = FALSE)
+write.csv(series.wide, "data/mc_inflation_month.csv", row.names = FALSE)

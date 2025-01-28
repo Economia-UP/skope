@@ -43,4 +43,4 @@ series.df <- series.df %>%
   )
 
 # Specify the output directory and file name
-write.csv(series.df, "scripts/data/mc_policy.csv", row.names = FALSE)
+write.csv(series.df, "data/mc_policy.csv", row.names = FALSE)

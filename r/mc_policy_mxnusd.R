@@ -34,4 +34,4 @@ series.df <- series.df %>%
 series.df <- series.df %>%
   filter(date >= Sys.Date() - years(3))
 
-write.csv(series.df, "scripts/data/mc_policy_mxnusd.csv", row.names = FALSE)
+write.csv(series.df, "data/mc_policy_mxnusd.csv", row.names = FALSE)

@@ -10,7 +10,7 @@ library(lubridate)
 inegi.api = Sys.getenv("INEGI_API")
 
 # Load dfs
-weights <- read.csv("scripts/r/weights.csv") %>% 
+weights <- read.csv("r/weights.csv") %>% 
   reframe(Concept, Weight = Weight/100)
 
 # Fetch the data using the specified series IDs
@@ -42,4 +42,4 @@ series.incidence <- series.wide %>%
   filter(date >= Sys.Date() - years(1))
 
 # Specify the output directory and file name
-write.csv(series.incidence, "scripts/data/mc_inflation_weights.csv", row.names = FALSE)
+write.csv(series.incidence, "data/mc_inflation_weights.csv", row.names = FALSE)

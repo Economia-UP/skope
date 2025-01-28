@@ -21,5 +21,5 @@ month <- fx %>%
 five_years <- fx %>% 
   filter(date >= Sys.Date() - years(5))
 
-write.csv(month, "scripts/data/mc_mxnusd_month.csv", row.names = FALSE)
-write.csv(five_years, "scripts/data/mc_mxnusd_5y.csv", row.names = FALSE)
+write.csv(month, "data/mc_mxnusd_month.csv", row.names = FALSE)
+write.csv(five_years, "data/mc_mxnusd_5y.csv", row.names = FALSE)
