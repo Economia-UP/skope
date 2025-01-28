@@ -2,10 +2,7 @@ name: Update R
 
 on:
   schedule:
-    - cron: '*/30 * * * *'  # This will run the workflow every 5 minutes.
-  # push:
-  #   branches: 
-  #     - main  # This will also run when there are changes pushed to the main branch.
+    - cron: '*/30 * * * *'  # Runs every 30 minutes
   workflow_dispatch:
 
 jobs:
@@ -13,11 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Set up R
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
 
-      # Step 2: Install required R packages
       - name: Install packages
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
@@ -27,24 +22,23 @@ jobs:
             siebanxicor
             fredr
 
-      # Step 3: Check out the repository
       - name: Check out repository
         uses: actions/checkout@v3
 
-      # Step 4: Run all R scripts in the 'R' folder
       - name: Import data
         run: |
-          # Loop through all .R files in the R folder and run them
           for file in r/*.R; do
             Rscript $file
           done
+        env:
+          INEGI_API_KEY: ${{ secrets.INEGI_API }}
+          BANXICO_TOKEN: ${{ secrets.BANXICO_API }}
+          FRED_API_KEY: ${{ secrets.FRED_API }}
 
-      # Step 5: Commit and push the updated data
       - name: Commit and push changes
         run: |
           git config --local user.name "GitHub Action"
           git config --local user.email "action@github.com"
-          git add 'data/*.csv'  # Add all CSV files from the specific folder
+          git add 'data/*.csv'
           git commit -m "Update data" || echo "No changes to commit"
           git push
-
