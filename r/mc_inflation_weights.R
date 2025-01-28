@@ -1,3 +1,4 @@
+print("mc_inflation_weights.R")
 rm(list = ls())
 
 # Load the necessary libraries

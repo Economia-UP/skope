@@ -1,3 +1,4 @@
+print("inflation.R")
 rm(list = ls())
 
 # Load the necessary libraries

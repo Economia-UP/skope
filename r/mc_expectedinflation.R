@@ -1,3 +1,4 @@
+print("mc_expectedinflation.R")
 rm(list=ls())
 
 library("siebanxicor")

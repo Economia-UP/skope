@@ -1,3 +1,4 @@
+print("mc_policy.R")
 rm(list=ls())
 
 library("siebanxicor")

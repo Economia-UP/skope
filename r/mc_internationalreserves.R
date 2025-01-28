@@ -1,3 +1,4 @@
+print("mc_internationalreserves.R")
 rm(list=ls())
 
 library("siebanxicor")
