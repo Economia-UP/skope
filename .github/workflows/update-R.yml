@@ -28,9 +28,9 @@ jobs:
       # Set environment variables FIRST
       - name: Set API keys
         run: |
-          echo "INEGI_API_KEY=${{ secrets.INEGI_API_KEY }}" >> $GITHUB_ENV
-          echo "BANXICO_TOKEN=${{ secrets.BANXICO_TOKEN }}" >> $GITHUB_ENV
-          echo "FRED_API_KEY=${{ secrets.FRED_API_KEY }}" >> $GITHUB_ENV
+          echo "INEGI_API_KEY=${{ secrets.INEGI_API }}" >> $GITHUB_ENV
+          echo "BANXICO_TOKEN=${{ secrets.BANXICO }}" >> $GITHUB_ENV
+          echo "FRED_API_KEY=${{ secrets.FRED_API }}" >> $GITHUB_ENV
 
       # Now run scripts with environment variables available
       - name: Import data
