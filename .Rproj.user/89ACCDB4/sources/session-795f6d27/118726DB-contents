@@ -4,13 +4,12 @@ rm(list = ls())
 library(inegiR)
 library(dplyr)
 library(tidyr)
-library(lubridate)
 
 # Define your INEGI API key
-inegi.api = Sys.getenv("INEGI_API")
+inegi.api = '446548c3-7b55-4b22-8430-ac8f251ea555'
 
 # Load dfs
-weights <- read.csv("scripts/r/weights.csv") %>% 
+weights <- read.csv("r/weights.csv") %>% 
   reframe(Concept, Weight = Weight/100)
 
 # Fetch the data using the specified series IDs
@@ -39,7 +38,7 @@ series.incidence <- series.wide %>%
     "Agropecuarios" = Agropecuarios*weights$Weight[weights$Concept == "Agropecuarios"],
     "Energéticos y tarifas autorizadas por el gobierno" = `Energéticos y tarifas autorizadas por el gobierno`*weights$Weight[weights$Concept == "Energéticos y tarifas autorizadas por el gobierno "]
       ) %>% 
-  filter(date >= Sys.Date() - years(1))
+  filter(date >= "2024-01-01")
 
 # Specify the output directory and file name
-write.csv(series.incidence, "scripts/data/mc_inflation_weights.csv", row.names = FALSE)
+(write.csv(series.df, "data/mc_inflation_weights.csv", row.names = FALSE))

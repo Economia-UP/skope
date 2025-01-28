@@ -10,7 +10,7 @@ library(lubridate)
 inegi.api = Sys.getenv("INEGI_API")
 
 # Fetch the data using the specified series IDs
-idSeries <- c("910406", "910407", "910410")  # Your INEGI series IDs
+idSeries <- c("910399", "910400", "910403")  # Your INEGI series IDs
 
 # Get the data
 series <- inegi_series_multiple(series = idSeries, token = inegi.api)
@@ -21,10 +21,10 @@ series.wide <- series %>%
   pivot_wider(names_from = meta_indicatorid, values_from = values) %>%
   rename(
     date = date,
-    'Inflación general' = '910406',
-    'Subyacente' = '910407',
-    'No subyacente' = '910410') %>% 
+    'Inflación general' = '910399',
+    'Subyacente' = '910400',
+    'No subyacente' = '910403') %>% 
   filter(date >= Sys.Date() - years(3))
 
 # Specify the output directory and file name
-write.csv(series.wide, "scripts/data/mc_inflation.csv", row.names = FALSE)
+write.csv(series.wide, "scripts/data/mc_inflation_month.csv", row.names = FALSE)
