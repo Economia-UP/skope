@@ -25,16 +25,19 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
 
+      # Set environment variables FIRST
+      - name: Set API keys
+        run: |
+          echo "INEGI_API_KEY=${{ secrets.INEGI_API_KEY }}" >> $GITHUB_ENV
+          echo "BANXICO_TOKEN=${{ secrets.BANXICO_TOKEN }}" >> $GITHUB_ENV
+          echo "FRED_API_KEY=${{ secrets.FRED_API_KEY }}" >> $GITHUB_ENV
+
+      # Now run scripts with environment variables available
       - name: Import data
-        env:
-          INEGI_API_KEY: ${{ secrets.INEGI_API }}
-          BANXICO_TOKEN: ${{ secrets.BANXICO_API }}
-          FRED_API_KEY: ${{ secrets.FRED_API }}
         run: |
           for file in r/*.R; do
             Rscript $file
           done
-
 
       - name: Commit and push changes
         run: |
