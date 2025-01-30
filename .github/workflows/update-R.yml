@@ -13,7 +13,12 @@ jobs:
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
 
-      - name: Install packages
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-roboto libharfbuzz-dev libfribidi-dev libfontconfig1-dev
+
+      - name: Install R packages
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           packages: |
@@ -23,15 +28,12 @@ jobs:
             fredr
             hrbrthemes
             sysfonts
+            forcats
+            lubridate
+            showtext  # For proper font rendering in GitHub Actions
 
       - name: Check out repository
         uses: actions/checkout@v3
-
-      # Install Roboto Condensed font
-      - name: Install Roboto Condensed font
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y fonts-roboto
 
       # Set environment variables FIRST
       - name: Set API keys
@@ -40,7 +42,7 @@ jobs:
           echo "BANXICO_API=${{ secrets.BANXICO_API }}" >> $GITHUB_ENV
           echo "FRED_API=${{ secrets.FRED_API }}" >> $GITHUB_ENV
 
-      # Now run scripts with environment variables available
+      # Run R scripts
       - name: Import data
         run: |
           find r -type f -name "*.R" -exec Rscript {} \;
