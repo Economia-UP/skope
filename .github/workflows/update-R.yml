@@ -21,6 +21,7 @@ jobs:
             inegiR
             siebanxicor
             fredr
+            hrbrthemes
 
       - name: Check out repository
         uses: actions/checkout@v3
