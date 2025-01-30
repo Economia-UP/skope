@@ -98,7 +98,7 @@ gdppc <- left_join(gdp, pop, join_by(date), suffix = c("_gdp", "_pop")) %>%
 
 # Crecimiento económico per cápita
 ggplot(gdppc, aes(date, gdppc)) +
-  geom_line(size = 1, color = "#970639") +
+  geom_line(size = 1, color = "blue") +
   labs( title = "PIB per cápita en México",
         subtitle = "Moneda nacional",
         y = "",
