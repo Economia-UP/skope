@@ -35,9 +35,7 @@ jobs:
       # Now run scripts with environment variables available
       - name: Import data
         run: |
-          for file in r/*.R; do
-            Rscript $file
-          done
+          find r -type f -name "*.R" -exec Rscript {} \;
 
       - name: Commit and push changes
         run: |
