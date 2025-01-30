@@ -10,9 +10,12 @@ library(hrbrthemes)
 library(forcats)
 library(lubridate)
 library(sysfonts)
+library(showtext)  # Needed for non-interactive environments
+
 
 options(warn = -1)  # Ignore warnings
 font_add_google("Roboto Condensed", "roboto_condensed")
+showtext_auto()
 import_roboto_condensed()
 
 # Define your INEGI API key
