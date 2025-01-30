@@ -9,14 +9,13 @@ library(ggplot2)
 library(hrbrthemes)
 library(forcats)
 library(lubridate)
-library(sysfonts)
 
-font_add_google("Roboto Condensed")
+options(warn = -1)  # Ignore warnings
 import_roboto_condensed()
 
 # Define your INEGI API key
 inegi.api = Sys.getenv("INEGI_API")
-# inegi.api <- "446548c3-7b55-4b22-8430-ac8f251ea555"
+inegi.api <- "446548c3-7b55-4b22-8430-ac8f251ea555"
 
 # Fetch the data using the specified series IDs
 # idSeries <- c("910399", "910400", "910403")  # Your INEGI series IDs
@@ -98,7 +97,7 @@ gdppc <- left_join(gdp, pop, join_by(date), suffix = c("_gdp", "_pop")) %>%
 
 # Crecimiento económico per cápita
 ggplot(gdppc, aes(date, gdppc)) +
-  geom_line(size = 1, color = "#970639") +
+  geom_line(size = 1, color = "blue") +
   labs( title = "PIB per cápita en México",
         subtitle = "Moneda nacional",
         y = "",
