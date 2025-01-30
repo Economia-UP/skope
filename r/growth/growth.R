@@ -114,11 +114,11 @@ sexenios_gdp <- gdp %>%
 # Crecimiento promedio por sexenio
 ggplot(sexenios_gdp, aes(mean_growth/100, fct_rev(sexenio))) +
   geom_col(fill = "#970639") +
-  labs( title = "Crecimiento promedio por sexenio",
+  labs( title = "Crecimiento promedio por \nsexenio*",
         subtitle = "Promedio del crecimiento anual en México",
         y = "",
         x = "",
-        caption = "Fuente: INEGI") +
+        caption = "Fuente: INEGI\nDato del último trimestre del 2024 corresponde a la estimación oportuna.*") +
   scale_x_percent() +
   theme_ipsum_rc(grid="X", base_family = "roboto_condensed") %>%   # Use Roboto Condensed
   gg_check()
@@ -150,6 +150,3 @@ ggsave("plots/gdppc.png")
 
 write.csv(gdppc, "data/growth/gdppc.csv", row.names = FALSE)
 write.csv(sexenios_gdp, "data/growth/sexenios_gdp.csv", row.names = FALSE)
-
-
-
