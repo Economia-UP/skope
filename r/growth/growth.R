@@ -20,7 +20,7 @@ showtext_opts(dpi = 96)  # Set a fixed DPI to prevent font scaling
 
 # Define your INEGI API key
 inegi.api = Sys.getenv("INEGI_API")
-inegi.api <- "446548c3-7b55-4b22-8430-ac8f251ea555"
+# inegi.api <- "446548c3-7b55-4b22-8430-ac8f251ea555"
 
 # Fetch the data using the specified series IDs
 gdp <- inegi_series(series = "736181", token = inegi.api)
@@ -77,6 +77,42 @@ gdp %>%
 ggsave("plots/gdp_growth.png")
 
 
+
+# Estimación oportuna del PIB
+eopib <- inegi_series(series = "733855", token = inegi.api)
+
+
+eopib %>% 
+  filter(date >= "2022-01-01") %>% 
+  ggplot(aes(date, values/100)) +
+    geom_line(data = eopib %>% 
+              filter(date >= "2022-01-01") %>% 
+              arrange(date) %>% 
+              slice(1:(n() - 1)), 
+            aes(date, values/100), 
+            size = 1, color = "#970639") +
+    geom_line(data = eopib %>% 
+              filter(date >= "2022-01-01") %>% 
+              arrange(desc(date)) %>% 
+              slice(1:2), 
+            aes(date, values/100), 
+            color = "#970639", linetype = "dashed", size = 1) +  
+    # geom_point(data = eopib %>% 
+    #            filter(date == max(date)), 
+    #          aes(date, values/100), 
+    #          color = "black", size = 3, shape = 15) +  
+  
+  labs(title = "Crecimiento económico en México*",
+       subtitle = "Variación anual",
+       y = "",
+       x = "",
+       caption = "Fuente: INEGI \nDato del último trimestre del 2024 corresponde a la estimación oportuna.*") +
+  scale_y_percent() + 
+  theme_ipsum_rc(grid = "Y") %>%  
+  gg_check()
+ggsave("plots/eopib_growth.png")
+
+
 # Crecimiento promedio por sexenio
 ggplot(sexenios_gdp, aes(mean_growth/100, fct_rev(sexenio))) +
   geom_col(fill = "#970639") +
@@ -113,4 +149,6 @@ ggsave("plots/gdppc.png")
 
 
 write.csv(gdppc, "data/growth/gdppc.csv", row.names = FALSE)
+
+
 
