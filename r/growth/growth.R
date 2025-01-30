@@ -15,8 +15,8 @@ font_add_google("Roboto Condensed")
 import_roboto_condensed()
 
 # Define your INEGI API key
-# inegi.api = Sys.getenv("INEGI_API")
-inegi.api <- "446548c3-7b55-4b22-8430-ac8f251ea555"
+inegi.api = Sys.getenv("INEGI_API")
+# inegi.api <- "446548c3-7b55-4b22-8430-ac8f251ea555"
 
 # Fetch the data using the specified series IDs
 # idSeries <- c("910399", "910400", "910403")  # Your INEGI series IDs
