@@ -22,8 +22,41 @@ showtext_opts(dpi = 96)  # Set a fixed DPI to prevent font scaling
 inegi.api = Sys.getenv("INEGI_API")
 # inegi.api <- "446548c3-7b55-4b22-8430-ac8f251ea555"
 
-# Fetch the data using the specified series IDs
-gdp <- inegi_series(series = "736181", token = inegi.api)
+
+# Estimación oportuna del PIB
+eopib <- inegi_series(series = "733855", token = inegi.api)
+
+
+eopib %>% 
+  filter(date >= "2022-01-01") %>% 
+  ggplot(aes(date, values/100)) +
+  geom_line(data = eopib %>% 
+              filter(date >= "2022-01-01") %>% 
+              arrange(date) %>% 
+              slice(1:(n() - 1)), 
+            aes(date, values/100), 
+            size = 1, color = "#970639") +
+  geom_line(data = eopib %>% 
+              filter(date >= "2022-01-01") %>% 
+              arrange(desc(date)) %>% 
+              slice(1:2), 
+            aes(date, values/100), 
+            color = "#970639", linetype = "dashed", size = 1) +  
+  # geom_point(data = eopib %>% 
+  #            filter(date == max(date)), 
+  #          aes(date, values/100), 
+  #          color = "black", size = 3, shape = 15) +  
+  
+  labs(title = "Crecimiento económico en México*",
+       subtitle = "Variación anual",
+       y = "",
+       x = "",
+       caption = "Fuente: INEGI \nDato del último trimestre del 2024 corresponde a la estimación oportuna.*") +
+  scale_y_percent() + 
+  theme_ipsum_rc(grid = "Y") %>%  
+  gg_check()
+ggsave("plots/eopib_growth.png")
+
 
 orden_sexenios <- c(
   "Miguel de la Madrid (1982-1988)",
@@ -36,10 +69,10 @@ orden_sexenios <- c(
   "Claudia Sheinbaum Pardo (2024-2030)"
 )
 
-gdp <- gdp %>% 
-  group_by(date_shortcut) %>%
-  arrange(date) %>% 
-  mutate(growth  = (values/lag(values) - 1)*100) %>% 
+gdp <- eopib %>% 
+  # group_by(date_shortcut) %>%
+  # arrange(date) %>% 
+  # mutate(growth  = (values/lag(values) - 1)*100) %>% 
   mutate(year = year(date),  # Extrae el año de la fecha
          sexenio = case_when(
            year > 1982 & year <= 1988 ~ "Miguel de la Madrid (1982-1988)",
@@ -57,60 +90,25 @@ gdp <- gdp %>%
 
 sexenios_gdp <- gdp %>%
   group_by(sexenio) %>%
-  reframe(mean_growth = mean(growth, na.rm = TRUE)) %>% 
+  reframe(mean_growth = mean(values, na.rm = TRUE)) %>% 
   filter(!is.na(sexenio)) %>% 
   arrange(sexenio)
 
 # Crecimiento económico
-gdp %>% 
-  filter(date >= "2022-01-01") %>% 
-  ggplot(aes(date, growth/100)) +
-  geom_line(size = 1, color = "#970639") +
-  labs( title = "Crecimiento económico en México",
-        subtitle = "Variación anual",
-        y = "",
-        x = "",
-        caption = "Fuente: INEGI") +
-  scale_y_percent() +
-  theme_ipsum_rc(grid="Y") %>%   # Use Roboto Condensed
-  gg_check()
-ggsave("plots/gdp_growth.png")
+# gdp %>% 
+#   filter(date >= "2022-01-01") %>% 
+#   ggplot(aes(date, values/100)) +
+#   geom_line(size = 1, color = "#970639") +
+#   labs( title = "Crecimiento económico en México",
+#         subtitle = "Variación anual",
+#         y = "",
+#         x = "",
+#         caption = "Fuente: INEGI\nDato del último trimestre del 2024 corresponde a la estimación oportuna.*") +
+#   scale_y_percent() +
+#   theme_ipsum_rc(grid="Y") %>%   # Use Roboto Condensed
+#   gg_check()
+# ggsave("plots/gdp_growth.png")
 
-
-
-# Estimación oportuna del PIB
-eopib <- inegi_series(series = "733855", token = inegi.api)
-
-
-eopib %>% 
-  filter(date >= "2022-01-01") %>% 
-  ggplot(aes(date, values/100)) +
-    geom_line(data = eopib %>% 
-              filter(date >= "2022-01-01") %>% 
-              arrange(date) %>% 
-              slice(1:(n() - 1)), 
-            aes(date, values/100), 
-            size = 1, color = "#970639") +
-    geom_line(data = eopib %>% 
-              filter(date >= "2022-01-01") %>% 
-              arrange(desc(date)) %>% 
-              slice(1:2), 
-            aes(date, values/100), 
-            color = "#970639", linetype = "dashed", size = 1) +  
-    # geom_point(data = eopib %>% 
-    #            filter(date == max(date)), 
-    #          aes(date, values/100), 
-    #          color = "black", size = 3, shape = 15) +  
-  
-  labs(title = "Crecimiento económico en México*",
-       subtitle = "Variación anual",
-       y = "",
-       x = "",
-       caption = "Fuente: INEGI \nDato del último trimestre del 2024 corresponde a la estimación oportuna.*") +
-  scale_y_percent() + 
-  theme_ipsum_rc(grid = "Y") %>%  
-  gg_check()
-ggsave("plots/eopib_growth.png")
 
 
 # Crecimiento promedio por sexenio
@@ -126,6 +124,8 @@ ggplot(sexenios_gdp, aes(mean_growth/100, fct_rev(sexenio))) +
   gg_check()
 ggsave("plots/sexenios.png")
 
+# Fetch the data using the specified series IDs
+gdp <- inegi_series(series = "736181", token = inegi.api)
 
 pop <- inegi_series_multiple(series = "289242", token = inegi.api) %>% 
   select(date, date_shortcut, values)
@@ -149,6 +149,7 @@ ggsave("plots/gdppc.png")
 
 
 write.csv(gdppc, "data/growth/gdppc.csv", row.names = FALSE)
+write.csv(sexenios_gdp, "data/growth/sexenios_gdp.csv", row.names = FALSE)
 
 
 
