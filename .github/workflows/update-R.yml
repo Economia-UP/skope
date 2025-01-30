@@ -22,6 +22,7 @@ jobs:
             siebanxicor
             fredr
             hrbrthemes
+            sysfonts
 
       - name: Check out repository
         uses: actions/checkout@v3
