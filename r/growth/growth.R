@@ -9,8 +9,10 @@ library(ggplot2)
 library(hrbrthemes)
 library(forcats)
 library(lubridate)
+library(sysfonts)
 
 options(warn = -1)  # Ignore warnings
+font_add_google("Roboto Condensed", "roboto_condensed")
 import_roboto_condensed()
 
 # Define your INEGI API key
