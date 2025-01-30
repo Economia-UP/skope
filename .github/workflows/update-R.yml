@@ -1,4 +1,4 @@
-name: Update R
+name: Update Data and Plots
 
 on:
   schedule:
@@ -10,40 +10,39 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set up R
-        uses: r-lib/actions/setup-r@v2
+      - name: Check out repository
+        uses: actions/checkout@v3
 
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y fonts-roboto libharfbuzz-dev libfribidi-dev libfontconfig1-dev
+          sudo apt-get install -y \
+            libfreetype6-dev \
+            libharfbuzz-dev \
+            libfribidi-dev \
+            libfontconfig1-dev \
+            fonts-roboto
+            
+          # Install Roboto Condensed specifically
+          wget -O RobotoCondensed.ttf https://github.com/google/fonts/raw/main/apache/roboto/static/RobotoCondensed-Regular.ttf
+          sudo mkdir -p /usr/share/fonts/truetype/roboto-condensed
+          sudo mv RobotoCondensed.ttf /usr/share/fonts/truetype/roboto-condensed/
+          sudo fc-cache -fv
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
 
       - name: Install R packages
-        uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          packages: |
-            tidyverse
-            inegiR
-            siebanxicor
-            fredr
-            hrbrthemes
-            sysfonts
-            forcats
-            lubridate
-            showtext
+        run: |
+          R -e "install.packages(c('tidyverse', 'inegiR', 'siebanxicor', 'fredr', 'hrbrthemes', 'sysfonts', 'forcats', 'lubridate', 'showtext'))"
 
-      - name: Check out repository
-        uses: actions/checkout@v3
-
-      # Set environment variables FIRST
       - name: Set API keys
         run: |
           echo "INEGI_API=${{ secrets.INEGI_API }}" >> $GITHUB_ENV
           echo "BANXICO_API=${{ secrets.BANXICO_API }}" >> $GITHUB_ENV
           echo "FRED_API=${{ secrets.FRED_API }}" >> $GITHUB_ENV
 
-      # Run R scripts
-      - name: Import data
+      - name: Run R scripts
         run: |
           find r -type f -name "*.R" -exec Rscript {} \;
 
@@ -52,5 +51,5 @@ jobs:
           git config --local user.name "GitHub Action"
           git config --local user.email "action@github.com"
           git add 'data/*.csv' 'plots/*.png'
-          git commit -m "Update data and plots" || echo "No changes to commit"
+          git commit -m "Auto-update: Data and plots refreshed [$(date +'%Y-%m-%d %H:%M')]" || echo "No changes to commit"
           git push

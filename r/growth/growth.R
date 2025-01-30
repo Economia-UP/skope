@@ -16,7 +16,7 @@ options(warn = -1)  # Ignore warnings
 
 # Load the system font (Roboto Condensed)
 font_add_google("Roboto Condensed", family = "roboto_condensed")
-showtext_opts(dpi = 96)  # Set DPI for ggplot and prevent resizing
+showtext_opts(dpi = 96)  # Set a fixed DPI to prevent font scaling
 
 # Define your INEGI API key
 inegi.api = Sys.getenv("INEGI_API")
@@ -86,7 +86,7 @@ ggplot(sexenios_gdp, aes(mean_growth/100, fct_rev(sexenio))) +
         x = "",
         caption = "Fuente: INEGI") +
   scale_x_percent() +
-  theme_ipsum_rc(grid="X", base_family = "roboto_condensed") +  # Use Roboto Condensed
+  theme_ipsum_rc(grid="X", base_family = "roboto_condensed") %>%   # Use Roboto Condensed
   gg_check()
 ggsave("plots/sexenios.png")
 
@@ -100,16 +100,17 @@ gdppc <- left_join(gdp, pop, join_by(date), suffix = c("_gdp", "_pop")) %>%
 
 # Crecimiento económico per cápita
 ggplot(gdppc, aes(date, gdppc)) +
-  geom_line(size = 1, color = "blue") +
+  geom_line(size = 1, color = "#970639") +
   labs( title = "PIB per cápita en México",
         subtitle = "Moneda nacional",
         y = "",
         x = "",
         caption = "Fuente: INEGI") +
   scale_y_comma() +
-  theme_ipsum_rc(grid="Y", base_family = "roboto_condensed") +  # Use Roboto Condensed
+  theme_ipsum_rc(grid="Y", base_family = "roboto_condensed") %>%   # Use Roboto Condensed
   gg_check()
 ggsave("plots/gdppc.png")
 
 
 write.csv(gdppc, "data/growth/gdppc.csv", row.names = FALSE)
+
