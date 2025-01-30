@@ -30,7 +30,7 @@ jobs:
             sysfonts
             forcats
             lubridate
-            showtext  # For proper font rendering in GitHub Actions
+            showtext
 
       - name: Check out repository
         uses: actions/checkout@v3
