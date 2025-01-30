@@ -10,21 +10,19 @@ library(hrbrthemes)
 library(forcats)
 library(lubridate)
 library(sysfonts)
-library(showtext)  # Needed for non-interactive environments
-
+library(showtext)
 
 options(warn = -1)  # Ignore warnings
-font_add_google("Roboto Condensed", "roboto_condensed")
-showtext_auto()
-import_roboto_condensed()
+
+# Load the system font (Roboto Condensed)
+font_add_google("Roboto Condensed", family = "roboto_condensed")
+showtext_opts(dpi = 96)  # Set DPI for ggplot and prevent resizing
 
 # Define your INEGI API key
 inegi.api = Sys.getenv("INEGI_API")
 inegi.api <- "446548c3-7b55-4b22-8430-ac8f251ea555"
 
 # Fetch the data using the specified series IDs
-# idSeries <- c("910399", "910400", "910403")  # Your INEGI series IDs
-
 gdp <- inegi_series(series = "736181", token = inegi.api)
 
 orden_sexenios <- c(
@@ -66,7 +64,7 @@ sexenios_gdp <- gdp %>%
 # Crecimiento económico
 gdp %>% 
   filter(date >= "2022-01-01") %>% 
-ggplot(aes(date, growth/100)) +
+  ggplot(aes(date, growth/100)) +
   geom_line(size = 1, color = "#970639") +
   labs( title = "Crecimiento económico en México",
         subtitle = "Variación anual",
@@ -74,7 +72,7 @@ ggplot(aes(date, growth/100)) +
         x = "",
         caption = "Fuente: INEGI") +
   scale_y_percent() +
-  theme_ipsum_rc(grid="Y") %>% 
+  theme_ipsum_rc(grid="Y") %>%   # Use Roboto Condensed
   gg_check()
 ggsave("plots/gdp_growth.png")
 
@@ -88,7 +86,7 @@ ggplot(sexenios_gdp, aes(mean_growth/100, fct_rev(sexenio))) +
         x = "",
         caption = "Fuente: INEGI") +
   scale_x_percent() +
-  theme_ipsum_rc(grid="X") %>% 
+  theme_ipsum_rc(grid="X", base_family = "roboto_condensed") +  # Use Roboto Condensed
   gg_check()
 ggsave("plots/sexenios.png")
 
@@ -109,7 +107,7 @@ ggplot(gdppc, aes(date, gdppc)) +
         x = "",
         caption = "Fuente: INEGI") +
   scale_y_comma() +
-  theme_ipsum_rc(grid="Y") %>% 
+  theme_ipsum_rc(grid="Y", base_family = "roboto_condensed") +  # Use Roboto Condensed
   gg_check()
 ggsave("plots/gdppc.png")
 
