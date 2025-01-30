@@ -27,6 +27,12 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
 
+      # Install Roboto Condensed font
+      - name: Install Roboto Condensed font
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-roboto
+
       # Set environment variables FIRST
       - name: Set API keys
         run: |
