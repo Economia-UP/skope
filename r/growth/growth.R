@@ -6,11 +6,13 @@ library(inegiR)
 library(dplyr)
 library(tidyr)
 library(ggplot2)
+library(ggpattern)
 library(hrbrthemes)
 library(forcats)
 library(lubridate)
 library(sysfonts)
 library(showtext)
+library(svglite)
 
 options(warn = -1)  # Ignore warnings
 
@@ -42,20 +44,16 @@ eopib %>%
               slice(1:2), 
             aes(date, values/100), 
             color = "#970639", linetype = "dashed", size = 1) +  
-  # geom_point(data = eopib %>% 
-  #            filter(date == max(date)), 
-  #          aes(date, values/100), 
-  #          color = "black", size = 3, shape = 15) +  
-  
   labs(title = "Crecimiento económico en México*",
        subtitle = "Variación anual",
        y = "",
        x = "",
        caption = "Fuente: INEGI \nDato del último trimestre del 2024 corresponde a la estimación oportuna.*") +
   scale_y_percent() + 
-  theme_ipsum_rc(grid = "Y") %>%  
+  theme_ipsum_rc(grid = "Y") %>% 
   gg_check()
-ggsave("plots/eopib_growth.png")
+ggsave("plots/eopib_growth_d.svg")
+ggsave("plots/eopib_growth_m.svg", width = 6, height = 6, units = "in")
 
 
 orden_sexenios <- c(
@@ -85,30 +83,56 @@ gdp <- eopib %>%
            year > 2024 & year <= 2030 ~ "Claudia Sheinbaum Pardo (2024-2030)",
            TRUE ~ "Otro"
          ),
-         sexenio = factor(sexenio, levels = orden_sexenios) # Ordenar como factor
-  )
+         sexenio = factor(sexenio, levels = orden_sexenios), # Ordenar como factor
+  ) 
+
+growth_annual <- gdp %>% 
+  group_by(year) %>% 
+  summarize(growth = mean(values), .groups = "drop")
+
+
+growth_annual %>% 
+  filter(year >= 2018) %>% 
+  ggplot(aes(year, growth/100)) +
+  geom_col(data = growth_annual %>% 
+              filter(year >= 2018) %>% 
+              arrange(year) %>% 
+              slice(1:(n())), 
+            aes(year, growth/100), 
+            size = 1, fill = "#970639") +
+  geom_col_pattern(data = growth_annual %>%
+                     filter(year >= 2018) %>%
+                     arrange(desc(year)) %>%
+                     slice(1),
+                   aes(year, growth/100),
+                   fill = "#970639",  # Background color
+                   pattern = "stripe",  # Striped pattern
+                   pattern_color = "#fdfcfd",  # Stripe color
+                   pattern_density = 0.2,  # Adjust spacing of stripes
+                   pattern_angle = 45,  # Angle of stripes
+                   size = 1) +
+  labs(title = "Crecimiento económico en México*",
+       subtitle = "Variación promedio anual",
+       y = "",
+       x = "",
+       caption = "Fuente: INEGI \nDato del último trimestre del 2024 corresponde a la estimación oportuna.*") +
+  scale_x_continuous(breaks = seq(2018, max(growth_annual$year), by = 1)) +
+  scale_y_percent(breaks = seq(floor(min(growth_annual$growth / 100)), 
+                               ceiling(max(growth_annual$growth / 100)), 
+                               by = 0.02)) + 
+  # scale_y_percent() + 
+  theme_ipsum_rc(grid = "Y") %>%  
+  gg_check()
+ggsave("plots/eopib_annual_growth_d.svg")
+ggsave("plots/eopib_annual_growth_m.svg", width = 6, height = 6, units = "in")
+
+
 
 sexenios_gdp <- gdp %>%
   group_by(sexenio) %>%
   reframe(mean_growth = mean(values, na.rm = TRUE)) %>% 
   filter(!is.na(sexenio)) %>% 
   arrange(sexenio)
-
-# Crecimiento económico
-# gdp %>% 
-#   filter(date >= "2022-01-01") %>% 
-#   ggplot(aes(date, values/100)) +
-#   geom_line(size = 1, color = "#970639") +
-#   labs( title = "Crecimiento económico en México",
-#         subtitle = "Variación anual",
-#         y = "",
-#         x = "",
-#         caption = "Fuente: INEGI\nDato del último trimestre del 2024 corresponde a la estimación oportuna.*") +
-#   scale_y_percent() +
-#   theme_ipsum_rc(grid="Y") %>%   # Use Roboto Condensed
-#   gg_check()
-# ggsave("plots/gdp_growth.png")
-
 
 
 # Crecimiento promedio por sexenio
@@ -122,7 +146,9 @@ ggplot(sexenios_gdp, aes(mean_growth/100, fct_rev(sexenio))) +
   scale_x_percent() +
   theme_ipsum_rc(grid="X", base_family = "roboto_condensed") %>%   # Use Roboto Condensed
   gg_check()
-ggsave("plots/sexenios.png")
+ggsave("plots/sexenios_d.svg")
+ggsave("plots/sexenios_m.svg", width = 7, height = 6, units = "in")
+
 
 # Fetch the data using the specified series IDs
 gdp <- inegi_series(series = "736181", token = inegi.api)
@@ -145,7 +171,9 @@ ggplot(gdppc, aes(date, gdppc)) +
   scale_y_comma() +
   theme_ipsum_rc(grid="Y", base_family = "roboto_condensed") %>%   # Use Roboto Condensed
   gg_check()
-ggsave("plots/gdppc.png")
+ggsave("plots/gdppc_d.svg")
+ggsave("plots/gdppc_m.svg", width = 6, height = 6, units = "in")
+
 
 
 write.csv(gdppc, "data/growth/gdppc.csv", row.names = FALSE)
