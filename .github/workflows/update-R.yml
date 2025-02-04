@@ -10,13 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set needrestart to auto mode
+        run: |
+          echo 'NEEDRESTART_MODE=a' | sudo tee -a /etc/environment
+
       - name: Check out repository
         uses: actions/checkout@v3
 
       - name: Install system dependencies
         run: |
-          set -e  # Exit immediately on any error
           sudo apt-get update
+          sudo NEEDRESTART_SUSPEND=1 apt-get upgrade -y
           sudo apt-get install -y \
             libfreetype6-dev \
             libharfbuzz-dev \
@@ -25,11 +29,11 @@ jobs:
             fonts-roboto \
             pkg-config
 
-          # Download Roboto Condensed font
-          wget -q --show-progress -O RobotoCondensed.ttf https://github.com/google/fonts/raw/main/apache/roboto/static/RobotoCondensed-Regular.ttf
-          sudo mkdir -p /usr/share/fonts/truetype/roboto-condensed
-          sudo mv RobotoCondensed.ttf /usr/share/fonts/truetype/roboto-condensed/
-          sudo fc-cache -fv
+      - name: Restart outdated services
+        run: |
+          sudo systemctl restart systemd-logind.service
+          sudo systemctl restart getty@tty1.service
+          sudo systemctl restart serial-getty@ttyS0.service
 
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
