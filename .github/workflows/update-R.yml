@@ -15,16 +15,18 @@ jobs:
 
       - name: Install system dependencies
         run: |
+          set -e  # Exit immediately on any error
           sudo apt-get update
           sudo apt-get install -y \
             libfreetype6-dev \
             libharfbuzz-dev \
             libfribidi-dev \
             libfontconfig1-dev \
-            fonts-roboto
-            
-          # Install Roboto Condensed specifically
-          wget -O RobotoCondensed.ttf https://github.com/google/fonts/raw/main/apache/roboto/static/RobotoCondensed-Regular.ttf
+            fonts-roboto \
+            pkg-config
+
+          # Download Roboto Condensed font
+          wget -q --show-progress -O RobotoCondensed.ttf https://github.com/google/fonts/raw/main/apache/roboto/static/RobotoCondensed-Regular.ttf
           sudo mkdir -p /usr/share/fonts/truetype/roboto-condensed
           sudo mv RobotoCondensed.ttf /usr/share/fonts/truetype/roboto-condensed/
           sudo fc-cache -fv
