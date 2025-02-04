@@ -1,4 +1,4 @@
-print("growth.R")
+print("gdp.R")
 rm(list = ls())
 
 # Load the necessary libraries
@@ -8,13 +8,12 @@ library(tidyr)
 library(ggplot2)
 library(ggpattern)
 library(hrbrthemes)
-library(forcats)
 library(lubridate)
 library(sysfonts)
 library(showtext)
 library(svglite)
 
-options(warn = -1)  # Ignore warnings
+# options(warn = -1)  # Ignore warnings
 
 # Load the system font (Roboto Condensed)
 font_add_google("Roboto Condensed", family = "roboto_condensed")
@@ -22,7 +21,7 @@ showtext_opts(dpi = 96)  # Set a fixed DPI to prevent font scaling
 
 # Define your INEGI API key
 inegi.api = Sys.getenv("INEGI_API")
-# inegi.api <- "446548c3-7b55-4b22-8430-ac8f251ea555"
+inegi.api <- "446548c3-7b55-4b22-8430-ac8f251ea555"
 
 
 # Estimación oportuna del PIB
@@ -52,8 +51,8 @@ eopib %>%
   scale_y_percent() + 
   theme_ipsum_rc(grid = "Y") %>% 
   gg_check()
-ggsave("plots/eopib_growth_d.svg")
-ggsave("plots/eopib_growth_m.svg", width = 6, height = 6, units = "in")
+ggsave("plots/gdp/eopib_growth_d.svg")
+ggsave("plots/gdp/eopib_growth_m.svg", width = 6, height = 6, units = "in")
 
 
 orden_sexenios <- c(
@@ -123,8 +122,8 @@ growth_annual %>%
   # scale_y_percent() + 
   theme_ipsum_rc(grid = "Y") %>%  
   gg_check()
-ggsave("plots/eopib_annual_growth_d.svg")
-ggsave("plots/eopib_annual_growth_m.svg", width = 6, height = 6, units = "in")
+ggsave("plots/gdp/eopib_annual_growth_d.svg")
+ggsave("plots/gdp/eopib_annual_growth_m.svg", width = 6, height = 6, units = "in")
 
 
 
@@ -146,8 +145,8 @@ ggplot(sexenios_gdp, aes(mean_growth/100, fct_rev(sexenio))) +
   scale_x_percent() +
   theme_ipsum_rc(grid="X", base_family = "roboto_condensed") %>%   # Use Roboto Condensed
   gg_check()
-ggsave("plots/sexenios_d.svg")
-ggsave("plots/sexenios_m.svg", width = 7, height = 6, units = "in")
+ggsave("plots/gdp/sexenios_d.svg")
+ggsave("plots/gdp/sexenios_m.svg", width = 7, height = 6, units = "in")
 
 
 # Fetch the data using the specified series IDs
@@ -169,10 +168,10 @@ ggplot(gdppc, aes(date, gdppc)) +
         x = "",
         caption = "Fuente: INEGI") +
   scale_y_comma() +
-  theme_ipsum_rc(grid="Y", base_family = "roboto_condensed") %>%   # Use Roboto Condensed
+  theme_ipsum_rc(grid="Y") %>%
   gg_check()
-ggsave("plots/gdppc_d.svg")
-ggsave("plots/gdppc_m.svg", width = 6, height = 6, units = "in")
+ggsave("plots/gdp/gdppc_d.svg")
+ggsave("plots/gdp/gdppc_m.svg", width = 6, height = 6, units = "in")
 
 
 

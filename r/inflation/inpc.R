@@ -1,0 +1,140 @@
+print("inpc.R")
+rm(list = ls())
+
+# Load the necessary libraries
+library(inegiR)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(ggpattern)
+library(hrbrthemes)
+library(lubridate)
+library(sysfonts)
+library(showtext)
+library(svglite)
+
+
+# Define your INEGI API key
+inegi.api = Sys.getenv("INEGI_API")
+
+# Fetch the data using the specified series IDs
+idSeries1 <- c("910406", "910407", "910410")  # Your INEGI series IDs
+
+# Get the data
+series1 <- inegi_series_multiple(series = idSeries1, token = inegi.api)
+
+# Transform the data
+series.wide <- series1 %>%
+  select(date, values, meta_indicatorid) %>%  
+  pivot_wider(names_from = meta_indicatorid, values_from = values) %>%
+  rename(
+    date = date,
+    'Inflación general' = '910406',
+    'Subyacente' = '910407',
+    'No subyacente' = '910410') %>% 
+  filter(date >= Sys.Date() - years(3))
+
+# Specify the output directory and file name
+write.csv(series.wide, "data/mc_inflation_month.csv", row.names = FALSE)
+
+df <- series1 %>% 
+  select(date, values, meta_indicatorid) %>%  
+  mutate(
+    meta_indicatorid = recode(meta_indicatorid,
+                              "910406" = "Inflación general",
+                              "910407" = "Subyacente",
+                              "910410" = "No subyacente")) %>% 
+  rename(indicator = meta_indicatorid) %>% 
+  filter(date >= "2020-01-01",
+         indicator != "No subyacente")
+
+# Inflation graph
+ggplot(df, aes(date, values/100, color = indicator)) +
+  geom_line(size = 1) +
+  geom_point(
+    data = df %>% group_by(indicator) %>% filter(date == max(date)),  # Select last point per line
+    size = 2.5  # Adjust point size
+  ) +
+  geom_text(
+    data = df %>% group_by(indicator) %>% filter(date == max(date)),  # Select last point per line
+    aes(label = scales::percent(values / 100)),  # Format label as percentage
+    hjust = -0.3,  # Adjust text position (shift right)
+    vjust = 0.2,
+    size = 3.5,
+    show.legend = FALSE
+  ) +
+  coord_cartesian(clip = "off") +  # Disable clipping for points/text at edges
+  labs( title = "Inflación en México",
+        subtitle = "Índice Nacional de Precios al Consumidor",
+        y = "",
+        x = "Último dato diciembre 2024.",
+        color = "",
+        caption = "Fuente: INEGI") +
+  scale_y_percent(breaks = seq(min(df$values)/100, max(df$values)/100,
+                               by = 0.01)) +
+  scale_x_date(breaks = seq(as.Date(min(df$date)), 
+                            as.Date(max(df$date)), 
+                            by = "1 year"),
+               date_labels = "%Y") +  # Format labels as only the year
+  scale_color_manual(values = c("#970639", "#043574")) +
+  theme_ipsum_rc(grid="Y") +
+  theme(legend.position="bottom") %>%   # Use Roboto Condensed
+  gg_check()
+ggsave("plots/inflation/inpc.svg")
+
+# Fetch the data using the specified series IDs (Subyacente)
+idSeries2 <- c("910407", "910408", "910409")  # Your INEGI series IDs
+
+# Get the data
+series2 <- inegi_series_multiple(series = idSeries2, token = inegi.api)
+
+sub <- series2 %>% 
+  select(date, values, meta_indicatorid) %>%  
+  mutate(
+    meta_indicatorid = recode(meta_indicatorid,
+                              "910407" = "Total",
+                              "910408" = "Mercancías",
+                              "910409" = "Servicios") %>% 
+  factor(levels = c("Total", "Mercancías", "Servicios"))) %>% 
+  rename(indicator = meta_indicatorid) %>% 
+  filter(date >= "2020-01-01",
+         indicator != "Total")
+
+# Core inflation graph
+ggplot(sub, aes(date, values / 100, color = indicator)) +
+  geom_line(size = 1) +
+  geom_point(
+    data = sub %>% group_by(indicator) %>% filter(date == max(date)),  # Select last point per line
+    size = 2.5  # Adjust point size
+  ) +
+  geom_text(
+    data = sub %>% group_by(indicator) %>% filter(date == max(date)),  # Select last point per line
+    aes(label = scales::percent(values / 100)),  # Format label as percentage
+    hjust = -0.3,  # Adjust text position (shift right)
+    vjust = 0.2,
+    size = 3.5,
+    show.legend = FALSE
+  ) +
+  coord_cartesian(clip = "off") +  # Disable clipping for points/text at edges
+  scale_y_percent(breaks = seq(min(sub$values)/100, max(sub$values) / 100, by = 0.01)) +  
+  scale_x_date(
+    breaks = seq(as.Date(min(sub$date)), as.Date(max(sub$date)), by = "1 year"),  # Major ticks (yearly)
+    minor_breaks = seq(as.Date(min(sub$date)), as.Date(max(sub$date)), by = "1 month"),  # Minor ticks (monthly)
+    date_labels = "%Y"  # Only show years on the x-axis
+  ) +
+  labs(
+    title = "Inflación subyacente en México",
+    subtitle = "",
+    y = "",
+    x = "Último dato diciembre 2024.",
+    color = "",
+    caption = "Fuente: INEGI"
+  ) +
+  scale_color_manual(values = c("#970639", "#043574", "black")) +
+  theme_ipsum_rc(grid = "Y") +  # hrbrthemes disables minor grid by default
+  theme(
+    legend.position = "bottom",
+    panel.grid.minor = element_line(color = "gray80", linetype = "dashed")  # Enable minor grid lines
+  ) %>% 
+  gg_check()
+ggsave("plots/inflation/inpc_sub.svg")
