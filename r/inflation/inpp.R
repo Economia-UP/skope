@@ -37,7 +37,7 @@ serie <- series %>%
   rename(indicator = meta_indicatorid) %>% 
   group_by(indicator) %>% 
   arrange(date) %>% 
-  mutate(pc = (lag(values, 12)/values -1)*100) %>% 
+  mutate(pc = (values/lag(values, 12) -1)*100) %>% 
   filter(date >= "2022-01-01")
 
 # Inflation (INPP) graph
