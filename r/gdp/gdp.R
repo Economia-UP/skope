@@ -21,9 +21,6 @@ showtext_opts(dpi = 96)  # Set a fixed DPI to prevent font scaling
 
 # Define your INEGI API key
 inegi.api = Sys.getenv("INEGI_API")
-inegi.api <- "446548c3-7b55-4b22-8430-ac8f251ea555"
-
-# Hello world
 
 # Estimación oportuna del PIB
 eopib <- inegi_series(series = "733855", token = inegi.api)
