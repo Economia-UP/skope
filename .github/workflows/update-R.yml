@@ -40,7 +40,7 @@ jobs:
 
       - name: Install R packages
         run: |
-          R -e "install.packages(c('tidyverse', 'inegiR', 'siebanxicor', 'fredr', 'hrbrthemes', 'sysfonts', 'forcats', 'lubridate', 'showtext', 'hrbrthemes', 'ggpattern', 'ggrepel'))"
+          R -e "install.packages(c('tidyverse', 'tidymodels', 'inegiR', 'siebanxicor', 'fredr', 'hrbrthemes', 'sysfonts', 'forcats', 'lubridate', 'showtext', 'hrbrthemes', 'ggpattern', 'ggrepel'))"
 
       - name: Set API keys
         run: |
