@@ -13,6 +13,10 @@ library(sysfonts)
 library(showtext)
 library(svglite)
 
+# Hello world
+print("Hello World")
+1+1
+
 # options(warn = -1)  # Ignore warnings
 
 # Load the system font (Roboto Condensed)
