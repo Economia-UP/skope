@@ -7,6 +7,7 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(ggpattern)
+library(ggrepel)
 library(hrbrthemes)
 library(lubridate)
 library(sysfonts)
@@ -55,19 +56,31 @@ ggplot(df, aes(date, values/100, color = indicator)) +
     data = df %>% group_by(indicator) %>% filter(date == max(date)),  # Select last point per line
     size = 2.5  # Adjust point size
   ) +
-  geom_text(
-    data = df %>% group_by(indicator) %>% filter(date == max(date)),  # Select last point per line
-    aes(label = scales::percent(values / 100)),  # Format label as percentage
-    hjust = -0.3,  # Adjust text position (shift right)
-    vjust = 0.2,
+  # geom_text(
+  #   data = df %>% group_by(indicator) %>% filter(date == max(date)),  # Select last point per line
+  #   aes(label = scales::percent(values / 100)),  # Format label as percentage
+  #   hjust = -0.3,  # Adjust text position (shift right)
+  #   vjust = 0.2,
+  #   size = 3.5,
+  #   show.legend = FALSE
+  # ) +
+  ggrepel::geom_text_repel(
+    data = df %>% group_by(indicator) %>% filter(date == max(date)),
+    aes(label = scales::percent(values/100, accuracy = 0.1)),
+    nudge_x = 40,  # Desplazamiento base
+    direction = "y",  # Solo mueve en eje Y
+    min.segment.length = Inf,  # Elimina líneas de conexión
+    hjust = -0.3,
+    vjust = 0.5,
     size = 3.5,
+    box.padding = 0.2,  # Espacio alrededor de etiquetas
     show.legend = FALSE
   ) +
   coord_cartesian(clip = "off") +  # Disable clipping for points/text at edges
   labs( title = "Inflación en México",
         subtitle = "Índice Nacional de Precios al Consumidor",
         y = "",
-        x = "Último dato diciembre 2024.",
+        x = "Último dato: enero 2025.",
         color = "",
         caption = "Fuente: INEGI") +
   scale_y_percent(breaks = seq(min(df$values)/100, max(df$values)/100,
@@ -126,7 +139,7 @@ ggplot(sub, aes(date, values / 100, color = indicator)) +
     title = "Inflación subyacente en México",
     subtitle = "",
     y = "",
-    x = "Último dato diciembre 2024.",
+    x = "Último dato: enero 2025.",
     color = "",
     caption = "Fuente: INEGI"
   ) +
