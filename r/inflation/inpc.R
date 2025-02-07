@@ -32,11 +32,10 @@ series.wide <- series1 %>%
     date = date,
     'Inflación general' = '910406',
     'Subyacente' = '910407',
-    'No subyacente' = '910410') %>% 
-  filter(date >= Sys.Date() - years(3))
+    'No subyacente' = '910410')
 
 # Specify the output directory and file name
-write.csv(series.wide, "data/mc_inflation_month.csv", row.names = FALSE)
+write.csv(series.wide, "data/inflation/inpc.csv", row.names = FALSE)
 
 df <- series1 %>% 
   select(date, values, meta_indicatorid) %>%  
@@ -46,8 +45,9 @@ df <- series1 %>%
                               "910407" = "Subyacente",
                               "910410" = "No subyacente")) %>% 
   rename(indicator = meta_indicatorid) %>% 
-  filter(date >= "2020-01-01",
+  filter(date >= "2022-01-01",
          indicator != "No subyacente")
+
 
 # Inflation graph
 ggplot(df, aes(date, values/100, color = indicator)) +
@@ -101,6 +101,21 @@ idSeries2 <- c("910407", "910408", "910409")  # Your INEGI series IDs
 # Get the data
 series2 <- inegi_series_multiple(series = idSeries2, token = inegi.api)
 
+# Transform the data
+series2.wide <- series2 %>% 
+  select(date, values, meta_indicatorid) %>% 
+  pivot_wider(names_from = meta_indicatorid, values_from = values) %>% 
+  rename(
+    date = date,
+    "Total" = "910407",
+    "Mercancías" = "910408",
+    "Servicios" = "910409") %>% 
+  factor(levels = c("Total", "Mercancías", "Servicios"))
+
+# Specify the output directory and file name
+write.csv(series2.wide, "data/inflation/inpc_core.csv", row.names = FALSE)
+
+
 sub <- series2 %>% 
   select(date, values, meta_indicatorid) %>%  
   mutate(
@@ -110,7 +125,7 @@ sub <- series2 %>%
                               "910409" = "Servicios") %>% 
   factor(levels = c("Total", "Mercancías", "Servicios"))) %>% 
   rename(indicator = meta_indicatorid) %>% 
-  filter(date >= "2020-01-01",
+  filter(date >= "2022-01-01",
          indicator != "Total")
 
 # Core inflation graph

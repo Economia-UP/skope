@@ -40,6 +40,23 @@ serie <- series %>%
   mutate(pc = (values/lag(values, 12) -1)*100) %>% 
   filter(date >= "2022-01-01")
 
+# Transform the data
+series.wide <- series %>% 
+  select(date, values, meta_indicatorid) %>% 
+  pivot_wider(names_from = meta_indicatorid, values_from = values) %>% 
+  rename(
+    date = date,
+    "INPP (sin petróleo y con servicios)" = "673095",
+    "Actividades secundarias sin petróleo" = "673098",
+    "Actividades terciarias" = "673100") %>% 
+  factor(levels = c("INPP (sin petróleo y con servicios)", 
+                    "Actividades secundarias sin petróleo",
+                    "Actividades terciarias"))
+
+# Specify the output directory and file name
+write.csv(series.wide, "data/inflation/inpp.csv", row.names = FALSE)
+
+
 # Inflation (INPP) graph
 ggplot(serie, aes(date, pc/100, color = indicator)) +
   geom_line(size = 1) +
