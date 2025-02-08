@@ -6,21 +6,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  import-data:
+  update:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set needrestart to auto mode
-        run: |
-          echo 'NEEDRESTART_MODE=a' | sudo tee -a /etc/environment
-
-      - name: Check out repository
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo NEEDRESTART_SUSPEND=1 apt-get upgrade -y
           sudo apt-get install -y \
             libfreetype6-dev \
             libharfbuzz-dev \
@@ -29,18 +24,12 @@ jobs:
             fonts-roboto \
             pkg-config
 
-      - name: Restart outdated services
-        run: |
-          sudo systemctl restart systemd-logind.service
-          sudo systemctl restart getty@tty1.service
-          sudo systemctl restart serial-getty@ttyS0.service
-
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
 
       - name: Install R packages
         run: |
-          R -e "install.packages(c('tidyverse', 'tidymodels', 'inegiR', 'siebanxicor', 'fredr', 'hrbrthemes', 'sysfonts', 'forcats', 'lubridate', 'showtext', 'hrbrthemes', 'ggpattern', 'ggrepel'))"
+          Rscript -e "install.packages(c('tidyverse', 'tidymodels', 'inegiR', 'siebanxicor', 'fredr', 'hrbrthemes', 'sysfonts', 'forcats', 'lubridate', 'showtext', 'ggpattern', 'ggrepel'), repos = 'https://cloud.r-project.org')"
 
       - name: Set API keys
         run: |
@@ -56,6 +45,6 @@ jobs:
         run: |
           git config --local user.name "GitHub Action"
           git config --local user.email "action@github.com"
-          git add 'data/*.csv' 'plots/*.svg'
-          git commit -m "Auto-update: Data and plots refreshed [$(date +'%Y-%m-%d %H:%M')]" || echo "No changes to commit"
+          git add data/*.csv plots/*.svg
+          git commit -m "Auto-update: Data and plots refreshed $(date +'%Y-%m-%d %H:%M')" || echo "No changes to commit"
           git push
