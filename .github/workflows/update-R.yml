@@ -29,7 +29,7 @@ jobs:
 
       - name: Install R packages
         run: |
-          Rscript -e "install.packages(c('tidyverse', 'tidymodels', 'inegiR', 'siebanxicor', 'fredr', 'hrbrthemes', 'sysfonts', 'forcats', 'lubridate', 'showtext', 'ggpattern', 'ggrepel'), repos = 'https://cloud.r-project.org')"
+          Rscript -e "install.packages(c('tidyverse', 'tidymodels', 'inegiR', 'siebanxicor', 'fredr', 'hrbrthemes', 'sysfonts', 'forcats', 'lubridate', 'showtext', 'ggpattern', 'ggrepel'), repos='https://cloud.r-project.org')"
 
       - name: Set API keys
         run: |
@@ -39,7 +39,9 @@ jobs:
 
       - name: Run R scripts
         run: |
-          find r -type f -name "*.R" -exec Rscript {} \;
+          for file in $(find r -type f -name "*.R"); do
+            Rscript "$file"
+          done
 
       - name: Commit and push changes
         run: |
