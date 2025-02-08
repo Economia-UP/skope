@@ -9,38 +9,31 @@ jobs:
   update:
     runs-on: ubuntu-latest
 
+    # Explicitly map each API key secret to an environment variable.
+    env:
+      INEGI_API: ${{ secrets.INEGI_API }}
+      BANXICO_API: ${{ secrets.BANXICO_API }}
+      FRED_API: ${{ secrets.FRED_API }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            libfreetype6-dev \
-            libharfbuzz-dev \
-            libfribidi-dev \
-            libfontconfig1-dev \
-            fonts-roboto \
-            pkg-config
 
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
 
       - name: Install R packages
         run: |
-          Rscript -e "install.packages(c('tidyverse', 'tidymodels', 'inegiR', 'siebanxicor', 'fredr', 'hrbrthemes', 'sysfonts', 'forcats', 'lubridate', 'showtext', 'ggpattern', 'ggrepel'), repos='https://cloud.r-project.org')"
-
-      - name: Set API keys
-        run: |
-          echo "INEGI_API=${{ secrets.INEGI_API }}" >> $GITHUB_ENV
-          echo "BANXICO_API=${{ secrets.BANXICO_API }}" >> $GITHUB_ENV
-          echo "FRED_API=${{ secrets.FRED_API }}" >> $GITHUB_ENV
+          Rscript -e "install.packages(
+            c('tidyverse', 'tidymodels', 'inegiR', 'siebanxicor', 'fredr', 
+              'hrbrthemes', 'sysfonts', 'forcats', 'lubridate', 'showtext', 
+              'ggpattern', 'ggrepel'),
+            repos = 'https://cloud.r-project.org')"
 
       - name: Run R scripts
         run: |
-          for file in $(find r -type f -name "*.R"); do
-            Rscript "$file"
+          for script in $(find r -type f -name "*.R"); do
+            Rscript "$script"
           done
 
       - name: Commit and push changes
