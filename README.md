@@ -17,12 +17,15 @@ Here's a quick overview of the main folders and files you will interact with:
 ```
 ├── .github
 │   └── workflows
-│       └── update_data.yml       # The GitHub Actions workflow file
+│       └── update_R.yml       # The GitHub Actions workflow file
 ├── r
 │   └── *.r    # Example R script to fetch data
 |
 ├── data
 |    └── *csv       # Output CSV file updated by the script
+|
+├── plots
+|    └── *svg/png   # Output plots in svg/png file updated by the script
 |    
 └── README.md       # Documentation file
 ```
