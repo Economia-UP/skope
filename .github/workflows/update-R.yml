@@ -25,7 +25,7 @@ jobs:
       - name: Install R packages
         run: |
           Rscript -e "install.packages(
-            c('tidyverse', 'tidymodels', 'inegiR', 'siebanxicor', 'fredr', 
+            c('tidyverse', 'tidymodels', 'inegiR', 'sierbanxicor', 'fredr', 
               'hrbrthemes', 'sysfonts', 'forcats', 'lubridate', 'showtext', 
               'ggpattern', 'ggrepel'),
             repos = 'https://cloud.r-project.org')"
