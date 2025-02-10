@@ -1,7 +1,7 @@
 print("mc_mxnusd.R")
 rm(list=ls())
 
-library("siebanxicor")
+library(siebanxicor)
 library(dplyr)
 library(tidyr)
 library(lubridate)
