@@ -9,18 +9,14 @@ jobs:
   update:
     runs-on: ubuntu-latest
 
-    # Explicitly map each API key secret to an environment variable.
-    env:
-      INEGI_API: ${{ secrets.INEGI_API }}
-      BANXICO_API: ${{ secrets.BANXICO_API }}
-      FRED_API: ${{ secrets.FRED_API }}
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Set up R
+      - name: Set up R (latest release)
         uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: 'release'
 
       - name: Install R packages
         run: |
@@ -40,6 +36,6 @@ jobs:
         run: |
           git config --local user.name "GitHub Action"
           git config --local user.email "action@github.com"
-          git add data/*.csv plots/*.svg
+          git add data/*.csv plots/*.svg plots/*.png
           git commit -m "Auto-update: Data and plots refreshed $(date +'%Y-%m-%d %H:%M')" || echo "No changes to commit"
           git push
