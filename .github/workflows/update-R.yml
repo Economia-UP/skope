@@ -23,8 +23,7 @@ jobs:
           Rscript -e "install.packages(
             c('tidyverse', 'tidymodels', 'inegiR', 'siebanxicor', 'fredr', 
               'hrbrthemes', 'sysfonts', 'forcats', 'lubridate', 'showtext', 
-              'ggpattern', 'ggrepel'),
-            repos = 'https://cloud.r-project.org')"
+              'ggpattern', 'ggrepel'))"
 
       - name: Run R scripts
         run: |
