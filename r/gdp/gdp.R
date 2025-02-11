@@ -9,15 +9,12 @@ library(ggplot2)
 library(ggpattern)
 library(hrbrthemes)
 library(lubridate)
-library(sysfonts)
 library(showtext)
 library(svglite)
 
-# options(warn = -1)  # Ignore warnings
-
-# Load the system font (Roboto Condensed)
-font_add_google("Roboto Condensed", family = "roboto_condensed")
-showtext_opts(dpi = 96)  # Set a fixed DPI to prevent font scaling
+library(showtext)
+font_add_google("Roboto Condensed", "Roboto")
+showtext_auto()
 
 # Define your INEGI API key
 inegi.api = Sys.getenv("INEGI_API")
