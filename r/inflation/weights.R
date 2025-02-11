@@ -1,17 +1,15 @@
-print("mc_inflation_weights.R")
+print("weights.R")
 rm(list = ls())
 
 # Load the necessary libraries
 library(inegiR)
-library(dplyr)
-library(tidyr)
-library(lubridate)
+library(tidyverse)
 
 # Define your INEGI API key
 inegi.api = Sys.getenv("INEGI_API")
 
 # Load dfs
-weights <- read.csv("r/weights.csv") %>% 
+weights <- read.csv("r/inflation/weights.csv") %>% 
   reframe(Concept, Weight = Weight/100)
 
 # Fetch the data using the specified series IDs
@@ -43,4 +41,4 @@ series.incidence <- series.wide %>%
   filter(date >= Sys.Date() - years(1))
 
 # Specify the output directory and file name
-write.csv(series.incidence, "data/mc_inflation_weights.csv", row.names = FALSE)
+write.csv(series.incidence, "data/inflation/weights.csv", row.names = FALSE)
