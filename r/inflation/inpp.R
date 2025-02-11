@@ -91,5 +91,5 @@ ggplot(serie, aes(date, pc/100, color = indicator)) +
   theme_ipsum_rc(grid="Y") +
   theme(legend.position="bottom") %>%   # Use Roboto Condensed
   gg_check()
-ggsave("plots/inflation/inpp.svg")
+ggsave("plots/inflation/inpp.svg", create.dir = TRUE)
 

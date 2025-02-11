@@ -91,7 +91,7 @@ ggplot(df, aes(date, values/100, color = indicator)) +
   theme_ipsum_rc(grid="Y") +
   theme(legend.position="bottom") %>%   # Use Roboto Condensed
   gg_check()
-ggsave("plots/inflation/inpc.svg")
+ggsave("plots/inflation/inpc.svg", create.dir = TRUE)
 
 # Fetch the data using the specified series IDs (Subyacente)
 idSeries2 <- c("910407", "910408", "910409")  # Your INEGI series IDs
@@ -163,4 +163,4 @@ ggplot(sub, aes(date, values / 100, color = indicator)) +
     panel.grid.minor = element_line(color = "gray80", linetype = "dashed")  # Enable minor grid lines
   ) %>% 
   gg_check()
-ggsave("plots/inflation/inpc_sub.svg")
+ggsave("plots/inflation/inpc_sub.svg", create.dir = TRUE)

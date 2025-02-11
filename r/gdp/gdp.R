@@ -42,8 +42,7 @@ eopib %>%
   scale_y_percent() + 
   theme_ipsum_rc(grid = "Y") %>% 
   gg_check()
-ggsave("plots/gdp/eopib_growth_d.svg")
-ggsave("plots/gdp/eopib_growth_m.svg", width = 6, height = 6, units = "in")
+ggsave("plots/gdp/eopib_growth.svg", create.dir = TRUE)
 
 
 orden_sexenios <- c(
@@ -113,8 +112,7 @@ growth_annual %>%
   # scale_y_percent() + 
   theme_ipsum_rc(grid = "Y") %>%  
   gg_check()
-ggsave("plots/gdp/eopib_annual_growth_d.svg")
-ggsave("plots/gdp/eopib_annual_growth_m.svg", width = 6, height = 6, units = "in")
+ggsave("plots/gdp/eopib_annual_growth.svg", create.dir = TRUE)
 
 
 
@@ -136,8 +134,7 @@ ggplot(sexenios_gdp, aes(mean_growth/100, fct_rev(sexenio))) +
   scale_x_percent() +
   theme_ipsum_rc(grid="X", base_family = "roboto_condensed") %>%   # Use Roboto Condensed
   gg_check()
-ggsave("plots/gdp/sexenios_d.svg")
-ggsave("plots/gdp/sexenios_m.svg", width = 7, height = 6, units = "in")
+ggsave("plots/gdp/sexenios.svg", create.dir = TRUE)
 
 
 # Fetch the data using the specified series IDs
@@ -161,8 +158,7 @@ ggplot(gdppc, aes(date, gdppc)) +
   scale_y_comma() +
   theme_ipsum_rc(grid="Y") %>%
   gg_check()
-ggsave("plots/gdp/gdppc_d.svg")
-ggsave("plots/gdp/gdppc_m.svg", width = 6, height = 6, units = "in")
+ggsave("plots/gdp/gdppc.svg", create.dir = TRUE)
 
 
 
