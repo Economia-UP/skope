@@ -47,10 +47,10 @@ jobs:
               'ggpattern', 'ggrepel'))"
       
       - name: Set API Key
-        run: 
-          echo "INEGI_API=${{ secrets.INEGI_API }}" >> $GITHUB_ENV
-          echo "BANXICO_API=${{ secrets.BANXICO_API }}" >> $GITHUB_ENV
-          echo "FRED_API=${{ secrets.FRED_API }}" >> $GITHUB_ENV
+        env:
+          INEGI_API: ${{ secrets.INEGI_API }}
+          BANXICO_API: ${{ secrets.BANXICO_API }}
+          FRED_API: ${{ secrets.FRED_API }}
 
 
 
