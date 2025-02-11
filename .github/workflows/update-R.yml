@@ -42,7 +42,7 @@ jobs:
       - name: Install Required R Packages
         run: |
           Rscript -e "install.packages(
-            c('tidyverse', 'tidymodels', 'inegiR', 'siebanxicor', 'fredr', 
+            c('tidyverse', 'tidymodels', 'inegiR', 'siebanxicor', 'fredr', 'hunspell', 
               'hrbrthemes', 'sysfonts', 'svglite', 'forcats', 'lubridate', 'showtext', 
               'ggpattern', 'ggrepel'))"
       
