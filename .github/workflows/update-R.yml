@@ -51,8 +51,8 @@ jobs:
           INEGI_API: ${{ secrets.INEGI_API }}
           BANXICO_API: ${{ secrets.BANXICO_API }}
           FRED_API: ${{ secrets.FRED_API }}
-        run: ls -R
         run: |
+          ls -R  # List files to check if R scripts exist
           for script in $(find r -type f -name "*.R"); do
             echo "Running $script"
             Rscript "$script"
