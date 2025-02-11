@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '*/30 * * * *'  # Runs every 30 minutes
   workflow_dispatch:
+  push:
+    branches: [main, master]
+  pull_request:
+
+permissions: read-all
 
 jobs:
   build:
