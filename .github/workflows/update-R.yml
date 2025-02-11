@@ -11,7 +11,7 @@ on:
 permissions: read-all
 
 jobs:
-  build:
+  update:
     runs-on: macOS-latest
     if: "contains(github.event.head_commit.message, 'initial commit')"
     steps:
