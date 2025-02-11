@@ -3,16 +3,12 @@ rm(list = ls())
 
 # Load the necessary libraries
 library(inegiR)
-library(dplyr)
-library(tidyr)
-library(ggplot2)
+library(tidyverse)
 library(ggpattern)
 library(hrbrthemes)
-library(lubridate)
 library(showtext)
 library(svglite)
 
-library(showtext)
 font_add_google("Roboto Condensed", "Roboto")
 showtext_auto()
 

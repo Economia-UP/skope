@@ -3,17 +3,15 @@ rm(list = ls())
 
 # Load the necessary libraries
 library(inegiR)
-library(dplyr)
-library(tidyr)
-library(ggplot2)
+library(tidyverse)
 library(ggrepel)
 library(ggpattern)
 library(hrbrthemes)
-library(forcats)
-library(lubridate)
-library(sysfonts)
 library(showtext)
 library(svglite)
+
+font_add_google("Roboto Condensed", "Roboto")
+showtext_auto()
 
 # Define your INEGI API key
 inegi.api = Sys.getenv("INEGI_API")
