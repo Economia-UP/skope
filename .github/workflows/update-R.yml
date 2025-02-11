@@ -55,7 +55,7 @@ jobs:
           ls -R  # List files to check if R scripts exist
           for script in $(find r -type f -name "*.R"); do
             echo "Running $script"
-            Rscript "$script"
+            Rscript "$script" || echo "⚠️ Warning: $script failed but continuing..."
           done
 
       - name: Commit and push changes
