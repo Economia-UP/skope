@@ -46,18 +46,12 @@ jobs:
               'hrbrthemes', 'sysfonts', 'svglite', 'forcats', 'lubridate', 'showtext', 
               'ggpattern', 'ggrepel'))"
       
-      - name: Set API Key
+      - name: Set API Key and run R scripts
         env:
           INEGI_API: ${{ secrets.INEGI_API }}
           BANXICO_API: ${{ secrets.BANXICO_API }}
           FRED_API: ${{ secrets.FRED_API }}
-
-
-
-      - name: Debug Files
         run: ls -R
-
-      - name: Run R scripts
         run: |
           for script in $(find r -type f -name "*.R"); do
             echo "Running $script"
