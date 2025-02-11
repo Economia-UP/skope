@@ -43,7 +43,7 @@ jobs:
         run: |
           Rscript -e "install.packages(
             c('tidyverse', 'tidymodels', 'inegiR', 'siebanxicor', 'fredr', 
-              'hrbrthemes', 'sysfonts', 'forcats', 'lubridate', 'showtext', 
+              'hrbrthemes', 'sysfonts', 'svglite', 'forcats', 'lubridate', 'showtext', 
               'ggpattern', 'ggrepel'))"
 
       - name: Debug Files
