@@ -62,6 +62,6 @@ jobs:
         run: |
           git config --local user.name "GitHub Action"
           git config --local user.email "action@github.com"
-          git add data/*.csv plots/*.png
+          git add data/*.csv plots/*.svg
           git commit -m "Auto-update: Data and plots refreshed $(date +'%Y-%m-%d %H:%M')" || echo "No changes to commit"
           git push
