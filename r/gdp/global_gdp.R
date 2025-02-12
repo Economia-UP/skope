@@ -38,7 +38,8 @@ ggplot(growth_clean %>%
     subtitle = "",
     y = "",
     x = "",
-    fill = ""
+    fill = "",
+    caption = "Fuente: OECD."
   ) +
   scale_y_percent(breaks = seq(min(growth_clean$obsValue), max(growth_clean$obsValue), by = 1/100)) +
   scale_fill_manual(values = c("#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3", "#a6d854",
