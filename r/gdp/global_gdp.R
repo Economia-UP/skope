@@ -39,7 +39,7 @@ ggplot(growth_clean %>%
     y = "",
     x = "",
     fill = "",
-    caption = paste("Fuente: OECD. Última actualización", Sys.Date())
+    caption = paste("Fuente: OECD. Última actualización", format(Sys.time(), '%d %b, %Y'))
   ) +
   scale_y_percent(breaks = seq(min(growth_clean$obsValue), max(growth_clean$obsValue), by = 1/100)) +
   scale_fill_manual(values = c("#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3", "#a6d854",
@@ -48,3 +48,5 @@ ggplot(growth_clean %>%
   theme_ipsum_rc(grid = "Y")
 
 ggsave("plots/gdp/oecd_gdp_growth.svg", width = 1200, height = 900, units = "px", dpi = 150,create.dir = TRUE)
+
+

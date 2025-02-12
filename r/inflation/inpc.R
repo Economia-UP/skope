@@ -80,7 +80,7 @@ ggplot(df, aes(date, values/100, color = indicator)) +
         y = "",
         x = "Último dato: enero 2025.",
         color = "",
-        caption = "Fuente: INEGI") +
+        caption = paste("Fuente: INEGI. Última actualización", format(Sys.time(), '%d %b, %Y'))) +
   scale_y_percent(breaks = seq(min(df$values)/100, max(df$values)/100,
                                by = 0.01)) +
   scale_x_date(breaks = seq(as.Date(min(df$date)), 
@@ -154,7 +154,7 @@ ggplot(sub, aes(date, values / 100, color = indicator)) +
     y = "",
     x = "Último dato: enero 2025.",
     color = "",
-    caption = "Fuente: INEGI"
+    caption = paste("Fuente: INEGI. Última actualización", format(Sys.time(), '%d %b, %Y'))
   ) +
   scale_color_manual(values = c("#970639", "#043574", "black")) +
   theme_ipsum_rc(grid = "Y") +  # hrbrthemes disables minor grid by default
