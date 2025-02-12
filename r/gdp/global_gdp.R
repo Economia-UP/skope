@@ -6,6 +6,9 @@ library(hrbrthemes)
 library(showtext)
 library(svglite)
 
+font_add_google("Roboto Condensed", "Roboto")
+showtext_auto()
+
 url <- "https://sdmx.oecd.org/public/rest/data/OECD.SDD.NAD,DSD_NAMAIN1@DF_QNA_EXPENDITURE_GROWTH_OECD,1.0/A..AUS+AUT+BEL+CAN+CHL+COL+CRI+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+ISR+ITA+JPN+KOR+LVA+LTU+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+G7+G20+EA20+EU27_2020+OECD+OECDE+ARG+BRA+CHN+IND+IDN+RUS+SAU+ZAF+NAFTA...B1GQ......G1.?dimensionAtObservation=AllDimensions"
 growth <- readSDMX(url) %>% 
   as.data.frame()
@@ -43,4 +46,4 @@ ggplot(growth_clean %>%
                                "#7570b3", "#e7298a", "#66a61e", "#e6ab02", "#a6761d")) +
   theme_ipsum_rc(grid = "Y")
 
-ggsave("plots/gdp/oecd_gdp_growth.svg", width = 1200, height = 900, units = "px", create.dir = TRUE)
+ggsave("plots/gdp/oecd_gdp_growth.svg", width = 1200, height = 900, units = "px", dpi = 150,create.dir = TRUE)
