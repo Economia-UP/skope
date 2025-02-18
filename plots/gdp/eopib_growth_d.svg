@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' width='510.67pt' height='304.67pt' viewBox='0 0 510.67 304.67'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: none;'/>
+<defs>
+  <clipPath id='cpMC4wMHw1MTAuNjd8MC4wMHwzMDQuNjc='>
+    <rect x='0.00' y='0.00' width='510.67' height='304.67' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw1MTAuNjd8MC4wMHwzMDQuNjc=)'>
+</g>
+<defs>
+  <clipPath id='cpNTYuODV8NDgwLjc4fDgzLjQwfDIyMi4yNA=='>
+    <rect x='56.85' y='83.40' width='423.93' height='138.84' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpNTYuODV8NDgwLjc4fDgzLjQwfDIyMi4yNA==)'>
+<polyline points='56.85,206.55 480.78,206.55 ' style='stroke-width: 0.43; stroke: #CCCCCC; stroke-linecap: butt;' />
+<polyline points='56.85,173.40 480.78,173.40 ' style='stroke-width: 0.43; stroke: #CCCCCC; stroke-linecap: butt;' />
+<polyline points='56.85,140.26 480.78,140.26 ' style='stroke-width: 0.43; stroke: #CCCCCC; stroke-linecap: butt;' />
+<polyline points='56.85,107.12 480.78,107.12 ' style='stroke-width: 0.43; stroke: #CCCCCC; stroke-linecap: butt;' />
+<polyline points='76.12,152.16 110.67,143.16 145.60,84.76 180.91,87.72 216.23,113.17 250.77,125.92 285.70,122.36 321.02,158.94 356.33,191.64 391.26,165.19 426.19,185.10 ' style='stroke-width: 2.13; stroke: #970639; stroke-linecap: butt;' />
+<polyline points='426.19,185.10 461.51,220.88 ' style='stroke-width: 2.13; stroke: #970639; stroke-dasharray: 11.38,11.38; stroke-linecap: butt;' />
+</g>
+<g clip-path='url(#cpMC4wMHw1MTAuNjd8MC4wMHwzMDQuNjc=)'>
+<text x='53.98' y='210.63' text-anchor='end' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Roboto Condensed";' textLength='12.95px' lengthAdjust='spacingAndGlyphs'>1%</text>
+<text x='53.98' y='177.49' text-anchor='end' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Roboto Condensed";' textLength='12.95px' lengthAdjust='spacingAndGlyphs'>2%</text>
+<text x='53.98' y='144.35' text-anchor='end' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Roboto Condensed";' textLength='12.95px' lengthAdjust='spacingAndGlyphs'>3%</text>
+<text x='53.98' y='111.21' text-anchor='end' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Roboto Condensed";' textLength='12.95px' lengthAdjust='spacingAndGlyphs'>4%</text>
+<text x='76.12' y='233.27' text-anchor='middle' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Roboto Condensed";' textLength='22.69px' lengthAdjust='spacingAndGlyphs'>2022</text>
+<text x='216.23' y='233.27' text-anchor='middle' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Roboto Condensed";' textLength='22.69px' lengthAdjust='spacingAndGlyphs'>2023</text>
+<text x='356.33' y='233.27' text-anchor='middle' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Roboto Condensed";' textLength='22.69px' lengthAdjust='spacingAndGlyphs'>2024</text>
+<text x='56.85' y='65.74' style='font-size: 13.00px; font-family: "Roboto Condensed";' textLength='79.50px' lengthAdjust='spacingAndGlyphs'>Variación anual</text>
+<text x='56.85' y='42.69' style='font-size: 18.00px; font-weight: bold; font-family: "Roboto Condensed";' textLength='256.51px' lengthAdjust='spacingAndGlyphs'>Crecimiento económico en México*</text>
+<text x='480.78' y='263.18' text-anchor='end' style='font-size: 9.00px; font-family: "Roboto Condensed";' textLength='50.25px' lengthAdjust='spacingAndGlyphs'>Fuente: INEGI </text>
+<text x='480.78' y='272.90' text-anchor='end' style='font-size: 9.00px; font-family: "Roboto Condensed";' textLength='263.73px' lengthAdjust='spacingAndGlyphs'>Dato del último trimestre del 2024 corresponde a la estimación oportuna.*</text>
+</g>
+</svg>
