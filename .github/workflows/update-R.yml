@@ -44,7 +44,7 @@ jobs:
           Rscript -e "install.packages(
             c('tidyverse', 'tidymodels', 'inegiR', 'siebanxicor', 'fredr', 'hunspell', 
               'hrbrthemes', 'sysfonts', 'svglite', 'forcats', 'lubridate', 'showtext', 
-              'ggpattern', 'ggrepel', 'rsdmx', 'plotly'))"
+              'ggpattern', 'ggrepel', 'rsdmx', 'plotly', 'htmlwidgets'))"
       
       - name: Set API Key and run R scripts
         env:
