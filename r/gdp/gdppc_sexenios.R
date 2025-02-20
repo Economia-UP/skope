@@ -80,5 +80,5 @@ ggplot(sexenios_gdppc, aes(mean_gdppc, fct_rev(sexenio))) +
   scale_x_comma() +
   theme_ipsum_rc(grid="Y") %>%
   gg_check()
-ggsave("plots/gdp/gdppc_sexenio.png",  width = 1200, height = 900, units = "px", dpi = 300, create.dir = TRUE)
+ggsave("plots/gdp/gdppc_sexenio.png",  width = 1200, height = 800, units = "px", dpi = 150, create.dir = TRUE)
 
