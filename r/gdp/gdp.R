@@ -134,7 +134,7 @@ ggplot(sexenios_gdp, aes(mean_growth/100, fct_rev(sexenio))) +
   scale_x_percent() +
   theme_ipsum_rc(grid="X", base_family = "roboto_condensed") %>%   # Use Roboto Condensed
   gg_check()
-ggsave("plots/gdp/sexenios.svg", create.dir = TRUE)
+ggsave("plots/gdp/gdp.png",  width = 1200, height = 900, units = "px", dpi = 300, create.dir = TRUE)
 
 
 # Fetch the data using the specified series IDs
@@ -158,7 +158,7 @@ ggplot(gdppc, aes(date, gdppc)) +
   scale_y_comma() +
   theme_ipsum_rc(grid="Y") %>%
   gg_check()
-ggsave("plots/gdp/gdppc.svg",  width = 1200, height = 900, units = "px", dpi = 150, create.dir = TRUE)
+ggsave("plots/gdp/gdppc.png",  width = 1200, height = 900, units = "px", dpi = 300, create.dir = TRUE)
 
 
 

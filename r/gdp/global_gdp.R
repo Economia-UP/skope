@@ -1,3 +1,4 @@
+print("global_gdp.R")
 rm(list = ls())
 
 library(tidyverse)
