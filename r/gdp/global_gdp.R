@@ -58,18 +58,18 @@ ggsave("plots/gdp/oecd_gdp_growth.png", width = 1200, height = 800, units = "px"
 
 
 # Necessary for interactive plots iframe
-ggplotly(tooltip = "none") %>%
-  # Recover caption
-  layout(annotations = list(
-      x = 1,  # Horizontal position (centered)
-      y = -0.2, # Vertical position (below the plot)
-      text = paste("Fuente: OECD. Última actualización", format(Sys.time(), '%d %b, %Y')),  # The caption text
-      showarrow = FALSE,  # No arrow pointing to the caption
-      xref = 'paper',  # Use paper coordinates (relative to the plot's paper size)
-      yref = 'paper'   # Use paper coordinates for the caption position
-    )) %>% 
-  config(displayModeBar = FALSE) %>% 
-  saveWidget(file = "plots/gdp/oecd_gdp_growth.html", selfcontained = TRUE)
+# ggplotly(tooltip = "none") %>%
+#   # Recover caption
+#   layout(annotations = list(
+#       x = 1,  # Horizontal position (centered)
+#       y = -0.2, # Vertical position (below the plot)
+#       text = paste("Fuente: OECD. Última actualización", format(Sys.time(), '%d %b, %Y')),  # The caption text
+#       showarrow = FALSE,  # No arrow pointing to the caption
+#       xref = 'paper',  # Use paper coordinates (relative to the plot's paper size)
+#       yref = 'paper'   # Use paper coordinates for the caption position
+#     )) %>% 
+#   config(displayModeBar = FALSE) %>% 
+#   saveWidget(file = "plots/gdp/oecd_gdp_growth.html", selfcontained = TRUE)
 
 
 
