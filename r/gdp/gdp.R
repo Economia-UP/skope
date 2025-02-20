@@ -112,7 +112,7 @@ growth_annual %>%
   # scale_y_percent() + 
   theme_ipsum_rc(grid = "Y") %>%  
   gg_check()
-ggsave("plots/gdp/eopib_annual_growth.svg",  width = 1200, height = 900, units = "px", dpi = 150, create.dir = TRUE)
+ggsave("plots/gdp/eopib_annual_growth.png",  width = 1200, height = 900, units = "px", dpi = 300, create.dir = TRUE)
 
 
 

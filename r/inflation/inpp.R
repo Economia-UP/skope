@@ -8,7 +8,6 @@ library(ggrepel)
 library(ggpattern)
 library(hrbrthemes)
 library(showtext)
-library(svglite)
 
 font_add_google("Roboto Condensed", "Roboto")
 showtext_auto()
@@ -91,5 +90,5 @@ ggplot(serie, aes(date, pc/100, color = indicator)) +
   theme_ipsum_rc(grid="Y") +
   theme(legend.position="bottom") %>%   # Use Roboto Condensed
   gg_check()
-ggsave("plots/inflation/inpp.svg",  width = 1200, height = 900, units = "px", dpi = 150, create.dir = TRUE)
+ggsave("plots/inflation/inpp.png",  width = 1200, height = 900, units = "px", dpi = 300, create.dir = TRUE)
 
