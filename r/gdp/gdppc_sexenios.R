@@ -16,14 +16,14 @@ showtext_auto()
 inegi.api = Sys.getenv("INEGI_API")
 
 orden_sexenios <- c(
-  "Miguel de la Madrid (1982-1988)",
-  "Carlos Salinas (1988-1994)",
-  "Ernesto Zedillo (1994-2000)",
-  "Vicente Fox (2000-2006)",
-  "Felipe Calderón (2006-2012)",
-  "Enrique Peña Nieto (2012-2018)",
-  "Andrés Manuel López Obrador (2018-2024)",
-  "Claudia Sheinbaum Pardo (2024-2030)"
+  "MMH \n(1982-1988)",
+  "CSG \n(1988-1994)",
+  "EZPL \n(1994-2000)",
+  "VFQ \n(2000-2006)",
+  "FCH \n(2006-2012)",
+  "EPN \n(2012-2018)",
+  "AMLO \n(2018-2024)",
+  "CSP \n(2024-2030)"
 )
 
 sexenios_gdp <- gdp %>%
@@ -39,14 +39,14 @@ gdp <- inegi_series(series = "736181", token = inegi.api) %>%
   # mutate(growth  = (values/lag(values) - 1)*100) %>% 
   mutate(year = year(date),  # Extrae el año de la fecha
          sexenio = case_when(
-           year > 1982 & year <= 1988 ~ "Miguel de la Madrid (1982-1988)",
-           year > 1988 & year <= 1994 ~ "Carlos Salinas (1988-1994)",
-           year > 1994 & year <= 2000 ~ "Ernesto Zedillo (1994-2000)",
-           year > 2000 & year <= 2006 ~ "Vicente Fox (2000-2006)",
-           year > 2006 & year <= 2012 ~ "Felipe Calderón (2006-2012)",
-           year > 2012 & year <= 2018 ~ "Enrique Peña Nieto (2012-2018)",
-           year > 2018 & year <= 2024 ~ "Andrés Manuel López Obrador (2018-2024)",
-           year > 2024 & year <= 2030 ~ "Claudia Sheinbaum Pardo (2024-2030)",
+           year > 1982 & year <= 1988 ~ "MMH \n(1982-1988)",
+           year > 1988 & year <= 1994 ~ "CSG \n(1988-1994)",
+           year > 1994 & year <= 2000 ~ "EZPL \n(1994-2000)",
+           year > 2000 & year <= 2006 ~ "VFQ \n(2000-2006)",
+           year > 2006 & year <= 2012 ~ "FCH \n(2006-2012)",
+           year > 2012 & year <= 2018 ~ "EPN \n(2012-2018)",
+           year > 2018 & year <= 2024 ~ "AMLO \n(2018-2024)",
+           year > 2024 & year <= 2030 ~ "CSP \n(2024-2030)",
            TRUE ~ "Otro"
          ),
          sexenio = factor(sexenio, levels = orden_sexenios), # Ordenar como factor
@@ -66,19 +66,15 @@ sexenios_gdppc <- gdppc %>%
   filter(!is.na(sexenio)) %>% 
   arrange(sexenio)
 
-
-
-
 # Crecimiento económico per cápita
-ggplot(sexenios_gdppc, aes(mean_gdppc, fct_rev(sexenio))) +
+ggplot(sexenios_gdppc, aes(sexenio, mean_gdppc)) +
   geom_col(fill = "#970639") +
-  labs( title = "PIB per cápita en México \npromedio por sexenio",
-        subtitle = "Moneda nacional",
+  labs( title = "PIB per cápita en México promedio por sexenio",
+        subtitle = "Moneda nacional (MXN)",
         y = "",
         x = "",
         caption = "Fuente: INEGI") +
-  scale_x_comma() +
-  theme_ipsum_rc(grid="Y") %>%
-  gg_check()
+  scale_y_comma(breaks = seq(0, max(sexenios_gdppc$mean_gdppc), 25000)) +
+  theme_ipsum_rc(grid="Y")
 ggsave("plots/gdp/gdppc_sexenio.png",  width = 1200, height = 800, units = "px", dpi = 150, create.dir = TRUE)
 
