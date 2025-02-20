@@ -7,7 +7,7 @@ library(tidyverse)
 library(ggpattern)
 library(hrbrthemes)
 library(showtext)
-library(svglite)
+
 
 font_add_google("Roboto Condensed", "Roboto")
 showtext_auto()
@@ -27,7 +27,7 @@ eopib %>%
               arrange(date) %>% 
               slice(1:(n() - 1)), 
             aes(date, values/100), 
-            size = 1, color = "#970639") +
+            linewidth = 1, color = "#970639") +
   geom_line(data = eopib %>% 
               filter(date >= "2022-01-01") %>% 
               arrange(desc(date)) %>% 

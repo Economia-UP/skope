@@ -1,4 +1,4 @@
-print("gdp.R")
+print("gdppc_sexenios.R")
 rm(list = ls())
 
 # Load the necessary libraries
@@ -15,6 +15,7 @@ showtext_auto()
 # Define your INEGI API key
 inegi.api = Sys.getenv("INEGI_API")
 
+
 orden_sexenios <- c(
   "MMH \n(1982-1988)",
   "CSG \n(1988-1994)",
@@ -25,12 +26,6 @@ orden_sexenios <- c(
   "AMLO \n(2018-2024)",
   "CSP \n(2024-2030)"
 )
-
-sexenios_gdp <- gdp %>%
-  group_by(sexenio) %>%
-  reframe(mean_growth = mean(values, na.rm = TRUE)) %>% 
-  filter(!is.na(sexenio)) %>% 
-  arrange(sexenio)
 
 # Fetch the data using the specified series IDs
 gdp <- inegi_series(series = "736181", token = inegi.api) %>% 
@@ -51,6 +46,12 @@ gdp <- inegi_series(series = "736181", token = inegi.api) %>%
          ),
          sexenio = factor(sexenio, levels = orden_sexenios), # Ordenar como factor
   ) 
+
+sexenios_gdp <- gdp %>%
+  group_by(sexenio) %>%
+  reframe(mean_growth = mean(values, na.rm = TRUE)) %>% 
+  filter(!is.na(sexenio)) %>% 
+  arrange(sexenio)
 
 pop <- inegi_series_multiple(series = "289242", token = inegi.api) %>% 
   select(date, date_shortcut, values)
