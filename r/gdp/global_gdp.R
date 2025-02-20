@@ -24,16 +24,17 @@ names(growth)
 growth_clean <- growth %>% 
   reframe(obsTime, REF_AREA, obsValue) %>% 
   arrange(desc(obsTime), REF_AREA) %>% 
-  mutate(fill_color = ifelse(REF_AREA == "MEX", "#931336", "grey"))
+  mutate(
+    REF_AREA = ifelse(REF_AREA == "EU27_2020", "UE*", REF_AREA),
+    fill_color = ifelse(REF_AREA == "MEX", "#931336", "grey")) %>% 
+  # Filtering dataframe
+  filter(obsTime == max(obsTime),
+         REF_AREA %in% c("ARG", "BRA", "CAN", "CHL", "CHN", "COL", "ESP", "FRA", "GBR", "IND", "ITA", "JPN", "KOR", "MEX", "UE*", "USA"))
 
 # Note! Data will be updated on February 20, 2025
 
 # Create graph
-ggplot(growth_clean %>% 
-         # Filtering dataframe
-         filter(obsTime == max(obsTime),
-                REF_AREA %in% c("ARG", "BRA", "CAN", "CHL", "CHN", "COL", "ESP", "FRA", "GBR", "IND", "ITA", "JPN", "KOR", "MEX", "USA")) %>% 
-         arrange(desc(obsValue)),  # Arrange in descending order
+ggplot(growth_clean,  # Arrange in descending order
        # Continue ggplot
        aes(obsValue/100, reorder(REF_AREA, obsValue), fill = fill_color)) +  # Reorder with negative obsValue
   geom_col(position = "dodge") + 
@@ -44,7 +45,7 @@ ggplot(growth_clean %>%
     y = "",
     x = "",
     fill = "",
-    caption = paste("Fuente: OECD. Última actualización", format(Sys.time(), '%d %b, %Y'))
+    caption = paste("* UE (Unión Europea)\nFuente: OECD. Última actualización", format(Sys.time(), '%d %b, %Y'))
   ) +
   scale_x_percent(breaks = seq(min(growth_clean$obsValue)/100, max(growth_clean$obsValue)/100, by = 1/100)) +
   scale_fill_identity() +
