@@ -54,7 +54,7 @@ ggplot(growth_clean %>%
   )
 
 
-ggsave("plots/gdp/oecd_gdp_growth.png", width = 1200, height = 900, units = "px", dpi = 300, create.dir = TRUE)
+ggsave("plots/gdp/oecd_gdp_growth.png", width = 1200, height = 800, units = "px", dpi = 150, create.dir = TRUE)
 
 
 # Necessary for interactive plots iframe
