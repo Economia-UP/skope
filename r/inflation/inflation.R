@@ -6,6 +6,7 @@ library(inegiR)
 library(tidyverse)
 library(hrbrthemes)
 library(showtext)
+library(svglite)
 
 font_add_google("Roboto Condensed", "Roboto")
 showtext_auto()
