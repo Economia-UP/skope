@@ -87,7 +87,24 @@ ggplot(serie, aes(date, pc/100, color = indicator)) +
                             by = "1 year"),
                date_labels = "%Y") +  # Format labels as only the year
   scale_color_manual(values = c("#970639", "#043574", "#015b51")) +
-  theme_ipsum_rc(grid="Y") +
+  theme_ipsum_rc(
+    grid = "Y",
+    base_size = 18,  # Larger base size for readability
+    plot_title_size = 32,  # H1-sized title
+    plot_title_face = "bold",  # Bold title
+    plot_title_margin = 15,  # More space around title
+    subtitle_size = 24,  # Larger subtitle
+    subtitle_margin = 20,  # More space around subtitle
+    caption_size = 18,  # Larger caption
+    caption_margin = 15,  # More space around caption
+    axis_text_size = 16,  # Larger axis text
+    axis_title_size = 20,  # Larger axis labels
+    plot_margin = margin(30, 30, 30, 30),
+    grid_col = "#482626",
+    axis_col = "#cccccc",
+    axis = FALSE,
+    ticks = FALSE
+  ) +
   theme(legend.position="bottom") %>%   # Use Roboto Condensed
   gg_check()
 ggsave("plots/inflation/inpp.png",  width = 8, height = 6, dpi = 150, create.dir = TRUE)
