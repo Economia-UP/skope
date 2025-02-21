@@ -49,13 +49,13 @@ ggplot(growth_clean,  # Arrange in descending order
   ) +
   scale_x_percent(breaks = seq(min(growth_clean$obsValue)/100, max(growth_clean$obsValue)/100, by = 1/100)) +
   scale_fill_identity() +
-  theme_ipsum_rc(grid = "Y") +
+  theme_ipsum_rc(grid = "Y", base_size = 18, plot_title_size = 32) +
   theme(
     legend.position = "none"
   )
 
 
-ggsave("plots/gdp/oecd_gdp_growth.png", width = 1200, height = 800, units = "px", dpi = 150, create.dir = TRUE)
+ggsave("plots/gdp/oecd_gdp_growth.png", width = 8, height = 6, dpi = 150, create.dir = TRUE)
 
 
 # Necessary for interactive plots iframe

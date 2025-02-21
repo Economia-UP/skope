@@ -76,6 +76,6 @@ ggplot(sexenios_gdppc, aes(sexenio, mean_gdppc)) +
         x = "",
         caption = "Fuente: INEGI") +
   scale_y_comma(breaks = seq(0, max(sexenios_gdppc$mean_gdppc), 25000)) +
-  theme_ipsum_rc(grid="Y")
-ggsave("plots/gdp/gdppc_sexenio.png",  width = 1200, height = 800, units = "px", dpi = 150, create.dir = TRUE)
+  theme_ipsum_rc(grid = "Y", base_size = 18, plot_title_size = 32) +
+ggsave("plots/gdp/gdppc_sexenio.png",  width = 8, height = 6, dpi = 150, create.dir = TRUE)
 
