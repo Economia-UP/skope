@@ -10,7 +10,7 @@ library(hrbrthemes)
 library(showtext)
 library(svglite)
 
-font_add_google("Roboto Condensed", "Roboto")
+font_add_google("Rubik", "Rubik")
 showtext_auto()
 
 # Define your INEGI API key
