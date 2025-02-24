@@ -89,8 +89,7 @@ ggplot(df, aes(date, values/100, color = indicator)) +
                date_labels = "%Y") +  # Format labels as only the year
   scale_color_manual(values = c("#970639", "#043574")) +
   theme_ipsum_rc(grid = "Y", base_family = "Rubik") +
-  theme(legend.position="bottom") %>%   # Use Roboto Condensed
-  gg_check()
+  theme(legend.position="bottom")
 ggsave("plots/inflation/inpc.svg",  width = 8, height = 6, create.dir = TRUE)
 
 # Fetch the data using the specified series IDs (Subyacente)
