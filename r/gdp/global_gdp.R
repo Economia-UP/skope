@@ -62,7 +62,9 @@ ggsave("plots/gdp/oecd_gdp_growth.svg", width = 8, height = 6, create.dir = TRUE
 # Necessary for interactive plots iframe
 ggplotly(tooltip = "none") %>%
   # Recover caption
-  layout(annotations = list(
+  layout(
+    font = list(family = "Roboto Condensed"),  # Explicitly define font for Plotly
+    annotations = list(
       x = 1,  # Horizontal position (centered)
       y = -0.2, # Vertical position (below the plot)
       text = paste("* UE (Unión Europea)\nFuente: OECD. Última actualización", format(Sys.time(), '%d %b, %Y')),  # The caption text
