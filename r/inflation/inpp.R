@@ -90,5 +90,5 @@ ggplot(serie, aes(date, pc/100, color = indicator)) +
   scale_color_manual(values = c("#970639", "#043574", "#015b51")) +
   theme_ipsum_rc(grid = "Y", base_family = "Rubik") +
   theme(legend.position="bottom")
-ggsave("plots/inflation/inpp.svg",  width = 8, height = 7, create.dir = TRUE)
+ggsave("plots/inflation/inpp.svg",  width = 8, height = 6, create.dir = TRUE)
 

@@ -57,7 +57,7 @@ ggplot(growth_clean,  # Arrange in descending order
   )
 
 
-ggsave("plots/gdp/oecd_gdp_growth.svg", width = 8, height = 7, create.dir = TRUE)
+ggsave("plots/gdp/oecd_gdp_growth.svg", width = 8, height = 6, create.dir = TRUE)
 
 
 # # Necessary for interactive plots iframe
