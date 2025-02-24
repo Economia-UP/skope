@@ -4,6 +4,8 @@ rm(list=ls())
 library(siebanxicor)
 library(tidyverse)
 library(hrbrthemes)
+library(showtext)
+library(svglite)
 
 font_add_google("Rubik", "Rubik")
 showtext_auto()
