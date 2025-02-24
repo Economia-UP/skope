@@ -78,5 +78,5 @@ ggplot(sexenios_gdppc, aes(sexenio, mean_gdppc)) +
   scale_y_comma(breaks = seq(0, max(sexenios_gdppc$mean_gdppc), 25000)) +
   theme_ipsum_rc(grid = "Y", base_family = "Rubik")
   
-ggsave("plots/gdp/gdppc_sexenio.svg",  width = 8, height = 6, create.dir = TRUE)
+ggsave("plots/gdp/gdppc_sexenio.svg",  width = 8, height = 7, create.dir = TRUE)
 

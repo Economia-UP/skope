@@ -52,7 +52,7 @@ ggplot(series.long, aes(value/100, date, color = index, group = date)) +
   theme(
     legend.position = "bottom"
   )
-ggsave("plots/inflation/expectedinflation.svg",  width = 8, height = 6, create.dir = TRUE)
+ggsave("plots/inflation/expectedinflation.svg",  width = 8, height = 7, create.dir = TRUE)
 
 
 # Specify the output directory and file name

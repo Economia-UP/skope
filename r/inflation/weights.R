@@ -91,7 +91,7 @@ ggplot(series.plot, aes(date, value/100, fill = component)) +
   theme(
     legend.position = "bottom"
   )
-ggsave("plots/inflation/inpc_components.svg",  width = 8, height = 6, create.dir = TRUE)
+ggsave("plots/inflation/inpc_components.svg",  width = 8, height = 7, create.dir = TRUE)
 
 # Specify the output directory and file name
 write.csv(series.incidence, "data/inflation/weights.csv", row.names = FALSE)

@@ -90,7 +90,7 @@ ggplot(df, aes(date, values/100, color = indicator)) +
   scale_color_manual(values = c("#970639", "#043574")) +
   theme_ipsum_rc(grid = "Y", base_family = "Rubik") +
   theme(legend.position="bottom")
-ggsave("plots/inflation/inpc.svg",  width = 8, height = 6, create.dir = TRUE)
+ggsave("plots/inflation/inpc.svg",  width = 8, height = 7, create.dir = TRUE)
 
 # Fetch the data using the specified series IDs (Subyacente)
 idSeries2 <- c("910407", "910408", "910409")  # Your INEGI series IDs
@@ -162,4 +162,4 @@ ggplot(sub, aes(date, values / 100, color = indicator)) +
     legend.position = "bottom",
     panel.grid.minor = element_line(color = "gray80", linetype = "dashed")  # Enable minor grid lines
   ) 
-ggsave("plots/inflation/inpc_sub.svg",  width = 8, height = 6, create.dir = TRUE)
+ggsave("plots/inflation/inpc_sub.svg",  width = 8, height = 7, create.dir = TRUE)
