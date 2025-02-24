@@ -10,8 +10,9 @@ library(svglite)
 library(htmlwidgets)
 
 
-font_add_google("Roboto Condensed", "Roboto")
+font_add_google("Rubik", "Rubik")
 showtext_auto()
+
 
 url <- "https://sdmx.oecd.org/public/rest/data/OECD.SDD.NAD,DSD_NAMAIN1@DF_QNA_EXPENDITURE_GROWTH_OECD,/A..IRL+ARG+BRA+CHN+IND+IDN+RUS+SAU+ZAF+AUS+AUT+BEL+CAN+CHE+CHL+COL+CRI+CZE+DEU+DNK+ESP+FIN+EST+FRA+GBR+GRC+HUN+ISL+LTU+ISR+ITA+JPN+KOR+LUX+LVA+MEX+NLD+NOR+NZL+POL+PRT+SVK+SVN+SWE+TUR+USA+OECD+G20+G7+USMCA+OECDE+EA20+EU27_2020...B1GQ......GY.?startPeriod=2020"
 growth <- readSDMX(url) %>% 
@@ -42,7 +43,7 @@ ggplot(growth_clean,  # Arrange in descending order
   # Labels
   labs(
     title = paste("Crecimiento económico por país", max(growth_clean$obsTime)),
-    subtitle = "",
+    # subtitle = "",
     y = "",
     x = "",
     fill = "",
@@ -50,7 +51,7 @@ ggplot(growth_clean,  # Arrange in descending order
   ) +
   scale_x_percent(breaks = seq(min(growth_clean$obsValue)/100, max(growth_clean$obsValue)/100, by = 1/100)) +
   scale_fill_identity() +
-  theme_ipsum_rc(grid = "Y") +
+  theme_ipsum_rc(grid = "Y", base_family = "Rubik") +
   theme(
     legend.position = "none"
   )
@@ -59,21 +60,21 @@ ggplot(growth_clean,  # Arrange in descending order
 ggsave("plots/gdp/oecd_gdp_growth.svg", width = 8, height = 6, create.dir = TRUE)
 
 
-# Necessary for interactive plots iframe
-ggplotly(tooltip = "none") %>%
-  # Recover caption
-  layout(
-    font = list(family = "Roboto Condensed"),  # Explicitly define font for Plotly
-    annotations = list(
-      x = 1,  # Horizontal position (centered)
-      y = -0.2, # Vertical position (below the plot)
-      text = paste("* UE (Unión Europea)\nFuente: OECD. Última actualización", format(Sys.time(), '%d %b, %Y')),  # The caption text
-      showarrow = FALSE,  # No arrow pointing to the caption
-      xref = 'paper',  # Use paper coordinates (relative to the plot's paper size)
-      yref = 'paper'   # Use paper coordinates for the caption position
-    )) %>%
-  config(displayModeBar = FALSE) %>%
-  saveWidget(file = "plots/gdp/oecd_gdp_growth.html", selfcontained = TRUE)
+# # Necessary for interactive plots iframe
+# ggplotly(tooltip = "none") %>%
+#   # Recover caption
+#   layout(
+#     font = list(family = "Rubik"),  # Explicitly define font for Plotly
+#     annotations = list(
+#       x = 1,  # Horizontal position (centered)
+#       y = -0.2, # Vertical position (below the plot)
+#       text = paste("* UE (Unión Europea)\nFuente: OECD. Última actualización", format(Sys.time(), '%d %b, %Y')),  # The caption text
+#       showarrow = FALSE,  # No arrow pointing to the caption
+#       xref = 'paper',  # Use paper coordinates (relative to the plot's paper size)
+#       yref = 'paper'   # Use paper coordinates for the caption position
+#     )) %>%
+#   config(displayModeBar = FALSE) %>%
+#   saveWidget(file = "plots/gdp/oecd_gdp_growth.html", selfcontained = TRUE)
 
 
 

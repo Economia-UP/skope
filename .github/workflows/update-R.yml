@@ -24,20 +24,15 @@ jobs:
 
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
-# 
-#       - name: Install System Dependencies (macOS)
-#         run: |
-#           brew install pandoc
-#           brew install pkg-config
-#           brew install cairo
-#           brew install harfbuzz
-#           brew install fribidi
-# 
-#       - name: Install R Dependencies
-#         uses: r-lib/actions/setup-r-dependencies@v2
-#         with:
-#           extra-packages: any::rcmdcheck
-#           needs: check
+
+      - name: Install Rubik Font (macOS)
+        run: |
+          mkdir -p ~/Library/Fonts
+          curl -o ~/Library/Fonts/Rubik-Regular.ttf https://github.com/google/fonts/raw/main/ofl/rubik/Rubik-Regular.ttf
+          curl -o ~/Library/Fonts/Rubik-Bold.ttf https://github.com/google/fonts/raw/main/ofl/rubik/Rubik-Bold.ttf
+          curl -o ~/Library/Fonts/Rubik-Italic.ttf https://github.com/google/fonts/raw/main/ofl/rubik/Rubik-Italic.ttf
+          curl -o ~/Library/Fonts/Rubik-BoldItalic.ttf https://github.com/google/fonts/raw/main/ofl/rubik/Rubik-BoldItalic.ttf
+          ls ~/Library/Fonts  # Check if fonts were installed correctly
 
       - name: Install Required R Packages
         run: |
@@ -45,7 +40,7 @@ jobs:
             c('tidyverse', 'tidymodels', 'inegiR', 'siebanxicor', 'fredr', 'hunspell', 
               'hrbrthemes', 'sysfonts', 'svglite', 'forcats', 'lubridate', 'showtext', 
               'ggpattern', 'ggrepel', 'rsdmx', 'plotly', 'htmlwidgets'))"
-      
+
       - name: Set API Key and run R scripts
         env:
           INEGI_API: ${{ secrets.INEGI_API }}
