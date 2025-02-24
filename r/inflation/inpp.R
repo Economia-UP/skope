@@ -36,7 +36,7 @@ serie <- series %>%
   group_by(indicator) %>% 
   arrange(date) %>% 
   mutate(pc = (values/lag(values, 12) -1)*100) %>% 
-  filter(date >= "2022-01-01")
+  filter(date >= Sys.Date() - years(10))
 
 # Transform the data
 series.wide <- series %>% 
@@ -89,7 +89,6 @@ ggplot(serie, aes(date, pc/100, color = indicator)) +
                date_labels = "%Y") +  # Format labels as only the year
   scale_color_manual(values = c("#970639", "#043574", "#015b51")) +
   theme_ipsum_rc(grid = "Y", base_family = "Rubik") +
-  theme(legend.position="bottom") %>% 
-  gg_check()
+  theme(legend.position="bottom")
 ggsave("plots/inflation/inpp.svg",  width = 8, height = 6, create.dir = TRUE)
 

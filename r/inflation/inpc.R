@@ -43,7 +43,7 @@ df <- series1 %>%
                               "910407" = "Subyacente",
                               "910410" = "No subyacente")) %>% 
   rename(indicator = meta_indicatorid) %>% 
-  filter(date >= "2022-01-01",
+  filter(date >= Sys.Date() - years(10),
          indicator != "No subyacente")
 
 
@@ -122,7 +122,7 @@ sub <- series2 %>%
                               "910409" = "Servicios") %>% 
   factor(levels = c("Total", "Mercancías", "Servicios"))) %>% 
   rename(indicator = meta_indicatorid) %>% 
-  filter(date >= "2022-01-01",
+  filter(date >= Sys.Date() - years(10),
          indicator != "Total")
 
 # Core inflation graph

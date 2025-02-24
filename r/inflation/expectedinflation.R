@@ -1,0 +1,55 @@
+print("mc_expectedinflation.R")
+rm(list=ls())
+
+library(siebanxicor)
+library(tidyverse)
+library(hrbrthemes)
+
+font_add_google("Rubik", "Rubik")
+showtext_auto()
+
+# Define your INEGI API key
+setToken(Sys.getenv("BANXICO_API"))
+
+# Fetch the data using the specified series IDs
+idSeries <- c("SR14195", "SR14196","SR14197") 
+
+# Get the data
+series <- getSeriesData(idSeries)
+med <- getSerieDataFrame(series, "SR14195")
+first <- getSerieDataFrame(series, "SR14196")
+third <- getSerieDataFrame(series, "SR14197")
+
+series.df <- reduce(list(first, med, third), full_join, by = "date") %>% 
+  filter(date >= Sys.Date() - years(1))
+colnames(series.df)[2:4] <- c("Primer cuartil", "Mediana", "Tercer cuartil")
+
+series.long <- series.df %>% 
+  pivot_longer(
+    !date,
+    names_to = "index",
+    values_to = "value"
+  ) %>% 
+  mutate(index = factor(index, levels = c("Primer cuartil", "Mediana", "Tercer cuartil")))
+
+
+ggplot(series.long, aes(value/100, date, color = index, group = date)) +
+  geom_line(color = "grey", linewidth = 1) +
+  geom_point(size = 3) +
+  labs(
+    title = paste("Expectativas de inflación", year(Sys.Date())),
+    subtitle = "Encuestas Sobre las Expectativas de los Especialistas en Economía del \nSector Privado Expectativas de Inflación para los Próximos 12 Meses",
+    x = "",
+    y = "",
+    color = "",
+    caption = paste("Fuente: Banxico. Última actualización", format(Sys.time(), '%d %b, %Y'))
+  ) +
+  scale_x_percent() + 
+  scale_color_manual(values=c("#009076", "#ffe59c", "#c71e1d")) + 
+  theme_ipsum_rc(base_family = "Rubik") +
+  theme(
+    legend.position = "bottom"
+  )
+
+# Specify the output directory and file name
+write.csv(series.df, "data/mc_expectedinflation.csv", row.names = FALSE)
