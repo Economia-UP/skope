@@ -31,7 +31,7 @@ growth_clean <- growth %>%
     fill_color = ifelse(REF_AREA == "MEX", "#931336", "grey")) %>% 
   # Filtering dataframe
   filter(obsTime == max(obsTime),
-         REF_AREA %in% c("ARG", "BRA", "CAN", "CHL", "CHN", "COL", "ESP", "FRA", "GBR", "IND", "ITA", "JPN", "KOR", "UE*", "USA"))
+         REF_AREA %in% c("ARG", "BRA", "CAN", "CHL", "CHN", "COL", "ESP", "FRA", "GBR", "IND", "ITA", "JPN", "KOR", "MEX", "UE*", "USA"))
 
 # Note! Data will be updated on February 20, 2025
 
