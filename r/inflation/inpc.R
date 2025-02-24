@@ -65,7 +65,7 @@ ggplot(df, aes(date, values/100, color = indicator)) +
   ggrepel::geom_text_repel(
     data = df %>% group_by(indicator) %>% filter(date == max(date)),
     aes(label = scales::percent(values/100, accuracy = 0.1)),
-    nudge_x = 40,  # Desplazamiento base
+    nudge_x = 50,  # Desplazamiento base
     direction = "y",  # Solo mueve en eje Y
     min.segment.length = Inf,  # Elimina líneas de conexión
     hjust = -0.3,

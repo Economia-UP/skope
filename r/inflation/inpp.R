@@ -65,10 +65,10 @@ ggplot(serie, aes(date, pc/100, color = indicator)) +
   ggrepel::geom_text_repel(
     data = serie %>% group_by(indicator) %>% filter(date == max(date)),
     aes(label = scales::percent(pc/100, accuracy = 0.1)),
-    nudge_x = 40,  # Desplazamiento base
+    nudge_x = 50,  # Desplazamiento base
     direction = "y",  # Solo mueve en eje Y
     min.segment.length = Inf,  # Elimina líneas de conexión
-    hjust = -0.3,
+    hjust = -0.2,
     vjust = 0.5,
     size = 3.5,
     box.padding = 0.2,  # Espacio alrededor de etiquetas
