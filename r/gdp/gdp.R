@@ -41,9 +41,7 @@ eopib %>%
        x = "",
        caption = "Fuente: INEGI \nDato del último trimestre del 2024 corresponde a la estimación oportuna.*") +
   scale_y_percent() + 
-  theme_ipsum_rc(grid = "Y",
-                 base_family = "Rubik") %>% 
-  gg_check()
+  theme_ipsum_rc(grid = "Y", base_family = "Rubik")
 ggsave("plots/gdp/eopib_growth.png",  width = 8, height = 6, dpi = 150, create.dir = TRUE)
 
 
@@ -112,8 +110,7 @@ growth_annual %>%
                                ceiling(max(growth_annual$growth / 100)), 
                                by = 0.02)) + 
   # scale_y_percent() + 
-  theme_ipsum_rc(grid = "Y",
-                 base_family = "Rubik") %>%  
+  theme_ipsum_rc(grid = "Y", base_family = "Rubik")
 ggsave("plots/gdp/eopib_annual_growth.svg",  width = 8, height = 6, create.dir = TRUE)
 
 
@@ -134,7 +131,7 @@ ggplot(sexenios_gdp, aes(mean_growth/100, fct_rev(sexenio))) +
         x = "",
         caption = "Fuente: INEGI\nDato del último trimestre del 2024 corresponde a la estimación oportuna.*") +
   scale_x_percent() +
-  theme_ipsum_rc(grid="X", base_family = "Rubik") %>%   # Use Rubik
+  theme_ipsum_rc(grid="X", base_family = "Rubik") # Use Rubik
 ggsave("plots/gdp/gdp.svg",  width = 8, height = 6, create.dir = TRUE)
 
 
@@ -157,9 +154,7 @@ ggplot(gdppc, aes(date, gdppc)) +
         x = "",
         caption = "Fuente: INEGI") +
   scale_y_comma() +
-    theme_ipsum_rc(
-    grid = "Y", base_family = "Rubik") %>%
-  gg_check()
+    theme_ipsum_rc(grid = "Y", base_family = "Rubik")
 ggsave("plots/gdp/gdppc.svg",  width = 8, height = 6, create.dir = TRUE)
 
 
