@@ -46,7 +46,9 @@ ggplot(series.long, aes(value/100, date, color = index, group = date)) +
     color = "",
     caption = paste("Fuente: Banxico. Última actualización", format(Sys.time(), '%d %b, %Y'))
   ) +
-  scale_x_percent() + 
+  scale_x_percent(breaks = seq(min(series.long$value, na.rm = TRUE), 
+                                 max(series.long$value, na.rm = TRUE), 
+                                 by = 0.005))  + 
   scale_color_manual(values=c("#009076", "#ffe59c", "#c71e1d")) + 
   theme_ipsum_rc(base_family = "Rubik") +
   theme(
