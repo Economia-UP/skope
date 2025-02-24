@@ -9,7 +9,7 @@ library(hrbrthemes)
 library(showtext)
 library(svglite)
 
-font_add_google("Roboto Condensed", "Roboto")
+font_add_google("Rubik", "Rubik")
 showtext_auto()
 
 # Define your INEGI API key
@@ -76,7 +76,7 @@ ggplot(sexenios_gdppc, aes(sexenio, mean_gdppc)) +
         x = "",
         caption = "Fuente: INEGI") +
   scale_y_comma(breaks = seq(0, max(sexenios_gdppc$mean_gdppc), 25000)) +
-  theme_ipsum_rc(grid = "Y")
+  theme_ipsum_rc(grid = "Y", base_family = "Rubik")
   
 ggsave("plots/gdp/gdppc_sexenio.svg",  width = 8, height = 6, create.dir = TRUE)
 

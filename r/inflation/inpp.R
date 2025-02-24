@@ -88,8 +88,8 @@ ggplot(serie, aes(date, pc/100, color = indicator)) +
                             by = "1 year"),
                date_labels = "%Y") +  # Format labels as only the year
   scale_color_manual(values = c("#970639", "#043574", "#015b51")) +
-  theme_ipsum_rc(grid = "Y") +
-  theme(legend.position="bottom") %>%   # Use Roboto Condensed
+  theme_ipsum_rc(grid = "Y", base_family = "Rubik") +
+  theme(legend.position="bottom") %>% 
   gg_check()
 ggsave("plots/inflation/inpp.svg",  width = 8, height = 6, create.dir = TRUE)
 

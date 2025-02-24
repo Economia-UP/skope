@@ -88,7 +88,7 @@ ggplot(df, aes(date, values/100, color = indicator)) +
                             by = "1 year"),
                date_labels = "%Y") +  # Format labels as only the year
   scale_color_manual(values = c("#970639", "#043574")) +
-  theme_ipsum_rc(grid = "Y") +
+  theme_ipsum_rc(grid = "Y", base_family = "Rubik") +
   theme(legend.position="bottom") %>%   # Use Roboto Condensed
   gg_check()
 ggsave("plots/inflation/inpc.svg",  width = 8, height = 6, create.dir = TRUE)
@@ -157,10 +157,9 @@ ggplot(sub, aes(date, values / 100, color = indicator)) +
     caption = paste("Fuente: INEGI. Última actualización", format(Sys.time(), '%d %b, %Y'))
   ) +
   scale_color_manual(values = c("#970639", "#043574", "black")) +
-  theme_ipsum_rc(grid = "Y") +
+  theme_ipsum_rc(grid = "Y", base_family = "Rubik") +
   theme(
     legend.position = "bottom",
     panel.grid.minor = element_line(color = "gray80", linetype = "dashed")  # Enable minor grid lines
   ) %>% 
-  gg_check()
 ggsave("plots/inflation/inpc_sub.svg",  width = 8, height = 6, create.dir = TRUE)
