@@ -160,5 +160,5 @@ ggplot(sub, aes(date, values / 100, color = indicator)) +
   theme(
     legend.position = "bottom",
     panel.grid.minor = element_line(color = "gray80", linetype = "dashed")  # Enable minor grid lines
-  ) %>% 
+  ) 
 ggsave("plots/inflation/inpc_sub.svg",  width = 8, height = 6, create.dir = TRUE)
