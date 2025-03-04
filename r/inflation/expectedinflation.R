@@ -1,4 +1,4 @@
-print("mc_expectedinflation.R")
+print("expectedinflation.R")
 rm(list=ls())
 
 library(siebanxicor)
@@ -56,4 +56,4 @@ ggsave("plots/inflation/expectedinflation.svg",  width = 8, height = 6, create.d
 
 
 # Specify the output directory and file name
-write.csv(series.df, "data/mc_expectedinflation.csv", row.names = FALSE)
+write.csv(series.df, "data/inflation/expectedinflation.csv", row.names = FALSE)
