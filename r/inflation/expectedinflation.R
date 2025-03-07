@@ -23,7 +23,7 @@ first <- getSerieDataFrame(series, "SR14196")
 third <- getSerieDataFrame(series, "SR14197")
 
 series.df <- reduce(list(first, med, third), full_join, by = "date") %>% 
-  filter(date >= Sys.Date() - years(1))
+  filter(date >= Sys.Date() - years(2))
 colnames(series.df)[2:4] <- c("Primer cuartil", "Mediana", "Tercer cuartil")
 
 series.long <- series.df %>% 
@@ -35,7 +35,7 @@ series.long <- series.df %>%
   mutate(index = factor(index, levels = c("Primer cuartil", "Mediana", "Tercer cuartil")))
 
 
-ggplot(series.long, aes(value/100, date, color = index, group = date)) +
+ggplot(series.long, aes(date, value/100, color = index, group = date)) +
   geom_line(color = "grey", linewidth = 1) +
   geom_point(size = 3) +
   labs(
@@ -46,7 +46,7 @@ ggplot(series.long, aes(value/100, date, color = index, group = date)) +
     color = "",
     caption = paste("Fuente: Banxico. Última actualización", format(Sys.time(), '%d %b, %Y'))
   ) +
-  scale_x_percent(labels = scales::percent_format(accuracy = 0.1)) +  # Two decimal places
+  scale_y_percent(labels = scales::percent_format(accuracy = 0.1)) +  # Two decimal places
   scale_color_manual(values=c("#009076", "#ffe59c", "#c71e1d")) + 
   theme_ipsum_rc(base_family = "Rubik") +
   theme(

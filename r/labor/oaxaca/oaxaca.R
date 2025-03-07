@@ -7,50 +7,38 @@ install.packages("zip")
 # Load required libraries
 library(oaxaca)
 library(ggplot2)
-library(dplyr)
-library(readr)
+library(tidyverse)
 library(httr)  # For downloading files
 library(zip)   # For extracting ZIP files
 
 # Define the years and quarters to analyze
-anio <- 24  # Use last two digits of the year (e.g., 2024 -> 24)
-trimestres <- 1:4
+year <- 24  # Use last two digits of the year (e.g., 2024 -> 24)
+quarter <- 1:4
 
 # Define destination folder for downloads
-carpeta_destino <- "/r/labor/oaxaca/"
-
-# Ensure the destination folder exists
-if (!dir.exists(carpeta_destino)) {
-  dir.create(carpeta_destino, recursive = TRUE)
-}
+folder <- "/r/labor/oaxaca/"
 
 # Store results
-resultados <- data.frame()
+results <- data.frame()
 
 # Loop through each quarter
-for (trim in trimestres) {
+for (q in quarter) {
   
   # Construct the ZIP file URL
-  url <- paste0("https://www.inegi.org.mx/contenidos/programas/enoe/15ymas/microdatos/enoe_2024_trim", 
-                trim, "_csv.zip")
+  url <- paste0("https://www.inegi.org.mx/contenidos/programas/enoe/15ymas/microdatos/enoe_20",year,"_","trim", 
+                q, "_csv.zip")
   
   # Define local ZIP file name
-  archivo_zip <- paste0(carpeta_destino, "enoe_2024_trim", trim, ".zip")
+  archivo_zip <- paste0(folder, "enoe_20",year,"_trim", q, ".zip")
   
   # Download file using httr::GET
   response <- GET(url, write_disk(archivo_zip, overwrite = TRUE), timeout(300))  # 300s timeout
   
-  # Check if the download was successful
-  if (http_error(response)) {
-    print(paste("Failed to download:", url))
-    next
-  }
-  
   # Extract only the relevant CSV file
-  unzip(archivo_zip, exdir = carpeta_destino)
+  unzip(archivo_zip, exdir = folder)
   
   # Search for the correct CSV file (ENOE_SDEMT#YY.csv)
-  patron_csv <- paste0("ENOE_SDEMT", trim, anio, ".csv")
+  patron_csv <- paste0("ENOE_SDEMT", q, year, ".csv")
   archivo_csv <- list.files(carpeta_destino, pattern = patron_csv, full.names = TRUE)
   
   if (length(archivo_csv) == 0) {
