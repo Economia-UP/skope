@@ -78,7 +78,7 @@ ggplot(df, aes(date, values/100, color = indicator)) +
   labs( title = "Inflación en México",
         subtitle = "Índice Nacional de Precios al Consumidor",
         y = "",
-        x = "",
+        x = paste("Último dato:", format(max(sub$date), '%b, %Y')),
         color = "",
         caption = paste("Fuente: INEGI. Última actualización", format(Sys.time(), '%d %b, %Y'))) +
   scale_y_percent(breaks = seq(min(df$values)/100, max(df$values)/100,
@@ -151,7 +151,7 @@ ggplot(sub, aes(date, values / 100, color = indicator)) +
     title = "Inflación subyacente en México",
     # subtitle = "",
     y = "",
-    x = "Último dato: enero 2025.",
+    x = paste("Último dato:", format(max(sub$date), '%b, %Y')),
     color = "",
     caption = paste("Fuente: INEGI. Última actualización", format(Sys.time(), '%d %b, %Y'))
   ) +
