@@ -28,10 +28,10 @@ jobs:
       - name: Install Required R Packages
         run: |
           Rscript -e "install.packages(
-            c('tidyverse', 'tidymodels', 'inegiR', 'siebanxicor', 'fredr', 'hunspell', 
-              'hrbrthemes', 'sysfonts', 'svglite', 'forcats', 'lubridate', 'showtext', 
-              'ggpattern', 'ggrepel', 'rsdmx', 'plotly', 'htmlwidgets', 'zoo', 'xts', 
-              'scales')"
+          c('tidyverse', 'tidymodels', 'inegiR', 'siebanxicor', 'fredr', 'hunspell', 
+          'hrbrthemes', 'sysfonts', 'svglite', 'forcats', 'lubridate', 'showtext', 
+          'ggpattern', 'ggrepel', 'rsdmx', 'plotly', 'htmlwidgets', 'zoo', 'xts', 
+          'scales'))"
 
       - name: Set API Key and run R scripts
         env:
