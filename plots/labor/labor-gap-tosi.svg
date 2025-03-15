@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' width='576.00pt' height='432.00pt' viewBox='0 0 576.00 432.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: none;'/>
+<defs>
+  <clipPath id='cpMC4wMHw1NzYuMDB8MC4wMHw0MzIuMDA='>
+    <rect x='0.00' y='0.00' width='576.00' height='432.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw1NzYuMDB8MC4wMHw0MzIuMDA=)'>
+</g>
+<defs>
+  <clipPath id='cpNjguNzN8NTQ2LjExfDgzLjMxfDM1OS4yNw=='>
+    <rect x='68.73' y='83.31' width='477.38' height='275.96' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpNjguNzN8NTQ2LjExfDgzLjMxfDM1OS4yNw==)'>
+<polyline points='68.73,346.73 546.11,346.73 ' style='stroke-width: 0.43; stroke: #CCCCCC; stroke-linecap: butt;' />
+<polyline points='68.73,304.91 546.11,304.91 ' style='stroke-width: 0.43; stroke: #CCCCCC; stroke-linecap: butt;' />
+<polyline points='68.73,263.10 546.11,263.10 ' style='stroke-width: 0.43; stroke: #CCCCCC; stroke-linecap: butt;' />
+<polyline points='68.73,221.29 546.11,221.29 ' style='stroke-width: 0.43; stroke: #CCCCCC; stroke-linecap: butt;' />
+<polyline points='68.73,179.48 546.11,179.48 ' style='stroke-width: 0.43; stroke: #CCCCCC; stroke-linecap: butt;' />
+<polyline points='68.73,137.67 546.11,137.67 ' style='stroke-width: 0.43; stroke: #CCCCCC; stroke-linecap: butt;' />
+<polyline points='68.73,95.86 546.11,95.86 ' style='stroke-width: 0.43; stroke: #CCCCCC; stroke-linecap: butt;' />
+<polyline points='90.43,216.38 113.26,219.43 136.08,212.73 158.91,214.93 181.80,259.11 204.63,270.40 227.46,268.80 250.29,306.25 273.18,313.94 296.01,285.79 318.83,283.81 341.66,248.81 364.55,191.59 387.38,213.89 410.21,269.85 433.04,143.12 455.93,198.62 478.76,195.37 501.58,202.26 524.41,170.51 ' style='stroke-width: 2.13; stroke: #970639; stroke-linecap: butt;' />
+<circle cx='90.43' cy='216.38' r='2.49' style='stroke-width: 0.71; stroke: #970639; fill: #970639;' />
+<circle cx='113.26' cy='219.43' r='2.49' style='stroke-width: 0.71; stroke: #970639; fill: #970639;' />
+<circle cx='136.08' cy='212.73' r='2.49' style='stroke-width: 0.71; stroke: #970639; fill: #970639;' />
+<circle cx='158.91' cy='214.93' r='2.49' style='stroke-width: 0.71; stroke: #970639; fill: #970639;' />
+<circle cx='181.80' cy='259.11' r='2.49' style='stroke-width: 0.71; stroke: #970639; fill: #970639;' />
+<circle cx='204.63' cy='270.40' r='2.49' style='stroke-width: 0.71; stroke: #970639; fill: #970639;' />
+<circle cx='227.46' cy='268.80' r='2.49' style='stroke-width: 0.71; stroke: #970639; fill: #970639;' />
+<circle cx='250.29' cy='306.25' r='2.49' style='stroke-width: 0.71; stroke: #970639; fill: #970639;' />
+<circle cx='273.18' cy='313.94' r='2.49' style='stroke-width: 0.71; stroke: #970639; fill: #970639;' />
+<circle cx='296.01' cy='285.79' r='2.49' style='stroke-width: 0.71; stroke: #970639; fill: #970639;' />
+<circle cx='318.83' cy='283.81' r='2.49' style='stroke-width: 0.71; stroke: #970639; fill: #970639;' />
+<circle cx='341.66' cy='248.81' r='2.49' style='stroke-width: 0.71; stroke: #970639; fill: #970639;' />
+<circle cx='364.55' cy='191.59' r='2.49' style='stroke-width: 0.71; stroke: #970639; fill: #970639;' />
+<circle cx='387.38' cy='213.89' r='2.49' style='stroke-width: 0.71; stroke: #970639; fill: #970639;' />
+<circle cx='410.21' cy='269.85' r='2.49' style='stroke-width: 0.71; stroke: #970639; fill: #970639;' />
+<circle cx='433.04' cy='143.12' r='2.49' style='stroke-width: 0.71; stroke: #970639; fill: #970639;' />
+<circle cx='455.93' cy='198.62' r='2.49' style='stroke-width: 0.71; stroke: #970639; fill: #970639;' />
+<circle cx='478.76' cy='195.37' r='2.49' style='stroke-width: 0.71; stroke: #970639; fill: #970639;' />
+<circle cx='501.58' cy='202.26' r='2.49' style='stroke-width: 0.71; stroke: #970639; fill: #970639;' />
+<circle cx='524.41' cy='170.51' r='2.49' style='stroke-width: 0.71; stroke: #970639; fill: #970639;' />
+</g>
+<g clip-path='url(#cpMC4wMHw1NzYuMDB8MC4wMHw0MzIuMDA=)'>
+<text x='65.86' y='350.75' text-anchor='end' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Rubik";' textLength='24.83px' lengthAdjust='spacingAndGlyphs'>0.88</text>
+<text x='65.86' y='308.94' text-anchor='end' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Rubik";' textLength='24.32px' lengthAdjust='spacingAndGlyphs'>0.90</text>
+<text x='65.86' y='267.13' text-anchor='end' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Rubik";' textLength='23.77px' lengthAdjust='spacingAndGlyphs'>0.92</text>
+<text x='65.86' y='225.32' text-anchor='end' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Rubik";' textLength='24.16px' lengthAdjust='spacingAndGlyphs'>0.94</text>
+<text x='65.86' y='183.51' text-anchor='end' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Rubik";' textLength='23.95px' lengthAdjust='spacingAndGlyphs'>0.96</text>
+<text x='65.86' y='141.70' text-anchor='end' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Rubik";' textLength='24.34px' lengthAdjust='spacingAndGlyphs'>0.98</text>
+<text x='65.86' y='99.89' text-anchor='end' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Rubik";' textLength='22.43px' lengthAdjust='spacingAndGlyphs'>1.00</text>
+<text x='113.26' y='370.19' text-anchor='middle' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Rubik";' textLength='28.29px' lengthAdjust='spacingAndGlyphs'>2006</text>
+<text x='158.91' y='370.19' text-anchor='middle' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Rubik";' textLength='28.67px' lengthAdjust='spacingAndGlyphs'>2008</text>
+<text x='204.63' y='370.19' text-anchor='middle' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Rubik";' textLength='26.28px' lengthAdjust='spacingAndGlyphs'>2010</text>
+<text x='250.29' y='370.19' text-anchor='middle' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Rubik";' textLength='25.73px' lengthAdjust='spacingAndGlyphs'>2012</text>
+<text x='296.01' y='370.19' text-anchor='middle' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Rubik";' textLength='26.12px' lengthAdjust='spacingAndGlyphs'>2014</text>
+<text x='341.66' y='370.19' text-anchor='middle' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Rubik";' textLength='25.91px' lengthAdjust='spacingAndGlyphs'>2016</text>
+<text x='387.38' y='370.19' text-anchor='middle' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Rubik";' textLength='26.29px' lengthAdjust='spacingAndGlyphs'>2018</text>
+<text x='433.04' y='370.19' text-anchor='middle' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Rubik";' textLength='28.11px' lengthAdjust='spacingAndGlyphs'>2020</text>
+<text x='478.76' y='370.19' text-anchor='middle' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Rubik";' textLength='27.56px' lengthAdjust='spacingAndGlyphs'>2022</text>
+<text x='524.41' y='370.19' text-anchor='middle' style='font-size: 11.50px;fill: #4D4D4D; font-family: "Rubik";' textLength='27.95px' lengthAdjust='spacingAndGlyphs'>2024</text>
+<text x='546.11' y='381.89' text-anchor='end' style='font-size: 9.00px; font-family: "Rubik";' textLength='74.97px' lengthAdjust='spacingAndGlyphs'>Último dato: 2024</text>
+<text x='68.73' y='65.66' style='font-size: 13.00px; font-family: "Roboto Condensed";' textLength='192.97px' lengthAdjust='spacingAndGlyphs'>Brecha TOSI entre mujeres y hombres</text>
+<text x='68.73' y='42.49' style='font-size: 18.00px; font-weight: bold; font-family: "Rubik";' textLength='338.26px' lengthAdjust='spacingAndGlyphs'>Brecha TOSI entre mujeres y hombres</text>
+<text x='546.11' y='400.23' text-anchor='end' style='font-size: 9.00px; font-family: "Roboto Condensed";' textLength='175.74px' lengthAdjust='spacingAndGlyphs'>Fuente: INEGI. Última actualización 14 mar., 2025</text>
+</g>
+</svg>
