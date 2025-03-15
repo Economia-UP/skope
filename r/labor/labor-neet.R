@@ -24,8 +24,6 @@ idSeries2 <- c("1002000067", "1002000070")
 series <- inegi_series_multiple(series = idSeries, token = inegi.api)
 series2 <- inegi_series_multiple(series = idSeries2, token = inegi.api)
 
-inegi_series(series_id = "1002000067", token = inegi.api)
-
 df <- series %>%
   select(date, meta_indicatorid, values) %>%
   mutate(meta_indicatorid = case_when(
