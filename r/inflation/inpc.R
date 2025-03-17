@@ -48,23 +48,15 @@ df <- series1 %>%
 
 
 # Inflation graph
-ggplot(df, aes(date, values/100, color = indicator)) +
+ggplot(df, aes(date, values / 100, color = indicator)) +
   geom_line(size = 1) +
   geom_point(
     data = df %>% group_by(indicator) %>% filter(date == max(date)),  # Select last point per line
     size = 2.5  # Adjust point size
   ) +
-  # geom_text(
-  #   data = df %>% group_by(indicator) %>% filter(date == max(date)),  # Select last point per line
-  #   aes(label = scales::percent(values / 100)),  # Format label as percentage
-  #   hjust = -0.3,  # Adjust text position (shift right)
-  #   vjust = 0.2,
-  #   size = 3.5,
-  #   show.legend = FALSE
-  # ) +
   ggrepel::geom_text_repel(
     data = df %>% group_by(indicator) %>% filter(date == max(date)),
-    aes(label = scales::percent(values/100, accuracy = 0.1)),
+    aes(label = scales::percent(values / 100, accuracy = 0.1)),
     nudge_x = 50,  # Desplazamiento base
     direction = "y",  # Solo mueve en eje Y
     min.segment.length = Inf,  # Elimina líneas de conexión
@@ -74,22 +66,19 @@ ggplot(df, aes(date, values/100, color = indicator)) +
     box.padding = 0.2,  # Espacio alrededor de etiquetas
     show.legend = FALSE
   ) +
-  coord_cartesian(clip = "off") +  # Disable clipping for points/text at edges
-  labs( title = "Inflación en México",
-        subtitle = "Índice Nacional de Precios al Consumidor",
-        y = "",
-        x = paste("Último dato:", format(max(sub$date), '%b, %Y')),
-        color = "",
-        caption = paste("Fuente: INEGI. Última actualización", format(Sys.time(), '%d %b, %Y'))) +
-  scale_y_percent(breaks = seq(min(df$values)/100, max(df$values)/100,
-                               by = 0.01)) +
-  scale_x_date(breaks = seq(as.Date(min(df$date)), 
-                            as.Date(max(df$date)), 
-                            by = "1 year"),
-               date_labels = "%Y") +  # Format labels as only the year
+  labs( 
+    title = "Inflación en México",
+    subtitle = "Índice Nacional de Precios al Consumidor",
+    y = "",
+    x = paste("Último dato:", format(max(df$date), '%b, %Y')),
+    color = "",
+    caption = paste("Fuente: INEGI. Última actualización", format(Sys.time(), '%d %b, %Y'))
+  ) +
+  scale_y_continuous(labels = scales::label_percent(), breaks = scales::breaks_pretty()) +  # Use scale_y_continuous if scale_y_percent doesn't work
+  scale_x_date() +
   scale_color_manual(values = c("#970639", "#043574")) +
-  theme_ipsum_rc(grid = "Y", base_family = "Rubik") +
-  theme(legend.position="bottom")
+  theme_ipsum_rc(grid = "Y", base_family = "Rubik") +  # Adjusting theme
+  theme(legend.position = "bottom")
 ggsave("plots/inflation/inpc.svg",  width = 8, height = 6, create.dir = TRUE)
 
 # Fetch the data using the specified series IDs (Subyacente)
@@ -126,41 +115,31 @@ sub <- series2 %>%
          indicator != "Total")
 
 # Core inflation graph
-ggplot(sub, aes(date, values / 100, color = indicator)) +
+ggplot(sub, aes(date, values / 100, color = indicator)) +  # Divide by 100 for the values to be in a 0-1 scale
   geom_line(size = 1) +
   geom_point(
     data = sub %>% group_by(indicator) %>% filter(date == max(date)),  # Select last point per line
     size = 2.5  # Adjust point size
   ) +
+  coord_cartesian(clip = "off") +
   geom_text(
     data = sub %>% group_by(indicator) %>% filter(date == max(date)),  # Select last point per line
-    aes(label = scales::percent(values / 100)),  # Format label as percentage
+    aes(label = scales::label_percent()(values / 100)),  # Format label as percentage (values should already be divided by 100)
     hjust = -0.3,  # Adjust text position (shift right)
     vjust = 0.2,
     size = 3.5,
     show.legend = FALSE
   ) +
-  coord_cartesian(clip = "off") +  # Disable clipping for points/text at edges
-  scale_y_percent(breaks = seq(min(sub$values)/100, max(sub$values) / 100, by = 0.01)) +  
-  scale_x_date(
-    breaks = seq(as.Date(min(sub$date)), as.Date(max(sub$date)), by = "1 year"),  # Major ticks (yearly)
-    minor_breaks = seq(as.Date(min(sub$date)), as.Date(max(sub$date)), by = "1 month"),  # Minor ticks (monthly)
-    date_labels = "%Y"  # Only show years on the x-axis
-  ) +
+  scale_y_percent(breaks = scales::breaks_pretty()) +  # Show y-axis as percentage
   labs(
     title = "Inflación subyacente en México",
-    # subtitle = "",
     y = "",
     x = paste("Último dato:", format(max(sub$date), '%b, %Y')),
     color = "",
     caption = paste("Fuente: INEGI. Última actualización", format(Sys.time(), '%d %b, %Y'))
   ) +
-  # scale_color_ft() +
   scale_color_manual(values = c("#970639", "#043574", "black")) +
   theme_ipsum_rc(grid = "Y", base_family = "Rubik") +
-  theme(
-    legend.position = "bottom",
-    panel.grid.minor = element_line(color = "gray80", linetype = "dashed")  # Enable minor grid lines
-  ) 
+  theme(legend.position = "bottom") 
 ggsave("plots/inflation/inpc_sub.svg",  width = 8, height = 6, create.dir = TRUE)
 

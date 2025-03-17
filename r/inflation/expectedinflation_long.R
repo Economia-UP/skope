@@ -46,7 +46,8 @@ ggplot(series.long, aes(date, value/100, color = index, group = date)) +
     color = "",
     caption = paste("Fuente: Banxico. Última actualización", format(Sys.time(), '%d %b, %Y'))
   ) +
-  scale_y_percent(labels = scales::percent_format(accuracy = 0.1)) +  # Two decimal places
+  scale_y_percent(labels = scales::percent_format(accuracy = 0.1), limits = c(0.034, 0.039)) +  # Two decimal places
+  scale_x_date(labels = scales::date_format("%b\n%Y")) +
   scale_color_manual(values=c("#009076", "#ffe59c", "#c71e1d")) + 
   theme_ipsum_rc(base_family = "Rubik") +
   theme(
