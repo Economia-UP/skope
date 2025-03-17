@@ -8,6 +8,7 @@ library(ggpattern)
 library(hrbrthemes)
 library(showtext)
 library(svglite)
+library(scales)
 
 
 font_add_google("Rubik", "Rubik")
@@ -42,18 +43,19 @@ eopib %>%
        caption = "Fuente: INEGI \nDato del último trimestre del 2024 corresponde a la estimación oportuna.*") +
   scale_y_percent() + 
   theme_ipsum_rc(grid = "Y", base_family = "Rubik")
-ggsave("plots/gdp/eopib_growth.png",  width = 8, height = 6, dpi = 150, create.dir = TRUE)
+
+ggsave("plots/gdp/eopib_growth.svg",  width = 8, height = 6, create.dir = TRUE)
 
 
 orden_sexenios <- c(
-  "Miguel de la Madrid (1982-1988)",
-  "Carlos Salinas (1988-1994)",
-  "Ernesto Zedillo (1994-2000)",
-  "Vicente Fox (2000-2006)",
-  "Felipe Calderón (2006-2012)",
-  "Enrique Peña Nieto (2012-2018)",
-  "Andrés Manuel López Obrador (2018-2024)",
-  "Claudia Sheinbaum Pardo (2024-2030)"
+  "MMH (1982-1988)",
+  "CSG (1988-1994)",
+  "EZPL (1994-2000)",
+  "VFQ (2000-2006)",
+  "FCH (2006-2012)",
+  "EPN (2012-2018)",
+  "AMLO (2018-2024)",
+  "CSP (2024-2030)"
 )
 
 gdp <- eopib %>% 
@@ -62,14 +64,14 @@ gdp <- eopib %>%
   # mutate(growth  = (values/lag(values) - 1)*100) %>% 
   mutate(year = year(date),  # Extrae el año de la fecha
          sexenio = case_when(
-           year > 1982 & year <= 1988 ~ "Miguel de la Madrid (1982-1988)",
-           year > 1988 & year <= 1994 ~ "Carlos Salinas (1988-1994)",
-           year > 1994 & year <= 2000 ~ "Ernesto Zedillo (1994-2000)",
-           year > 2000 & year <= 2006 ~ "Vicente Fox (2000-2006)",
-           year > 2006 & year <= 2012 ~ "Felipe Calderón (2006-2012)",
-           year > 2012 & year <= 2018 ~ "Enrique Peña Nieto (2012-2018)",
-           year > 2018 & year <= 2024 ~ "Andrés Manuel López Obrador (2018-2024)",
-           year > 2024 & year <= 2030 ~ "Claudia Sheinbaum Pardo (2024-2030)",
+           year > 1982 & year <= 1988 ~ "MMH (1982-1988)",
+           year > 1988 & year <= 1994 ~ "CSG (1988-1994)",
+           year > 1994 & year <= 2000 ~ "EZPL (1994-2000)",
+           year > 2000 & year <= 2006 ~ "VFQ (2000-2006)",
+           year > 2006 & year <= 2012 ~ "FCH (2006-2012)",
+           year > 2012 & year <= 2018 ~ "EPN (2012-2018)",
+           year > 2018 & year <= 2024 ~ "AMLO (2018-2024)",
+           year > 2024 & year <= 2030 ~ "CSP (2024-2030)",
            TRUE ~ "Otro"
          ),
          sexenio = factor(sexenio, levels = orden_sexenios), # Ordenar como factor
@@ -77,7 +79,7 @@ gdp <- eopib %>%
 
 growth_annual <- gdp %>% 
   group_by(year) %>% 
-  summarize(growth = mean(values), .groups = "drop")
+  reframe(growth = mean(values), .groups = "drop")
 
 
 growth_annual %>% 
@@ -105,11 +107,8 @@ growth_annual %>%
        y = "",
        x = "",
        caption = "Fuente: INEGI \nDato del último trimestre del 2024 corresponde a la estimación oportuna.*") +
-  scale_x_continuous(breaks = seq(2018, max(growth_annual$year), by = 1)) +
-  scale_y_percent(breaks = seq(floor(min(growth_annual$growth / 100)), 
-                               ceiling(max(growth_annual$growth / 100)), 
-                               by = 0.02)) + 
-  # scale_y_percent() + 
+  scale_x_continuous(breaks = scales::breaks_width(width = 1)) +
+  scale_y_percent(breaks = scales::breaks_pretty(8)) + 
   theme_ipsum_rc(grid = "Y", base_family = "Rubik")
 ggsave("plots/gdp/eopib_annual_growth.svg",  width = 8, height = 6, create.dir = TRUE)
 

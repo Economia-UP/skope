@@ -5,9 +5,7 @@ library(tidyverse)
 library(rsdmx)
 library(hrbrthemes)
 library(showtext)
-library(plotly)
 library(svglite)
-library(htmlwidgets)
 
 
 font_add_google("Rubik", "Rubik")
@@ -19,8 +17,8 @@ growth <- readSDMX(url) %>%
   as.data.frame()
 
 # Check data
-head(growth)
-names(growth)
+# head(growth)
+# names(growth)
 
 # Clean data
 growth_clean <- growth %>% 
@@ -56,25 +54,5 @@ ggplot(growth_clean,  # Arrange in descending order
     legend.position = "none"
   )
 
-
 ggsave("plots/gdp/oecd_gdp_growth.svg", width = 8, height = 6, create.dir = TRUE)
-
-
-# # Necessary for interactive plots iframe
-# ggplotly(tooltip = "none") %>%
-#   # Recover caption
-#   layout(
-#     font = list(family = "Rubik"),  # Explicitly define font for Plotly
-#     annotations = list(
-#       x = 1,  # Horizontal position (centered)
-#       y = -0.2, # Vertical position (below the plot)
-#       text = paste("* UE (Unión Europea)\nFuente: OECD. Última actualización", format(Sys.time(), '%d %b, %Y')),  # The caption text
-#       showarrow = FALSE,  # No arrow pointing to the caption
-#       xref = 'paper',  # Use paper coordinates (relative to the plot's paper size)
-#       yref = 'paper'   # Use paper coordinates for the caption position
-#     )) %>%
-#   config(displayModeBar = FALSE) %>%
-#   saveWidget(file = "plots/gdp/oecd_gdp_growth.html", selfcontained = TRUE)
-
-
 
