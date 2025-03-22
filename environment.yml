@@ -1,0 +1,8 @@
+name: r-env
+channels:
+  - conda-forge
+dependencies:
+  - r
+  - r-essentials
+  - r-ggplot2  # Add any other R packages you need
+  - jupyter
