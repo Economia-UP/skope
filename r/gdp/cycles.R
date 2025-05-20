@@ -110,7 +110,7 @@ series_filt %>%
     )
 
 # Save the plot
-ggsave("plots/gdp/coincidente.svg", width = 8, height = 6, bg = "white", create.dir = TRUE)
+ggsave("plots/gdp/coincidente-componentes.svg", width = 8, height = 6, bg = "white", create.dir = TRUE)
 
 
 # Foor loop for graphs
