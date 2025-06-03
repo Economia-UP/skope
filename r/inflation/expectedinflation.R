@@ -27,30 +27,34 @@ series.df <- reduce(list(first, med, third), full_join, by = "date") %>%
   filter(date >= Sys.Date() - years(2))
 colnames(series.df)[2:4] <- c("Primer cuartil", "Mediana", "Tercer cuartil")
 
-series.long <- series.df %>% 
+series.long <- series.df %>%
   pivot_longer(
     !date,
     names_to = "index",
     values_to = "value"
-  ) %>% 
+  ) %>%
   mutate(index = factor(index, levels = c("Primer cuartil", "Mediana", "Tercer cuartil")))
+
+last_points <- series.long %>% group_by(index) %>% filter(date == max(date))
 
 
 ggplot(series.long, aes(date, value/100, color = index, group = date)) +
   geom_line(color = "grey", linewidth = 1) +
-  geom_point(size = 3) +
+  geom_point(data = last_points, size = 3) +
+  geom_text(data = last_points, aes(label = scales::percent(value/100, accuracy = 0.1)),
+            vjust = -0.5, hjust = 0, show.legend = FALSE, size = 3) +
   labs(
     title = paste("Expectativas de inflación", year(Sys.Date())),
     subtitle = "Encuestas Sobre las Expectativas de los Especialistas en Economía del \nSector Privado Expectativas de Inflación para los Próximos 12 Meses",
     x = "",
     y = "",
     color = "",
-    caption = paste("Fuente: Banxico. Última actualización", format(Sys.time(), '%d %b, %Y'))
+    caption = skope_caption("Banxico", max(series.long$date))
   ) +
   scale_y_percent(labels = scales::percent_format(accuracy = 0.1), limits = c(0.032, 0.052)) +  # Two decimal places
   scale_x_date(labels = scales::date_format("%b\n%Y")) +
-  scale_color_manual(values=c("#009076", "#ffe59c", "#c71e1d")) + 
-  theme_ipsum_rc(base_family = "Rubik") +
+  scale_color_manual(values=c("#009076", "#ffe59c", "#c71e1d")) +
+  theme_skope() +
   theme(
     legend.position = "bottom"
   )
