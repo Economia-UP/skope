@@ -20,29 +20,33 @@ inegi.api = Sys.getenv("INEGI_API")
 # Estimación oportuna del PIB
 eopib <- inegi_series(series = "733855", token = inegi.api)
 
+# Prepare data for plotting
+eopib_line <- eopib %>%
+  filter(date >= "2022-01-01") %>%
+  mutate(p = values / 100)
 
-eopib %>% 
-  filter(date >= "2022-01-01") %>% 
-  ggplot(aes(date, values/100)) +
-  geom_line(data = eopib %>% 
-              filter(date >= "2022-01-01") %>% 
-              arrange(date) %>% 
-              slice(1:(n() - 1)), 
-            aes(date, values/100), 
+eopib_line %>%
+  ggplot(aes(date, p)) +
+  geom_line(data = eopib %>%
+              filter(date >= "2022-01-01") %>%
+              arrange(date) %>%
+              slice(1:(n() - 1)),
+            aes(date, values/100),
             linewidth = 1, color = "#970639") +
-  geom_line(data = eopib %>% 
-              filter(date >= "2022-01-01") %>% 
-              arrange(desc(date)) %>% 
-              slice(1:2), 
-            aes(date, values/100), 
-            color = "#970639", linetype = "dashed", size = 1) +  
+  geom_line(data = eopib %>%
+              filter(date >= "2022-01-01") %>%
+              arrange(desc(date)) %>%
+              slice(1:2),
+            aes(date, values/100),
+            color = "#970639", linetype = "dashed", size = 1) +
+  highlight_last(eopib_line, "date", "p", color = "#970639", label_fmt = label_percent(accuracy = 0.1)) +
   labs(title = "Crecimiento económico en México*",
        subtitle = "Variación anual",
        y = "",
        x = "",
-       caption = "Fuente: INEGI \nDato del último trimestre del 2024 corresponde a la estimación oportuna.*") +
-  scale_y_percent() + 
-  theme_ipsum_rc(grid = "Y", base_family = "Rubik")
+       caption = skope_caption("INEGI", max(eopib$date))) +
+  scale_y_percent() +
+  theme_skope()
 
 ggsave("plots/gdp/eopib_growth.svg",  width = 8, height = 6, create.dir = TRUE)
 
@@ -106,10 +110,10 @@ growth_annual %>%
        subtitle = "Variación promedio anual",
        y = "",
        x = "",
-       caption = "Fuente: INEGI \nDato del último trimestre del 2024 corresponde a la estimación oportuna.*") +
+       caption = skope_caption("INEGI", max(eopib$date))) +
   scale_x_continuous(breaks = scales::breaks_width(width = 1)) +
-  scale_y_percent(breaks = scales::breaks_pretty(8)) + 
-  theme_ipsum_rc(grid = "Y", base_family = "Rubik")
+  scale_y_percent(breaks = scales::breaks_pretty(8)) +
+  theme_skope()
 ggsave("plots/gdp/eopib_annual_growth.svg",  width = 8, height = 6, create.dir = TRUE)
 
 
@@ -128,9 +132,9 @@ ggplot(sexenios_gdp, aes(mean_growth/100, fct_rev(sexenio))) +
         subtitle = "Promedio del crecimiento anual en México",
         y = "",
         x = "",
-        caption = "Fuente: INEGI\nDato del último trimestre del 2024 corresponde a la estimación oportuna.*") +
+        caption = skope_caption("INEGI", max(eopib$date))) +
   scale_x_percent() +
-  theme_ipsum_rc(grid="X", base_family = "Rubik") # Use Rubik
+  theme_skope("X")
 ggsave("plots/gdp/gdp.svg",  width = 8, height = 6, create.dir = TRUE)
 
 
@@ -140,20 +144,23 @@ gdp <- inegi_series(series = "736181", token = inegi.api)
 pop <- inegi_series_multiple(series = "289242", token = inegi.api) %>% 
   select(date, date_shortcut, values)
 
-gdppc <- left_join(gdp, pop, join_by(date), suffix = c("_gdp", "_pop")) %>% 
-  reframe(date, date_shortcut = date_shortcut_gdp, gdppc = values_gdp/values_pop*1000000) %>% 
+gdppc <- left_join(gdp, pop, join_by(date), suffix = c("_gdp", "_pop")) %>%
+  reframe(date, date_shortcut = date_shortcut_gdp, gdppc = values_gdp/values_pop*1000000) %>%
   filter(gdppc != 0)
 
+gdppc_line <- gdppc %>% mutate(p = gdppc)
+
 # Crecimiento económico per cápita
-ggplot(gdppc, aes(date, gdppc)) +
+ggplot(gdppc_line, aes(date, p)) +
   geom_line(size = 1, color = "#970639") +
+  highlight_last(gdppc_line, "date", "p", color = "#970639", label_fmt = label_comma()) +
   labs( title = "PIB per cápita en México",
         subtitle = "Moneda nacional",
         y = "",
         x = "",
-        caption = "Fuente: INEGI") +
+        caption = skope_caption("INEGI", max(gdppc$date))) +
   scale_y_comma() +
-    theme_ipsum_rc(grid = "Y", base_family = "Rubik")
+  theme_skope()
 ggsave("plots/gdp/gdppc.svg",  width = 8, height = 6, create.dir = TRUE)
 
 

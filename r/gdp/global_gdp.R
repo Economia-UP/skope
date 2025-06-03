@@ -45,7 +45,10 @@ ggplot(growth_clean,  # Arrange in descending order
     y = "",
     x = "",
     fill = "",
-    caption = paste("* UE (Unión Europea)\nFuente: OECD. Última actualización", format(Sys.time(), '%d %b, %Y'))
+    caption = paste0(
+      "* UE (Unión Europea)\n",
+      skope_caption("OECD", max(growth_clean$obsTime))
+    )
   ) +
   scale_x_percent(breaks = seq(min(growth_clean$obsValue)/100, max(growth_clean$obsValue)/100, by = 1/100)) +
   scale_fill_identity() +

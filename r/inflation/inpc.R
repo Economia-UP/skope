@@ -72,7 +72,7 @@ ggplot(df, aes(date, values / 100, color = indicator)) +
     y = "",
     x = paste("Último dato:", format(max(df$date), '%b, %Y')),
     color = "",
-    caption = paste("Fuente: INEGI. Última actualización", format(Sys.time(), '%d %b, %Y'))
+    caption = skope_caption("INEGI", max(df$date))
   ) +
   scale_y_continuous(labels = scales::label_percent(), breaks = scales::breaks_pretty()) +  # Use scale_y_continuous if scale_y_percent doesn't work
   scale_x_date() +
@@ -143,7 +143,7 @@ ggplot(sub, aes(date, values / 100, color = indicator)) +  # Divide by 100 for t
     y = "",
     x = paste("Último dato:", format(max(sub$date), '%b, %Y')),
     color = "",
-    caption = paste("Fuente: INEGI. Última actualización", format(Sys.time(), '%d %b, %Y'))
+    caption = skope_caption("INEGI", max(sub$date))
   ) +
   scale_color_manual(values = c("#970639", "#043574", "black")) +
   theme_skope()
