@@ -88,15 +88,23 @@ idSeries2 <- c("910407", "910408", "910409")  # Your INEGI series IDs
 series2 <- inegi_series_multiple(series = idSeries2, token = inegi.api)
 
 # Transform the data
-series2.wide <- series2 %>% 
-  select(date, values, meta_indicatorid) %>% 
-  pivot_wider(names_from = meta_indicatorid, values_from = values) %>% 
+series2.wide <- series2 %>%
+  select(date, values, meta_indicatorid) %>%
+  mutate(
+    meta_indicatorid = factor(meta_indicatorid,
+                              levels = c("910407", "910408", "910409"))
+  ) %>%
+  pivot_wider(names_from = meta_indicatorid, values_from = values) %>%
   rename(
     date = date,
-    "Total" = "910407",
+    "Total"      = "910407",
     "Mercancías" = "910408",
-    "Servicios" = "910409") %>% 
-  factor(levels = c("Total", "Mercancías", "Servicios"))
+    "Servicios"  = "910409"
+  ) %>%
+  mutate(
+    date = as.Date(date),
+    across(c("Total", "Mercancías", "Servicios"), as.numeric)
+  )
 
 # Specify the output directory and file name
 write.csv(series2.wide, "data/inflation/inpc_core.csv", row.names = FALSE)
