@@ -5,8 +5,8 @@ library(showtext)
 library(svglite)
 library(scales)
 
-font_add_google("Rubik", "Rubik")
-showtext_auto()
+source("r/theme_skope.R")
+skope_load_fonts()
 
 # Define your INEGI API key
 inegi.api = Sys.getenv("INEGI_API")
@@ -127,8 +127,7 @@ series %>% filter(indicator_name == x) %>%
        caption = "Fuente: INEGI") +
   scale_x_date(breaks = scales::date_breaks("5 year"), labels = scales::label_date(format = "%Y")) +
   scale_y_continuous(breaks = scales::breaks_width(2)) + 
-  theme_ipsum_rc(grid = "Y", base_family = "Rubik") +
-  theme(legend.position = "bottom")
+  theme_skope()
   # Save the plot
 ggsave(paste0("plots/gdp/cycles/",x,".svg"),  width = 8, height = 6, create.dir = TRUE)
 }

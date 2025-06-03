@@ -10,8 +10,8 @@ library(hrbrthemes)
 library(showtext)
 library(svglite)
 
-font_add_google("Rubik", "Rubik")
-showtext_auto()
+source("r/theme_skope.R")
+skope_load_fonts()
 
 # Define your INEGI API key
 inegi.api = Sys.getenv("INEGI_API")
@@ -77,8 +77,7 @@ ggplot(df, aes(date, values / 100, color = indicator)) +
   scale_y_continuous(labels = scales::label_percent(), breaks = scales::breaks_pretty()) +  # Use scale_y_continuous if scale_y_percent doesn't work
   scale_x_date() +
   scale_color_manual(values = c("#970639", "#043574")) +
-  theme_ipsum_rc(grid = "Y", base_family = "Rubik") +  # Adjusting theme
-  theme(legend.position = "bottom")
+  theme_skope()  # Adjusting theme
 ggsave("plots/inflation/inpc.svg",  width = 8, height = 6, create.dir = TRUE)
 
 # Fetch the data using the specified series IDs (Subyacente)
@@ -147,7 +146,6 @@ ggplot(sub, aes(date, values / 100, color = indicator)) +  # Divide by 100 for t
     caption = paste("Fuente: INEGI. Última actualización", format(Sys.time(), '%d %b, %Y'))
   ) +
   scale_color_manual(values = c("#970639", "#043574", "black")) +
-  theme_ipsum_rc(grid = "Y", base_family = "Rubik") +
-  theme(legend.position = "bottom") 
+  theme_skope()
 ggsave("plots/inflation/inpc_sub.svg",  width = 8, height = 6, create.dir = TRUE)
 

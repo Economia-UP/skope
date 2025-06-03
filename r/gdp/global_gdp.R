@@ -8,8 +8,8 @@ library(showtext)
 library(svglite)
 
 
-font_add_google("Rubik", "Rubik")
-showtext_auto()
+source("r/theme_skope.R")
+skope_load_fonts()
 
 
 url <- "https://sdmx.oecd.org/public/rest/data/OECD.SDD.NAD,DSD_NAMAIN1@DF_QNA_EXPENDITURE_GROWTH_OECD,/A..IRL+ARG+BRA+CHN+IND+IDN+RUS+SAU+ZAF+AUS+AUT+BEL+CAN+CHE+CHL+COL+CRI+CZE+DEU+DNK+ESP+FIN+EST+FRA+GBR+GRC+HUN+ISL+LTU+ISR+ITA+JPN+KOR+LUX+LVA+MEX+NLD+NOR+NZL+POL+PRT+SVK+SVN+SWE+TUR+USA+OECD+G20+G7+USMCA+OECDE+EA20+EU27_2020...B1GQ......GY.?startPeriod=2020"

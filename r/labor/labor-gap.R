@@ -10,8 +10,8 @@ library(svglite)
 library(scales)
 library(zoo)
 
-font_add_google("Rubik", "Rubik")
-showtext_auto()
+source("r/theme_skope.R")
+skope_load_fonts()
 
 # Define your INEGI API key
 inegi.api = Sys.getenv("INEGI_API")
@@ -48,8 +48,7 @@ ggplot(df, aes(as.Date(paste(year, "01-01", sep = "-"), format = "%Y-%m-%d"), va
   scale_color_manual(values = c("#970639", "#043574", "#015b51")) +
   scale_x_date(breaks = scales::date_breaks("2 years"), labels = scales::label_date("%Y")) +
   scale_y_percent(breaks = scales::breaks_pretty(8) , limits = c(0.3, 0.85)) + 
-  theme_ipsum_rc(grid = "Y", base_family = "Rubik") +
-  theme(legend.position = "bottom") 
+  theme_skope()
 ggsave("plots/labor/labor-share.svg",  width = 8, height = 6, create.dir = TRUE)
 
 
@@ -74,6 +73,5 @@ ggplot(gap, aes(as.Date(paste(year, "01-01", sep = "-"), format = "%Y-%m-%d"), g
   ) +
   scale_y_continuous(breaks = scales::breaks_pretty(), limits = c(1.6, 2)) + 
   scale_x_date(breaks = scales::date_breaks("2 years"), labels = scales::label_date("%Y")) +
-  theme_ipsum_rc(grid = "Y", base_family = "Rubik") +
-  theme(legend.position = "bottom") 
+  theme_skope()
 ggsave("plots/labor/labor-gap.svg",  width = 8, height = 6, create.dir = TRUE)
