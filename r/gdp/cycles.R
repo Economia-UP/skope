@@ -58,7 +58,8 @@ series_filt %>%
   ggplot(aes(date, values, col = indicator_name)) +
     # Líneas sólidas y dotdash según antigüedad
     geom_line(linewidth = 1) +
-    geom_hline(yintercept = 100, col = "black", linewidth = 0.5) + 
+    geom_hline(yintercept = 100, col = "black", linewidth = 0.5) +
+    highlight_last(series_filt, "date", "values", label_fmt = label_number(accuracy = 0.1)) +
 
     # Etiquetas y títulos
     labs(
@@ -66,7 +67,7 @@ series_filt %>%
       subtitle = "Componente cíclico",
       x        = NULL,
       y        = "Por abajo de 100 indica recesión",
-      caption  = "Fuente: INEGI",
+      caption  = skope_caption("INEGI", max(series_filt$date)),
       colour   = NULL            # quita el título de la leyenda
     ) +
 
@@ -102,7 +103,7 @@ series_filt %>%
     ) +
 
     # Tema
-    theme_ipsum_rc(grid = "Y", base_family = "Rubik") +
+    theme_skope() +
     theme(
       legend.position = "bottom",
       legend.margin   = margin(t = 5), 
@@ -119,14 +120,15 @@ series %>% filter(indicator_name == x) %>%
   ggplot(aes(date, values, col = indicator_name)) +
   geom_line(data = ~ filter(.x, date <= Sys.Date() - years(2)), col = "#970639", linewidth = 1) +
   geom_line(data = ~ filter(.x, date > Sys.Date() - years(2)), col = "#970639", linetype = "dotdash", linewidth = 1) +
-  geom_hline(yintercept = 100, col = "black", linewidth = 0.5) + 
+  geom_hline(yintercept = 100, col = "black", linewidth = 0.5) +
+  highlight_last(filter(series, indicator_name == x), "date", "values", label_fmt = label_number(accuracy = 0.1)) +
   labs(title = x,
        subtitle = "Componente cíclico",
        y = "",
        x = "",
-       caption = "Fuente: INEGI") +
+       caption = skope_caption("INEGI", max(series$date))) +
   scale_x_date(breaks = scales::date_breaks("5 year"), labels = scales::label_date(format = "%Y")) +
-  scale_y_continuous(breaks = scales::breaks_width(2)) + 
+  scale_y_continuous(breaks = scales::breaks_width(2)) +
   theme_skope()
   # Save the plot
 ggsave(paste0("plots/gdp/cycles/",x,".svg"),  width = 8, height = 6, create.dir = TRUE)
