@@ -82,7 +82,7 @@ ggplot(series.plot, aes(date, value/100, fill = component)) +
     x = "",
     y = "",
     fill = "",
-    caption = paste("Fuente: INEGI. Última actualización", format(Sys.time(), '%d %b, %Y'))
+    caption = skope_caption("INEGI", max(series.plot$date))
   ) +
   # scale_fill_ipsum() +
   scale_fill_manual(values = c("#970639", "#043574", "#015b51", "#b79357")) +
