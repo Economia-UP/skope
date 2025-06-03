@@ -12,14 +12,13 @@ This project automates the fetching, processing, and updating of data from APIs 
 
 ## Project Structure
 
-Here's a quick overview of the main folders and files in this layout, including workflows, data, tests, and reference materials:
+Here's a quick overview of the main folders and files in this layout, including workflows, data, and reference materials:
 
 ```
 ├── .github/workflows/     # CI workflows
 ├── r/                    # Data-fetching R scripts
 ├── data/                 # Generated CSVs
 ├── plots/                # Output graphics
-├── tests/                # testthat suite
 ├── pdf/                  # Reference PDFs
 ├── calendar/             # Calendar PDFs
 ├── environment.yml       # Conda environment

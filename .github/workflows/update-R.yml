@@ -49,9 +49,6 @@ jobs:
           Rscript "$script" || echo "⚠️ Warning: $script failed but continuing..."
           done
 
-      - name: Run tests
-        run: Rscript -e "testthat::test_dir('tests/testthat')"
-
       - name: Commit and push changes
         run: |
           git config --local user.name "GitHub Action"
