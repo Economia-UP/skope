@@ -35,7 +35,7 @@ jobs:
           c('tidyverse', 'tidymodels', 'inegiR', 'siebanxicor', 'fredr', 'hunspell', 
           'hrbrthemes', 'sysfonts', 'svglite', 'forcats', 'lubridate', 'showtext', 
           'ggpattern', 'ggrepel', 'rsdmx', 'plotly', 'htmlwidgets', 'zoo', 'xts', 
-          'scales'))"
+          'scales', 'testthat'))"
 
       - name: Set API Key and run R scripts
         env:
