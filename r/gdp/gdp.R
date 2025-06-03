@@ -11,8 +11,8 @@ library(svglite)
 library(scales)
 
 
-font_add_google("Rubik", "Rubik")
-showtext_auto()
+source("r/theme_skope.R")
+skope_load_fonts()
 
 # Define your INEGI API key
 inegi.api = Sys.getenv("INEGI_API")

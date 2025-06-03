@@ -10,8 +10,8 @@ library(svglite)
 library(scales)
 library(zoo)
 
-font_add_google("Rubik", "Rubik")
-showtext_auto()
+source("r/theme_skope.R")
+skope_load_fonts()
 
 # Define your INEGI API key
 inegi.api = Sys.getenv("INEGI_API")
@@ -52,8 +52,7 @@ ggplot(df, aes(as.Date(paste(year, "01-01", sep = "-"), format = "%Y-%m-%d"), va
   scale_color_manual(values = c("#970639", "#043574", "#015b51", "black")) +
   scale_y_continuous(breaks = scales::breaks_pretty(), labels = scales::label_percent(), limits = c(25/100, 31/100)) +
   scale_x_date(labels = scales::date_format("%Y"), breaks = scales::date_breaks("2 years")) + 
-  theme_ipsum_rc(grid = "Y", base_family = "Rubik") +
-  theme(legend.position = "bottom") 
+  theme_skope()
 ggsave("plots/labor/labor-tosi.svg",  width = 8, height = 6, create.dir = TRUE)
 
 
@@ -79,6 +78,5 @@ ggplot(gap, aes(as.Date(paste(year, "01-01", sep = "-"), format = "%Y-%m-%d"), g
   ) +
   scale_y_continuous(breaks = scales::breaks_pretty(6), limits = c(0.88, 1)) +
   scale_x_date(breaks = scales::date_breaks("2 years"), labels = scales::date_format("%Y")) +
-  theme_ipsum_rc(grid = "Y", base_family = "Rubik") +
-  theme(legend.position = "bottom") 
+  theme_skope()
 ggsave("plots/labor/labor-gap-tosi.svg",  width = 8, height = 6, create.dir = TRUE)

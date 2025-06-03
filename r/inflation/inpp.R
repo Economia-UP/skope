@@ -10,8 +10,8 @@ library(hrbrthemes)
 library(showtext)
 library(svglite)
 
-font_add_google("Rubik", "Rubik")
-showtext_auto()
+source("r/theme_skope.R")
+skope_load_fonts()
 
 # Define your INEGI API key
 inegi.api = Sys.getenv("INEGI_API")
@@ -88,7 +88,6 @@ ggplot(serie, aes(date, pc/100, color = indicator)) +
                             by = "1 year"),
                date_labels = "%Y") +  # Format labels as only the year
   scale_color_manual(values = c("#970639", "#043574", "#015b51")) +
-  theme_ipsum_rc(grid = "Y", base_family = "Rubik") +
-  theme(legend.position="bottom")
+  theme_skope()
 ggsave("plots/inflation/inpp.svg",  width = 8, height = 6, create.dir = TRUE)
 
