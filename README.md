@@ -12,22 +12,18 @@ This project automates the fetching, processing, and updating of data from APIs 
 
 ## Project Structure
 
-Here's a quick overview of the main folders and files you will interact with:
+Here's a quick overview of the main folders and files in this layout, including workflows, data, tests, and reference materials:
 
 ```
-├── .github
-│   └── workflows
-│       └── update_R.yml       # The GitHub Actions workflow file
-├── r
-│   └── *.r    # Example R script to fetch data
-|
-├── data
-|    └── *csv       # Output CSV file updated by the script
-|
-├── plots
-|    └── *svg/png   # Output plots in svg/png file updated by the script
-|    
-└── README.md       # Documentation file
+├── .github/workflows/     # CI workflows
+├── r/                    # Data-fetching R scripts
+├── data/                 # Generated CSVs
+├── plots/                # Output graphics
+├── tests/                # testthat suite
+├── pdf/                  # Reference PDFs
+├── calendar/             # Calendar PDFs
+├── environment.yml       # Conda environment
+└── README.md
 ```
 
 ## Prerequisites
