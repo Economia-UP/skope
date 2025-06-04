@@ -47,7 +47,7 @@ ggplot(df, aes(as.Date(paste(year, "01-01", sep = "-"), format = "%Y-%m-%d"), va
     y = "",
     x = paste("Último dato:", format(max(df$year))),
     color = "",
-    caption = paste("Fuente: INEGI. Última actualización", format(Sys.time(), '%d %b, %Y'))
+    caption = skope_caption("INEGI", as.Date(paste(max(df$year), "01-01", sep = "-")))
   ) +
   scale_color_manual(values = c("#970639", "#043574", "#015b51", "black")) +
   scale_y_continuous(breaks = scales::breaks_pretty(), labels = scales::label_percent(), limits = c(25/100, 31/100)) +
@@ -74,7 +74,7 @@ ggplot(gap, aes(as.Date(paste(year, "01-01", sep = "-"), format = "%Y-%m-%d"), g
     y = "",
     x = paste("Último dato:", format(max(df$year))),
     color = "",
-    caption = paste("Fuente: INEGI. Última actualización", format(Sys.time(), '%d %b, %Y'))
+    caption = skope_caption("INEGI", as.Date(paste(max(df$year), "01-01", sep = "-")))
   ) +
   scale_y_continuous(breaks = scales::breaks_pretty(6), limits = c(0.88, 1)) +
   scale_x_date(breaks = scales::date_breaks("2 years"), labels = scales::date_format("%Y")) +
