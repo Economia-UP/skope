@@ -41,7 +41,7 @@ last_points <- series.long %>% group_by(index) %>% filter(date == max(date))
 ggplot(series.long, aes(date, value/100, color = index, group = date)) +
   geom_line(color = "grey", linewidth = 1) +
   geom_point(size = 3) +
-  geom_point(data = last_points, size = 3) +
+  geom_point(size = 3) +
   geom_text(data = last_points, aes(label = scales::percent(value/100, accuracy = 0.1)),
             vjust = -0.5, hjust = 0, show.legend = FALSE, size = 3) +
   labs(
