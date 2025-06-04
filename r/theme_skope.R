@@ -23,6 +23,8 @@ skope_caption <- function(source, last_date) {
   paste0(
     "Fuente: ", source,
     ". Datos hasta ", format(last_date, "%d %b, %Y")
+    ". Datos hasta ", format(last_date, "%d %b, %Y"),
+    "\nÚltima actualización: ", format(Sys.time(), "%d %b, %Y")
   )
 }
 
@@ -74,4 +76,27 @@ highlight_last <- function(data, x, y, color = NULL,
       )
     )
   }
+#' @param color Point and text color
+#' @param label_fmt Label format function from scales
+#' @return List of ggplot2 layers
+highlight_last <- function(data, x, y, color = "#970639",
+                           label_fmt = label_number(accuracy = 0.1)) {
+  last <- data %>% filter(.data[[x]] == max(.data[[x]], na.rm = TRUE))
+  list(
+    geom_point(data = last, aes(.data[[x]], .data[[y]]),
+               color = color, size = 2),
+    geom_text(
+      data = last,
+      aes(
+        .data[[x]],
+        .data[[y]],
+        label = label_fmt(.data[[y]])
+      ),
+      color = color,
+      vjust = -0.5,
+      hjust = 0,
+      size = 3,
+      show.legend = FALSE
+    )
+  )
 }
